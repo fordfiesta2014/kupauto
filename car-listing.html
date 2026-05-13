@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Ogłoszenie</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     KONFIGURACJA — zmień tylko plik car-listing.html w sekcji
+     CONFIG poniżej (szukaj: === KONFIGURACJA ===)
+     ============================================================ */
+
+  :root {
+    --bg:        #0a0a0b;
+    --bg2:       #111113;
+    --bg3:       #18181b;
+    --border:    rgba(255,255,255,0.07);
+    --border2:   rgba(255,255,255,0.13);
+    --text:      #f0ede8;
+    --muted:     #7a7a80;
+    --accent:    #c9a96e;
+    --accent2:   #a07840;
+    --radius:    4px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* --- GRAIN OVERLAY --- */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.5;
+  }
+
+  /* --- NAV --- */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: rgba(10,10,11,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; }
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+
+  /* --- HERO --- */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    filter: brightness(0.45) saturate(0.8);
+    transition: transform 8s ease;
+  }
+
+  .hero:hover .hero-img { transform: scale(1.03); }
+
+  .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 30%,
+      rgba(10,10,11,0.5) 60%,
+      rgba(10,10,11,0.95) 90%,
+      var(--bg) 100%
+    );
+  }
+
+  .hero-content {
+    position: relative;
+    padding: 0 3rem 4rem;
+    max-width: 900px;
+    animation: fadeUp 1s ease both;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title span { color: var(--accent); }
+
+  .hero-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-meta {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* --- SCROLL INDICATOR --- */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: fadeIn 2s 1s both;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 50px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* --- SPECS BAR --- */
+  .specs-bar {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    background: var(--bg2);
+  }
+
+  .spec-item {
+    padding: 1.75rem 2rem;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .spec-item:last-child { border-right: none; }
+  .spec-item:hover { background: var(--bg3); }
+
+  .spec-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  .spec-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .spec-unit {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-left: 3px;
+  }
+
+  /* --- SECTION --- */
+  section { padding: 6rem 3rem; max-width: 1200px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 60px;
+    height: 1px;
+    background: var(--accent2);
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+  }
+
+  /* --- GALLERY --- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 3px;
+    margin-bottom: 3px;
+  }
+
+  .gallery-main {
+    grid-row: 1 / 3;
+    overflow: hidden;
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.9) saturate(0.85);
+    transition: filter 0.4s, transform 0.6s;
+    cursor: zoom-in;
+    min-height: 220px;
+  }
+
+  .gallery-img:hover {
+    filter: brightness(1) saturate(1);
+    transform: scale(1.02);
+  }
+
+  .gallery-thumb { overflow: hidden; aspect-ratio: 16/10; }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.95);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; }
+  .lightbox-close {
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    font-size: 2rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+    background: none;
+    border: none;
+    transition: color 0.2s;
+  }
+  .lightbox-close:hover { color: var(--text); }
+
+  /* --- DESCRIPTION --- */
+  .desc-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .desc-text {
+    font-size: 1.05rem;
+    color: rgba(240,237,232,0.75);
+    line-height: 1.85;
+  }
+
+  .desc-text p + p { margin-top: 1.2rem; }
+
+  .highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .highlight-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .highlight-item:first-child { border-top: 1px solid var(--border); }
+
+  .highlight-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 0.55rem;
+    flex-shrink: 0;
+  }
+
+  .highlight-text {
+    font-size: 0.9rem;
+    color: rgba(240,237,232,0.8);
+    line-height: 1.5;
+  }
+
+  /* --- FULL SPECS TABLE --- */
+  .specs-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+  }
+
+  .specs-table tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+  .specs-table tr:hover { background: var(--bg2); }
+
+  .specs-table td {
+    padding: 1rem 1.5rem;
+  }
+
+  .specs-table td:first-child {
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    width: 40%;
+  }
+
+  .specs-table td:last-child {
+    color: var(--text);
+    font-weight: 400;
+  }
+
+  .specs-two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 3rem;
+  }
+
+  /* --- CONTACT SECTION --- */
+  .contact-wrap {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    padding: 3rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .contact-line {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .contact-line-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .contact-line-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .contact-line-value a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .contact-line-value a:hover { color: var(--accent); }
+
+  .cta-group { display: flex; flex-direction: column; gap: 1rem; }
+
+  .btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    border-radius: var(--radius);
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0b;
+    font-weight: 500;
+  }
+  .btn-primary:hover {
+    background: #d4b07a;
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border2);
+  }
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-1px);
+  }
+
+  /* --- FOOTER --- */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 2rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--muted);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* --- ANIMATIONS --- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes scrollPulse {
+    0%,100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* --- RESPONSIVE --- */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero-content { padding: 0 1.5rem 3rem; }
+    .hero-title { font-size: 2.8rem; }
+    section { padding: 4rem 1.5rem; }
+    .desc-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .gallery-main { grid-row: auto; }
+    .gallery-thumb { aspect-ratio: 16/9; }
+    .specs-two-col { grid-template-columns: 1fr; }
+    .contact-wrap { grid-template-columns: 1fr; gap: 2rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; }
+    .scroll-hint { display: none; }
+    .specs-bar { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+  ███████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗ 
+  ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝ 
+  ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+  ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+  ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+   ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝ 
+
+  === KONFIGURACJA ===
+  Zmień wartości poniżej żeby dostosować stronę do innego samochodu.
+  Nie musisz ruszać reszty pliku.
+  ============================================================ -->
+
+<script>
+const CAR = {
+
+  /* --- PODSTAWOWE INFO --- */
+  marka:      "Porsche",
+  model:      "911 Carrera S",
+  rocznik:    "2021",
+  cena:       "549 000 zł",
+  przebieg:   "24 500 km",
+
+  /* --- NAGŁÓWEK STRONY (zakładka w przeglądarce) --- */
+  pageBrand:  "AutoPrestige",  // nazwa Twojej marki/agencji
+
+  /* --- KRÓTKI OPIS POD TYTUŁEM --- */
+  podtytul:   "Sylwetka legenda. Silnik z duszy wyścigów.",
+
+  /* ---- SZYBKIE PARAMETRY (pasek pod zdjęciem głównym) ----
+     Możesz zmienić etykiety i wartości. Max 6 pozycji.     */
+  specs_bar: [
+    { label: "Silnik",      value: "3.0 T", unit: "" },
+    { label: "Moc",         value: "450",   unit: "KM" },
+    { label: "0–100",       value: "3.5",   unit: "s" },
+    { label: "Skrzynia",    value: "PDK",   unit: "" },
+    { label: "Napęd",       value: "RWD",   unit: "" },
+    { label: "Rok",         value: "2021",  unit: "" },
+  ],
+
+  /* --- ZDJĘCIA ---
+     Wklej URL zdjęcia lub ścieżkę względną (np. "img/przod.jpg")
+     Pierwsze zdjęcie = hero (tło całej strony).
+     Drugie = duże zdjęcie w galerii.
+     Trzecie i czwarte = miniatury obok.                    */
+  zdjecia: {
+    hero:    "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1800&q=80",
+    gallery: [
+      "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80",
+      "https://images.unsplash.com/photo-1580274455191-1c62238fa333?w=800&q=80",
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
+    ]
+  },
+
+  /* --- OPIS SAMOCHODU ---
+     Możesz mieć jeden lub więcej akapitów (tablica tekstów).   */
+  opis: [
+    "Porsche 911 Carrera S w generacji 992 to rzadki przypadek samochodu, który spełnia obietnicę swojej legendy. Klasyczny układ tylnosilnikowy, skrzynię PDK i aktywny układ wydechowy Sport Exhaust łączy się tutaj w jedno — precyzyjne narzędzie do jazdy.",
+    "Egzemplarz w wersji Gentian Blue Metallic. Pełna historia serwisowa ASO. Bez szkód, bez lakierowania — dokumentacja fotograficzna od pierwszego właściciela."
+  ],
+
+  /* --- ATUTY (lista po prawej stronie opisu) ---
+     Krótkie zdania — będą wyświetlone z kropką akcentową.     */
+  atuty: [
+    "Jeden właściciel, zakupiony nowy w Polsce",
+    "Pełna historia serwisowa w autoryzowanej stacji",
+    "Sport Chrono Package + PASM aktywne zawieszenie",
+    "Bose Surround Sound, panorama, podgrzewane fotele",
+    "Gotowy do jazdy — po przeglądzie i detailingu",
+  ],
+
+  /* --- PEŁNA SPECYFIKACJA ---
+     Tablica par [etykieta, wartość]. Wiersze na dwie kolumny.  */
+  pelna_spec: [
+    ["Marka",              "Porsche"],
+    ["Model",              "911 Carrera S (992)"],
+    ["Rok produkcji",      "2021"],
+    ["Pierwsza rejestracja","03/2021"],
+    ["Przebieg",           "24 500 km"],
+    ["Silnik",             "3.0 Biturbo Boxer H6"],
+    ["Pojemność",          "2981 cm³"],
+    ["Moc",                "450 KM / 331 kW"],
+    ["Moment obrotowy",    "530 Nm"],
+    ["Skrzynia biegów",    "8-biegowa PDK"],
+    ["Napęd",              "Tylny (RWD)"],
+    ["0–100 km/h",         "3.5 s"],
+    ["Prędkość max",       "308 km/h"],
+    ["Kolor nadwozia",     "Gentian Blue Metallic"],
+    ["Tapicerka",          "Skóra czarna / Alcantara"],
+    ["Liczba drzwi",       "2"],
+    ["Liczba miejsc",      "2+2"],
+    ["Stan pojazdu",       "Bezwypadkowy"],
+    ["Kraj pochodzenia",   "Niemcy"],
+    ["VIN",                "WP0ZZZ99ZMS123456"],
+  ],
+
+  /* --- KONTAKT --- */
+  kontakt: {
+    osoba:    "Mateusz Kowalski",
+    telefon:  "+48 600 123 456",
+    email:    "sprzedaz@autoprestige.pl",
+    lokalizacja: "Poznań, Wielkopolska",
+    whatsapp: "+48600123456",  // bez spacji i myślników
+  }
+
+};
+/* ============================================================
+   KONIEC KONFIGURACJI — reszty nie musisz ruszać
+   ============================================================ */
+</script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#" id="nav-brand">AutoPrestige</a>
+  <div class="nav-links">
+    <a href="#galeria">Galeria</a>
+    <a href="#opis">Opis</a>
+    <a href="#specyfikacja">Specyfikacja</a>
+    <a href="#kontakt">Kontakt</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;max-width:none;">
+  <img class="hero-img" id="hero-img" src="" alt="Hero">
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow" id="hero-eyebrow">Oferta premium</p>
+    <h1 class="hero-title" id="hero-title">Loading…</h1>
+    <div class="hero-price" id="hero-price">–</div>
+    <p class="hero-meta" id="hero-meta">–</p>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SPECS BAR -->
+<div class="specs-bar" id="specs-bar"></div>
+
+<!-- GALLERY -->
+<div id="galeria" style="padding-top:5rem;">
+  <section style="padding-top:0;">
+    <p class="section-label reveal">Galeria</p>
+    <div class="gallery-grid" id="gallery-grid"></div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:3px;margin-top:3px;" id="gallery-extra"></div>
+  </section>
+</div>
+
+<!-- DESCRIPTION -->
+<div id="opis">
+  <section>
+    <p class="section-label reveal">O tym egzemplarzu</p>
+    <div class="desc-grid">
+      <div>
+        <h2 class="section-title reveal" id="desc-title">Bez kompromisów.</h2>
+        <div class="desc-text reveal" id="desc-text"></div>
+      </div>
+      <div class="highlights reveal" id="highlights"></div>
+    </div>
+  </section>
+</div>
+
+<!-- FULL SPECS -->
+<div id="specyfikacja">
+  <section style="border-top: 1px solid var(--border);">
+    <p class="section-label reveal">Specyfikacja techniczna</p>
+    <div class="specs-two-col reveal" id="specs-two-col"></div>
+  </section>
+</div>
+
+<!-- CONTACT -->
+<div id="kontakt">
+  <section>
+    <p class="section-label reveal">Kontakt</p>
+    <div class="contact-wrap reveal">
+      <div class="contact-info" id="contact-info"></div>
+      <div class="cta-group" id="cta-group"></div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span id="footer-brand">AutoPrestige</span>
+  <span id="footer-car">–</span>
+  <span>© <script>document.write(new Date().getFullYear())</script></span>
+</footer>
+
+
+<script>
+/* ========== RENDER ENGINE ========== */
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* page title */
+  document.getElementById('page-title').textContent =
+    `${CAR.marka} ${CAR.model} — ${CAR.pageBrand}`;
+
+  /* nav */
+  document.getElementById('nav-brand').textContent = CAR.pageBrand;
+
+  /* hero */
+  document.getElementById('hero-img').src = CAR.zdjecia.hero;
+  document.getElementById('hero-img').alt = `${CAR.marka} ${CAR.model}`;
+  document.getElementById('hero-title').innerHTML =
+    `${CAR.marka} <span>${CAR.model}</span>`;
+  document.getElementById('hero-price').textContent = CAR.cena;
+  document.getElementById('hero-meta').textContent =
+    `${CAR.rocznik}  ·  ${CAR.przebieg}  ·  ${CAR.podtytul}`;
+
+  /* specs bar */
+  const sb = document.getElementById('specs-bar');
+  CAR.specs_bar.forEach(s => {
+    sb.innerHTML += `
+      <div class="spec-item">
+        <div class="spec-label">${s.label}</div>
+        <div class="spec-value">${s.value}<span class="spec-unit">${s.unit}</span></div>
+      </div>`;
+  });
+
+  /* gallery */
+  const gg = document.getElementById('gallery-grid');
+  const ge = document.getElementById('gallery-extra');
+  const imgs = CAR.zdjecia.gallery;
+  if (imgs[0]) gg.innerHTML += `<div class="gallery-main"><img class="gallery-img" src="${imgs[0]}" alt="Zdjęcie 1" onclick="openLightbox('${imgs[0]}')"></div>`;
+  if (imgs[1]) gg.innerHTML += `<div class="gallery-thumb"><img class="gallery-img" src="${imgs[1]}" alt="Zdjęcie 2" onclick="openLightbox('${imgs[1]}')"></div>`;
+  if (imgs[2]) gg.innerHTML += `<div class="gallery-thumb"><img class="gallery-img" src="${imgs[2]}" alt="Zdjęcie 3" onclick="openLightbox('${imgs[2]}')"></div>`;
+  for (let i = 3; i < imgs.length; i++) {
+    ge.innerHTML += `<div class="gallery-thumb" style="aspect-ratio:16/9"><img class="gallery-img" src="${imgs[i]}" alt="Zdjęcie ${i+1}" onclick="openLightbox('${imgs[i]}')"></div>`;
+  }
+
+  /* description */
+  document.getElementById('desc-title').textContent =
+    `${CAR.marka} ${CAR.model}.`;
+  const dt = document.getElementById('desc-text');
+  CAR.opis.forEach(p => { dt.innerHTML += `<p>${p}</p>`; });
+
+  /* highlights */
+  const hl = document.getElementById('highlights');
+  CAR.atuty.forEach(a => {
+    hl.innerHTML += `
+      <div class="highlight-item">
+        <div class="highlight-dot"></div>
+        <div class="highlight-text">${a}</div>
+      </div>`;
+  });
+
+  /* full specs — two columns */
+  const half = Math.ceil(CAR.pelna_spec.length / 2);
+  const col1 = CAR.pelna_spec.slice(0, half);
+  const col2 = CAR.pelna_spec.slice(half);
+  const makeTable = rows => {
+    let t = '<table class="specs-table">';
+    rows.forEach(([k,v]) => { t += `<tr><td>${k}</td><td>${v}</td></tr>`; });
+    return t + '</table>';
+  };
+  document.getElementById('specs-two-col').innerHTML =
+    makeTable(col1) + makeTable(col2);
+
+  /* contact */
+  const ci = document.getElementById('contact-info');
+  ci.innerHTML = `
+    <div class="contact-line">
+      <span class="contact-line-label">Sprzedający</span>
+      <span class="contact-line-value">${CAR.kontakt.osoba}</span>
+    </div>
+    <div class="contact-line">
+      <span class="contact-line-label">Telefon</span>
+      <span class="contact-line-value"><a href="tel:${CAR.kontakt.telefon.replace(/\s/g,'')}">${CAR.kontakt.telefon}</a></span>
+    </div>
+    <div class="contact-line">
+      <span class="contact-line-label">E-mail</span>
+      <span class="contact-line-value"><a href="mailto:${CAR.kontakt.email}">${CAR.kontakt.email}</a></span>
+    </div>
+    <div class="contact-line">
+      <span class="contact-line-label">Lokalizacja</span>
+      <span class="contact-line-value">${CAR.kontakt.lokalizacja}</span>
+    </div>`;
+
+  document.getElementById('cta-group').innerHTML = `
+    <a href="tel:${CAR.kontakt.telefon.replace(/\s/g,'')}" class="btn btn-primary">Zadzwoń teraz</a>
+    <a href="https://wa.me/${CAR.kontakt.whatsapp}" target="_blank" class="btn btn-outline">Napisz na WhatsApp</a>
+    <a href="mailto:${CAR.kontakt.email}?subject=Zapytanie: ${CAR.marka} ${CAR.model}" class="btn btn-outline">Wyślij e-mail</a>`;
+
+  /* footer */
+  document.getElementById('footer-brand').textContent = CAR.pageBrand;
+  document.getElementById('footer-car').textContent =
+    `${CAR.marka} ${CAR.model} · ${CAR.rocznik}`;
+
+  /* scroll reveal */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+});
+
+/* lightbox */
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeLightbox(); });
+</script>
+
+</body>
+</html>
