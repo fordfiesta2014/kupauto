@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Parusdetail — Profesjonalny Detailing Samochodowy</title>
+  <style>
+    :root {
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --blue-light: #dbeafe;
+      --green: #10b981;
+      --bg: #f5f8ff;
+      --white: #ffffff;
+      --dark: #0f172a;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 18px;
+      --shadow: 0 4px 24px rgba(37,99,235,0.07);
+      --shadow-lg: 0 16px 48px rgba(37,99,235,0.13);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(255,255,255,0.88); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 48px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .logo { font-size: 1.45rem; font-weight: 900; color: var(--blue); letter-spacing: -0.5px; }
+    .logo span { color: var(--dark); }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.95rem; transition: color .2s; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-cta {
+      background: var(--blue); color: #fff !important; padding: 10px 26px;
+      border-radius: 100px; font-weight: 700 !important; font-size: 0.9rem !important;
+      transition: background .2s, transform .2s, box-shadow .2s !important;
+      box-shadow: 0 4px 14px rgba(37,99,235,0.3);
+    }
+    .nav-cta:hover { background: var(--blue-dark) !important; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative; height: 100vh; min-height: 620px;
+      display: flex; align-items: center; overflow: hidden;
+    }
+    #hero-canvas { position: absolute; inset: 0; z-index: 0; }
+    .hero-inner {
+      position: relative; z-index: 2;
+      max-width: 1200px; margin: 0 auto; padding: 0 48px; width: 100%;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(37,99,235,0.09); border: 1px solid rgba(37,99,235,0.22);
+      color: var(--blue); padding: 6px 18px; border-radius: 100px;
+      font-size: 0.82rem; font-weight: 700; letter-spacing: 0.5px;
+      margin-bottom: 24px; opacity: 0; animation: fadeUp .8s .2s ease forwards;
+    }
+    .hero-h1 {
+      font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; line-height: 1.1;
+      max-width: 580px; margin-bottom: 22px;
+      opacity: 0; animation: fadeUp .8s .4s ease forwards;
+    }
+    .hero-h1 em { font-style: normal; color: var(--blue); position: relative; }
+    .hero-h1 em::after {
+      content: ''; position: absolute; bottom: 2px; left: 0; right: 0;
+      height: 5px; background: var(--blue); opacity: .18; border-radius: 3px;
+    }
+    .hero-sub {
+      font-size: 1.08rem; color: var(--muted); max-width: 480px; line-height: 1.65;
+      margin-bottom: 40px; opacity: 0; animation: fadeUp .8s .6s ease forwards;
+    }
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp .8s .8s ease forwards;
+    }
+    .btn-blue {
+      background: var(--blue); color: #fff; padding: 15px 34px;
+      border-radius: 100px; font-size: 1rem; font-weight: 700; border: none;
+      cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: 0 6px 22px rgba(37,99,235,0.32); transition: all .2s;
+    }
+    .btn-blue:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,99,235,0.4); }
+    .btn-outline {
+      background: #fff; color: var(--text); padding: 15px 34px;
+      border-radius: 100px; font-size: 1rem; font-weight: 600;
+      border: 2px solid var(--border); cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px; transition: all .2s;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-2px); }
+
+    /* Floating stats */
+    .hero-stats {
+      position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 16px; z-index: 2;
+      opacity: 0; animation: fadeIn 1s 1.2s ease forwards;
+    }
+    .stat-pill {
+      background: #fff; border-radius: var(--radius); padding: 18px 24px;
+      box-shadow: var(--shadow-lg); text-align: center; min-width: 138px;
+      transform: perspective(800px) rotateY(-6deg);
+      transition: transform .3s, box-shadow .3s;
+    }
+    .stat-pill:hover { transform: perspective(800px) rotateY(0) scale(1.06); box-shadow: 0 20px 60px rgba(37,99,235,0.18); }
+    .stat-num { font-size: 2.1rem; font-weight: 900; color: var(--blue); }
+    .stat-lbl { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
+
+    /* Scroll mouse */
+    .scroll-mouse {
+      position: absolute; bottom: 34px; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fadeIn 1s 1.6s ease forwards;
+    }
+    .scroll-mouse span { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+    .mouse-icon {
+      width: 22px; height: 36px; border: 2px solid var(--border);
+      border-radius: 11px; position: relative;
+    }
+    .mouse-icon::before {
+      content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+      width: 3px; height: 7px; background: var(--blue); border-radius: 2px;
+      animation: scrollDot 1.6s infinite;
+    }
+    @keyframes scrollDot {
+      0%   { opacity: 1; transform: translateX(-50%) translateY(0); }
+      80%  { opacity: 0; transform: translateX(-50%) translateY(12px); }
+      100% { opacity: 0; transform: translateX(-50%) translateY(12px); }
+    }
+
+    /* ── SHARED ── */
+    .section-wrap { padding: 90px 48px; max-width: 1200px; margin: 0 auto; }
+    .card-wrap {
+      background: var(--white); border-radius: 32px;
+      box-shadow: var(--shadow); padding: 72px 60px;
+      max-width: 1200px; margin: 0 auto;
+    }
+    .sec-tag {
+      font-size: 0.78rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--blue); margin-bottom: 10px;
+    }
+    .sec-title { font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 900; line-height: 1.2; margin-bottom: 14px; }
+    .sec-sub { font-size: 1rem; color: var(--muted); max-width: 480px; line-height: 1.65; margin-bottom: 52px; }
+
+    /* ── SERVICES ── */
+    .services-bg { padding: 0 48px; margin-top: -30px; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .svc-card {
+      background: var(--bg); border-radius: var(--radius); padding: 30px 26px;
+      border: 1.5px solid transparent; cursor: default;
+      transition: all .3s; transform-style: preserve-3d;
+    }
+    .svc-card:hover {
+      background: #fff; border-color: var(--blue);
+      box-shadow: var(--shadow-lg); transform: translateY(-6px) perspective(700px) rotateX(3deg);
+    }
+    .svc-name { font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .svc-desc { font-size: 0.87rem; color: var(--muted); line-height: 1.5; }
+
+    /* ─── CSS 3D SERVICE ICONS ─── */
+    .icon3d-outer {
+      perspective: 220px;
+      width: 64px; height: 64px;
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .box3d {
+      transform-style: preserve-3d;
+      animation: box3dSpin 7s linear infinite;
+      position: relative;
+      will-change: transform;
+    }
+    .svc-card:hover .box3d { animation-duration: 1.6s; }
+    @keyframes box3dSpin {
+      0%   { transform: rotateX(18deg) rotateY(0deg)   translateY(0px);  }
+      50%  { transform: rotateX(21deg) rotateY(180deg) translateY(-5px); }
+      100% { transform: rotateX(18deg) rotateY(360deg) translateY(0px);  }
+    }
+    .box3d .f {
+      position: absolute; backface-visibility: hidden;
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ── Washing: cube 50×50×50 ── */
+    .c-wash { width: 50px; height: 50px; }
+    .c-wash .f      { width: 50px; height: 50px; }
+    .c-wash .f-fr   { transform: translateZ(25px);                  background: rgba(37,99,235,.90); font-size: 1.55rem; }
+    .c-wash .f-bk   { transform: rotateY(180deg) translateZ(25px);  background: rgba(29,78,216,.55); }
+    .c-wash .f-rt   { transform: rotateY(90deg)  translateZ(25px);  background: rgba(37,99,235,.65); }
+    .c-wash .f-lt   { transform: rotateY(-90deg) translateZ(25px);  background: rgba(37,99,235,.48); }
+    .c-wash .f-tp   { transform: rotateX(90deg)  translateZ(25px);  background: rgba(96,165,250,.82); }
+    .c-wash .f-bt   { transform: rotateX(-90deg) translateZ(25px);  background: rgba(30,58,138,.32); }
+
+    /* ── Seat: wide+flat 64×34×44 ── */
+    .c-seat { width: 64px; height: 34px; }
+    .c-seat .f-fr   { width: 64px; height: 34px; transform: translateZ(22px);                  background: rgba(37,99,235,.90); font-size: 1.4rem; }
+    .c-seat .f-bk   { width: 64px; height: 34px; transform: rotateY(180deg) translateZ(22px);  background: rgba(29,78,216,.52); }
+    .c-seat .f-rt   { width: 44px; height: 34px; transform: rotateY(90deg)  translateZ(32px);  background: rgba(37,99,235,.65); }
+    .c-seat .f-lt   { width: 44px; height: 34px; transform: rotateY(-90deg) translateZ(32px);  background: rgba(37,99,235,.48); }
+    .c-seat .f-tp   { width: 64px; height: 44px; transform: rotateX(90deg)  translateZ(17px);  background: rgba(96,165,250,.82); }
+    .c-seat .f-bt   { width: 64px; height: 44px; transform: rotateX(-90deg) translateZ(17px);  background: rgba(30,58,138,.32); }
+
+    /* ── Vacuum: tall+thin 30×60×30 ── */
+    .c-vac { width: 30px; height: 60px; }
+    .c-vac .f-fr    { width: 30px; height: 60px; transform: translateZ(15px);                  background: rgba(37,99,235,.90); font-size: 1.5rem; }
+    .c-vac .f-bk    { width: 30px; height: 60px; transform: rotateY(180deg) translateZ(15px);  background: rgba(29,78,216,.52); }
+    .c-vac .f-rt    { width: 30px; height: 60px; transform: rotateY(90deg)  translateZ(15px);  background: rgba(37,99,235,.65); }
+    .c-vac .f-lt    { width: 30px; height: 60px; transform: rotateY(-90deg) translateZ(15px);  background: rgba(37,99,235,.48); }
+    .c-vac .f-tp    { width: 30px; height: 30px; transform: rotateX(90deg)  translateZ(30px);  background: rgba(96,165,250,.82); }
+    .c-vac .f-bt    { width: 30px; height: 30px; transform: rotateX(-90deg) translateZ(30px);  background: rgba(30,58,138,.32); }
+
+    /* ── Plastics: cube 46×46×46, fioletowy akcent ── */
+    .c-shine { width: 46px; height: 46px; animation-duration: 5.5s; }
+    .c-shine .f     { width: 46px; height: 46px; }
+    .c-shine .f-fr  { transform: translateZ(23px);                  background: linear-gradient(135deg,rgba(99,102,241,.92),rgba(37,99,235,.82)); font-size: 1.5rem; }
+    .c-shine .f-bk  { transform: rotateY(180deg) translateZ(23px);  background: rgba(67,56,202,.50); }
+    .c-shine .f-rt  { transform: rotateY(90deg)  translateZ(23px);  background: rgba(99,102,241,.65); }
+    .c-shine .f-lt  { transform: rotateY(-90deg) translateZ(23px);  background: rgba(99,102,241,.48); }
+    .c-shine .f-tp  { transform: rotateX(90deg)  translateZ(23px);  background: rgba(167,139,250,.85); }
+    .c-shine .f-bt  { transform: rotateX(-90deg) translateZ(23px);  background: rgba(49,46,129,.32); }
+
+    /* ─── WHATSAPP BUTTON ─── */
+    .wa-btn {
+      position: fixed; bottom: 26px; right: 26px; z-index: 997;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(37,211,102,.55);
+      transition: transform .2s, box-shadow .2s;
+      animation: waPulse 3s ease-in-out infinite;
+    }
+    .wa-btn:hover { transform: scale(1.12); box-shadow: 0 6px 28px rgba(37,211,102,.7); animation: none; }
+    .wa-btn svg { width: 30px; height: 30px; fill: #fff; }
+    @keyframes waPulse {
+      0%,100% { box-shadow: 0 4px 18px rgba(37,211,102,.55); }
+      50%      { box-shadow: 0 4px 28px rgba(37,211,102,.8), 0 0 0 9px rgba(37,211,102,.1); }
+    }
+
+    /* ─── INSTAGRAM / SOCIAL ─── */
+    .nav-ig {
+      display: flex; align-items: center; gap: 6px;
+      text-decoration: none; color: var(--muted); font-size: 0.82rem; font-weight: 600;
+      padding: 7px 12px; border-radius: 10px; border: 1.5px solid var(--border);
+      transition: all .2s;
+    }
+    .nav-ig:hover { color: #e1306c; border-color: #e1306c; background: rgba(225,48,108,.05); }
+    .nav-ig svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; }
+    .footer-social { display: flex; gap: 14px; margin-top: 20px; flex-wrap: wrap; }
+    .footer-social a {
+      display: flex; align-items: center; gap: 7px;
+      color: rgba(255,255,255,.55); text-decoration: none; font-size: 0.85rem;
+      transition: color .2s;
+    }
+    .footer-social a:hover { color: #e1306c; }
+    .footer-social svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2; flex-shrink: 0; }
+
+    /* ── PRICING ── */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .price-card {
+      background: #fff; border-radius: 24px; padding: 36px 28px;
+      border: 2px solid var(--border); position: relative;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .price-card:hover { transform: translateY(-10px); box-shadow: var(--shadow-lg); }
+    .price-card.featured {
+      background: var(--blue); border-color: var(--blue); color: #fff;
+      transform: scale(1.04);
+    }
+    .price-card.featured:hover { transform: scale(1.04) translateY(-10px); }
+    .feat-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: var(--green); color: #fff; padding: 4px 22px;
+      border-radius: 100px; font-size: 0.77rem; font-weight: 800; white-space: nowrap;
+    }
+    .plan-num { font-size: 0.7rem; font-weight: 800; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .featured .plan-num { color: rgba(255,255,255,.55); }
+    .plan-name { font-size: 0.82rem; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .featured .plan-name { color: rgba(255,255,255,.65); }
+    .plan-subtitle { font-size: 1.4rem; font-weight: 900; color: var(--dark); margin: 4px 0 18px; }
+    .featured .plan-subtitle { color: #fff; }
+
+    /* Price table inside card */
+    .pt-wrap { background: rgba(37,99,235,0.05); border-radius: 12px; padding: 14px 16px; margin-bottom: 22px; }
+    .featured .pt-wrap { background: rgba(255,255,255,0.12); }
+    .pt-row { display: flex; justify-content: space-between; align-items: center; padding: 5px 0; font-size: 0.85rem; }
+    .pt-row:not(:last-child) { border-bottom: 1px solid rgba(37,99,235,0.08); }
+    .featured .pt-row:not(:last-child) { border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .pt-lbl { color: var(--muted); }
+    .featured .pt-lbl { color: rgba(255,255,255,.7); }
+    .pt-val { font-weight: 800; color: var(--dark); white-space: nowrap; margin-left: 12px; }
+    .featured .pt-val { color: #fff; }
+
+    .plan-list { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 28px; }
+    .plan-list li { display: flex; align-items: flex-start; gap: 8px; font-size: 0.86rem; color: var(--text); line-height: 1.4; }
+    .featured .plan-list li { color: rgba(255,255,255,.9); }
+    .plan-list li::before {
+      content: '✓'; width: 17px; height: 17px; flex-shrink: 0; margin-top: 1px;
+      background: rgba(37,99,235,0.1); color: var(--blue);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: 900;
+    }
+    .plan-list li.note::before { content: '+'; background: rgba(37,99,235,0.06); }
+    .featured .plan-list li::before { background: rgba(255,255,255,.2); color: #fff; }
+    .plan-btn {
+      width: 100%; padding: 13px; border-radius: 100px;
+      font-size: 0.93rem; font-weight: 700; cursor: pointer;
+      border: 2px solid var(--blue); background: transparent; color: var(--blue);
+      transition: all .2s;
+    }
+    .plan-btn:hover { background: var(--blue); color: #fff; }
+    .featured .plan-btn { border-color: #fff; background: #fff; color: var(--blue); }
+    .featured .plan-btn:hover { background: transparent; color: #fff; }
+
+    /* Addons section */
+    .addons-section { margin-top: 56px; }
+    .addons-title {
+      font-size: 0.78rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 3px; color: var(--muted); margin-bottom: 20px;
+    }
+    .addon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+    .addon-item {
+      background: var(--bg); border-radius: 12px; padding: 12px 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1.5px solid transparent; transition: all .2s;
+    }
+    .addon-item:hover { border-color: var(--blue); background: #fff; box-shadow: var(--shadow); }
+    .addon-name { font-size: 0.88rem; color: var(--text); font-weight: 500; }
+    .addon-price { font-size: 0.88rem; font-weight: 800; color: var(--blue); white-space: nowrap; margin-left: 10px; }
+
+    /* ── GALLERY ── */
+    .gallery-bg { padding: 0 48px; margin-bottom: 36px; }
+    .gal-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .gal-item {
+      border-radius: var(--radius); overflow: hidden;
+      aspect-ratio: 4/3; position: relative; cursor: pointer;
+    }
+    .gal-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .45s ease; display: block;
+    }
+    .gal-item:hover img { transform: scale(1.08); }
+    .gal-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(15,23,42,.85) 0%, rgba(37,99,235,.2) 55%, transparent 100%);
+      opacity: 0; transition: opacity .3s;
+      display: flex; align-items: flex-end; padding: 16px;
+    }
+    .gal-item:hover .gal-overlay { opacity: 1; }
+    .gal-overlay span { color: #fff; font-weight: 700; font-size: 0.85rem; line-height: 1.3; }
+    .gal-tag {
+      position: absolute; top: 12px; left: 12px;
+      background: rgba(37,99,235,.85); backdrop-filter: blur(4px);
+      color: #fff; font-size: 0.7rem; font-weight: 700;
+      padding: 3px 10px; border-radius: 100px; letter-spacing: 0.5px;
+      opacity: 0; transition: opacity .3s;
+    }
+    .gal-item:hover .gal-tag { opacity: 1; }
+
+    /* ── REVIEWS ── */
+    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+    .rev-card {
+      background: #fff; border-radius: var(--radius); padding: 30px;
+      border: 1px solid var(--border); transition: all .3s; transform-style: preserve-3d;
+    }
+    .rev-card:hover { transform: translateY(-5px) perspective(700px) rotateX(2deg); box-shadow: var(--shadow-lg); }
+    .stars { color: #f59e0b; font-size: 1rem; margin-bottom: 14px; letter-spacing: 1px; }
+    .rev-text { font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin-bottom: 20px; font-style: italic; }
+    .reviewer { display: flex; align-items: center; gap: 12px; }
+    .rev-avatar {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue), #6366f1);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 800; font-size: 0.9rem;
+    }
+    .rev-name { font-weight: 700; font-size: 0.93rem; }
+    .rev-car { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-bg { padding: 0 48px; margin-bottom: 80px; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: start; }
+    .ci-item { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+    .ci-icon {
+      width: 46px; height: 46px; flex-shrink: 0;
+      background: rgba(37,99,235,.09); border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+    }
+    .ci-lbl { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+    .ci-val { font-weight: 700; font-size: 0.95rem; color: var(--dark); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .fg { display: flex; flex-direction: column; gap: 7px; }
+    .fg label { font-size: 0.83rem; font-weight: 700; color: var(--text); }
+    .fg input, .fg select, .fg textarea {
+      padding: 13px 16px; border: 2px solid var(--border); border-radius: 12px;
+      font-size: 0.93rem; font-family: inherit; color: var(--text);
+      background: var(--bg); outline: none; transition: border-color .2s, box-shadow .2s;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus {
+      border-color: var(--blue); box-shadow: 0 0 0 4px rgba(37,99,235,.08); background: #fff;
+    }
+    .fg textarea { min-height: 110px; resize: vertical; }
+    .form-cf { display: flex; flex-direction: column; gap: 18px; }
+    .form-submit {
+      background: var(--blue); color: #fff; padding: 15px 32px;
+      border-radius: 100px; font-size: 1rem; font-weight: 700; border: none;
+      cursor: pointer; box-shadow: 0 6px 22px rgba(37,99,235,0.3); transition: all .2s;
+    }
+    .form-submit:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(37,99,235,0.4); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); color: rgba(255,255,255,.65); padding: 64px 48px 40px; }
+    .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 64px; margin-bottom: 52px; }
+    .footer-brand .fl { font-size: 1.45rem; font-weight: 900; color: #fff; margin-bottom: 12px; }
+    .footer-brand .fl span { color: rgba(255,255,255,.55); }
+    .footer-brand p { font-size: 0.88rem; line-height: 1.65; max-width: 270px; }
+    .footer-col h4 { color: #fff; font-weight: 800; margin-bottom: 20px; font-size: 0.9rem; letter-spacing: 0.5px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { color: rgba(255,255,255,.55); text-decoration: none; font-size: 0.88rem; transition: color .2s; }
+    .footer-col ul li a:hover { color: #fff; }
+    .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.1); display: flex; justify-content: space-between; font-size: 0.83rem; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn  { from { opacity: 0; } to { opacity: 1; } }
+    .aos { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .aos.vis { opacity: 1; transform: none; }
+    .aos-delay-1 { transition-delay: .1s; }
+    .aos-delay-2 { transition-delay: .2s; }
+    .aos-delay-3 { transition-delay: .3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .gal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 900px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .price-card.featured { transform: none; }
+      .reviews-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; gap: 36px; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 14px 20px; }
+      .nav-links { display: none; }
+      .hero-inner { padding: 0 22px; }
+      .hero-stats { display: none; }
+      .section-wrap, .card-wrap { padding: 56px 22px; }
+      .services-bg, .gallery-bg, .contact-bg { padding: 0 16px; }
+      .services-grid { grid-template-columns: 1fr; }
+      .gal-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <div class="logo">Parus<span>Detail</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Usługi</a></li>
+    <li><a href="#pricing">Cennik</a></li>
+    <li><a href="#gallery">Galeria</a></li>
+    <li><a href="#reviews">Opinie</a></li>
+    <li>
+      <a href="https://instagram.com/parusdetail" target="_blank" class="nav-ig" title="Instagram @parusdetail">
+        <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        @parusdetail
+      </a>
+    </li>
+    <li><a href="#contact" class="nav-cta">Umów wizytę</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-inner">
+    <div class="hero-badge">⭐ Profesjonalny detailing samochodowy</div>
+    <h1 class="hero-h1">Twoje auto<br>zasługuje na <em>perfekcję</em></h1>
+    <p class="hero-sub">Kompleksowy detailing wnętrza i karoserii. Przywracamy blask każdemu samochodowi — z dbałością o każdy detal.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-blue">Umów wizytę &rarr;</a>
+      <a href="#pricing" class="btn-outline">Zobacz cennik</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-pill"><div class="stat-num">200+</div><div class="stat-lbl">Zadowolonych klientów</div></div>
+    <div class="stat-pill"><div class="stat-num">5★</div><div class="stat-lbl">Średnia ocena</div></div>
+    <div class="stat-pill"><div class="stat-num">3+</div><div class="stat-lbl">Lata doświadczenia</div></div>
+  </div>
+  <div class="scroll-mouse">
+    <div class="mouse-icon"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ═══════════════ SERVICES ═══════════════ -->
+<div class="services-bg" style="margin-top:-24px;">
+  <div id="services" class="card-wrap aos">
+    <div class="sec-tag">Oferta</div>
+    <h2 class="sec-title">Nasze usługi</h2>
+    <p class="sec-sub">Kompleksowa pielęgnacja — od każdego centymetra karoserii po najciemniejszy kąt wnętrza.</p>
+    <div class="services-grid">
+      <div class="svc-card aos aos-delay-1">
+        <div class="icon3d-outer">
+          <div class="box3d c-wash">
+            <div class="f f-fr">🚿</div><div class="f f-bk"></div>
+            <div class="f f-lt"></div><div class="f f-rt"></div>
+            <div class="f f-tp"></div><div class="f f-bt"></div>
+          </div>
+        </div>
+        <div class="svc-name">Mycie &amp; Pielęgnacja</div>
+        <p class="svc-desc">Dokładne mycie ręczne karoserii, felg oraz progów. Delikatne środki nieuszkadzające lakieru.</p>
+      </div>
+      <div class="svc-card aos aos-delay-2">
+        <div class="icon3d-outer">
+          <div class="box3d c-seat">
+            <div class="f f-fr">🪑</div><div class="f f-bk"></div>
+            <div class="f f-lt"></div><div class="f f-rt"></div>
+            <div class="f f-tp"></div><div class="f f-bt"></div>
+          </div>
+        </div>
+        <div class="svc-name">Detailing Wnętrza</div>
+        <p class="svc-desc">Głębokie czyszczenie tapicerki, deski rozdzielczej i wszystkich powierzchni wewnętrznych.</p>
+      </div>
+      <div class="svc-card aos aos-delay-3">
+        <div class="icon3d-outer">
+          <div class="box3d c-vac">
+            <div class="f f-fr">🌀</div><div class="f f-bk"></div>
+            <div class="f f-lt"></div><div class="f f-rt"></div>
+            <div class="f f-tp"></div><div class="f f-bt"></div>
+          </div>
+        </div>
+        <div class="svc-name">Odkurzanie Wnętrza</div>
+        <p class="svc-desc">Profesjonalne odkurzanie każdego zakamarku — dywaniki, siedzenia, szczeliny drzwi.</p>
+      </div>
+      <div class="svc-card aos aos-delay-1">
+        <div class="icon3d-outer">
+          <div class="box3d c-shine">
+            <div class="f f-fr">✨</div><div class="f f-bk"></div>
+            <div class="f f-lt"></div><div class="f f-rt"></div>
+            <div class="f f-tp"></div><div class="f f-bt"></div>
+          </div>
+        </div>
+        <div class="svc-name">Czyszczenie Plastików</div>
+        <p class="svc-desc">Regeneracja i zabezpieczenie plastikowych elementów wnętrza i zewnętrznych listew.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PRICING ═══════════════ -->
+<div class="section-wrap aos" id="pricing">
+  <div class="sec-tag">Cennik</div>
+  <h2 class="sec-title">Wybierz swój pakiet</h2>
+  <p class="sec-sub">Ceny zależą od wielkości auta. Wszystko wyceniamy uczciwie, bez ukrytych kosztów.</p>
+  <div class="pricing-grid">
+
+    <!-- BASIC -->
+    <div class="price-card aos aos-delay-1">
+      <div class="plan-num">Pakiet 01</div>
+      <div class="plan-name">Basic</div>
+      <div class="plan-subtitle">"Fresh"</div>
+      <div class="pt-wrap">
+        <div class="pt-row"><span class="pt-lbl">Małe auto</span><span class="pt-val">149–179 zł</span></div>
+        <div class="pt-row"><span class="pt-lbl">Kompakt / sedan</span><span class="pt-val">199–239 zł</span></div>
+        <div class="pt-row"><span class="pt-lbl">SUV / kombi</span><span class="pt-val">249–299 zł</span></div>
+      </div>
+      <ul class="plan-list">
+        <li>Czyszczenie felg i nadkoli</li>
+        <li>Czyszczenie opon + dressing</li>
+        <li>Czyszczenie wnęk drzwi</li>
+        <li>Mycie szyb zewn. i wewnętrznych</li>
+        <li>Woskowanie lakieru</li>
+        <li>Odkurzanie wnętrza + bagażnik</li>
+        <li>Czyszczenie plastików + dressing</li>
+      </ul>
+      <button class="plan-btn" onclick="scrollToContact('Basic — Fresh')">Wybierz Basic</button>
+    </div>
+
+    <!-- STANDARD -->
+    <div class="price-card featured aos aos-delay-2">
+      <div class="feat-badge">Najpopularniejszy</div>
+      <div class="plan-num">Pakiet 02</div>
+      <div class="plan-name">Standard</div>
+      <div class="plan-subtitle">"Detail"</div>
+      <div class="pt-wrap">
+        <div class="pt-row"><span class="pt-lbl">Małe auto</span><span class="pt-val">399–479 zł</span></div>
+        <div class="pt-row"><span class="pt-lbl">Kompakt / sedan</span><span class="pt-val">499–599 zł</span></div>
+        <div class="pt-row"><span class="pt-lbl">SUV / kombi</span><span class="pt-val">649–799 zł</span></div>
+      </div>
+      <ul class="plan-list">
+        <li>Wszystko z pakietu Basic</li>
+        <li>Dekontaminacja lakieru (smoła, asfalt)</li>
+        <li>Sealant / zabezpieczenie lakieru</li>
+        <li>Niewidzialna wycieraczka</li>
+        <li>Kompleksowe czyszczenie wnętrza</li>
+        <li>Pranie foteli + dywaników</li>
+        <li>Czyszczenie nawiewów</li>
+        <li>Czyszczenie i impregnacja skóry</li>
+        <li class="note">Usuwanie sierści — opcja dodatku</li>
+      </ul>
+      <button class="plan-btn" onclick="scrollToContact('Standard — Detail')">Wybierz Standard</button>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="price-card aos aos-delay-3">
+      <div class="plan-num">Pakiet 03</div>
+      <div class="plan-name">Premium</div>
+      <div class="plan-subtitle">"Elite"</div>
+      <div class="pt-wrap">
+        <div class="pt-row"><span class="pt-lbl">Małe auto</span><span class="pt-val">799–949 zł</span></div>
+        <div class="pt-row"><span class="pt-lbl">Kompakt / sedan</span><span class="pt-val">999–1199 zł</span></div>
+        <div class="pt-row"><span class="pt-lbl">SUV / kombi</span><span class="pt-val">1299–1599 zł</span></div>
+      </div>
+      <ul class="plan-list">
+        <li>Wszystko ze Standard</li>
+        <li>Glinkowanie lakieru</li>
+        <li>Polerowanie 1-etapowe (korekta lakieru)</li>
+        <li>Mycie komory silnika</li>
+        <li>Pranie kanapy + podsufitka</li>
+        <li>Ozonowanie / neutralizacja zapachów</li>
+        <li>Przygotowanie do sprzedaży</li>
+        <li class="note">Czyszczenie po remoncie — wycena indyw.</li>
+      </ul>
+      <button class="plan-btn" onclick="scrollToContact('Premium — Elite')">Wybierz Premium</button>
+    </div>
+
+  </div>
+
+  <!-- ADDONS -->
+  <div class="addons-section aos">
+    <div class="addons-title">Usługi dodatkowe — à la carte</div>
+    <div class="addon-grid">
+      <div class="addon-item"><span class="addon-name">Usuwanie sierści</span><span class="addon-price">50–200 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Pranie fotela (szt.)</span><span class="addon-price">50–80 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Pranie kanapy</span><span class="addon-price">120–250 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Pranie podsufitki</span><span class="addon-price">100–250 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Mycie komory silnika</span><span class="addon-price">80–200 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Niewidzialna wycieraczka</span><span class="addon-price">80–150 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Dekontaminacja lakieru</span><span class="addon-price">100–250 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Glinkowanie lakieru</span><span class="addon-price">100–250 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Ozonowanie wnętrza</span><span class="addon-price">80–150 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Renowacja reflektorów</span><span class="addon-price">100–200 zł</span></div>
+      <div class="addon-item"><span class="addon-name">Czyszczenie po remoncie</span><span class="addon-price">wycena indyw.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ GALLERY ═══════════════ -->
+<div class="gallery-bg">
+  <div id="gallery" class="card-wrap aos">
+    <div class="sec-tag">Realizacje</div>
+    <h2 class="sec-title">Galeria prac</h2>
+    <p class="sec-sub">Każde auto wychodzi od nas jak nowe. Poniżej — wybrane realizacje z ostatnich miesięcy.</p>
+    <div class="gal-grid">
+
+      <!-- Range Rover L322 -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.48 (2).jpeg" alt="Range Rover L322">
+        <div class="gal-tag">Pakiet Premium</div>
+        <div class="gal-overlay"><span>Range Rover L322<br>Kompleksowy detailing + czyszczenie skóry</span></div>
+      </div>
+
+      <!-- Peugeot 607 exterior -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.52 (2).jpeg" alt="Peugeot 607">
+        <div class="gal-tag">Renowacja skóry</div>
+        <div class="gal-overlay"><span>Peugeot 607<br>Renowacja i impregnacja skóry bordo</span></div>
+      </div>
+
+      <!-- Toyota C-HR interior -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.49 (1).jpeg" alt="Toyota C-HR">
+        <div class="gal-tag">Detailing wnętrza</div>
+        <div class="gal-overlay"><span>Toyota C-HR<br>Detailing wnętrza — alcantara + skóra</span></div>
+      </div>
+
+      <!-- Mercedes Sprinter -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.49 (6).jpeg" alt="Mercedes Sprinter">
+        <div class="gal-tag">Detailing dostawczego</div>
+        <div class="gal-overlay"><span>Mercedes-Benz Sprinter<br>Mycie i pielęgnacja pojazdu dostawczego</span></div>
+      </div>
+
+      <!-- Ford Fiesta cockpit -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.47.jpeg" alt="Ford Fiesta">
+        <div class="gal-tag">Detailing wnętrza</div>
+        <div class="gal-overlay"><span>Ford Fiesta<br>Detailing wnętrza + mycie komory silnika</span></div>
+      </div>
+
+      <!-- Peugeot 607 interior dashboard -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.51 (7).jpeg" alt="Peugeot 607 wnętrze">
+        <div class="gal-tag">Renowacja skóry</div>
+        <div class="gal-overlay"><span>Peugeot 607 — wnętrze<br>Efekt po renowacji tapicerki skórzanej</span></div>
+      </div>
+
+      <!-- BMW Seria 3 -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.51 (3).jpeg" alt="BMW Seria 3">
+        <div class="gal-tag">Pakiet Standard</div>
+        <div class="gal-overlay"><span>BMW Seria 3 E90<br>Detailing wnętrza + odkurzanie</span></div>
+      </div>
+
+      <!-- Renault Zoe dashboard -->
+      <div class="gal-item">
+        <img src="zdj portfolio/WhatsApp Image 2026-05-24 at 20.11.50 (5).jpeg" alt="Renault Zoe">
+        <div class="gal-tag">Pakiet Basic</div>
+        <div class="gal-overlay"><span>Renault Zoe<br>Detailing wnętrza samochodu elektrycznego</span></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ REVIEWS ═══════════════ -->
+<div class="section-wrap aos" id="reviews">
+  <div class="sec-tag">Opinie</div>
+  <h2 class="sec-title">Co mówią klienci</h2>
+  <p class="sec-sub">Ponad 200 zadowolonych klientów. Przekonaj się, dlaczego nam ufają.</p>
+  <div class="reviews-grid">
+    <div class="rev-card aos aos-delay-1">
+      <div class="stars">★★★★★</div>
+      <p class="rev-text">"Oddałem BMW w stanie katastrofalnym — wróciło jak z salonu. Wnętrze lśni, zapachy zniknęły. Polecam każdemu!"</p>
+      <div class="reviewer">
+        <div class="rev-avatar">MK</div>
+        <div><div class="rev-name">Marek Kowalski</div><div class="rev-car">BMW 520d</div></div>
+      </div>
+    </div>
+    <div class="rev-card aos aos-delay-2">
+      <div class="stars">★★★★★</div>
+      <p class="rev-text">"Zamawiałam pakiet Standard. Plastiki w kokpicie wyglądają jak nowe, cena bardzo uczciwa. Na pewno wrócę!"</p>
+      <div class="reviewer">
+        <div class="rev-avatar">AN</div>
+        <div><div class="rev-name">Anna Nowak</div><div class="rev-car">Audi A3</div></div>
+      </div>
+    </div>
+    <div class="rev-card aos aos-delay-3">
+      <div class="stars">★★★★★</div>
+      <p class="rev-text">"Szczegółowe podejście do każdego miejsca w aucie. Byłem zaskoczony ile można wyciągnąć ze starego Golfa."</p>
+      <div class="reviewer">
+        <div class="rev-avatar">PW</div>
+        <div><div class="rev-name">Piotr Wiśniewski</div><div class="rev-car">VW Golf VII</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="contact-bg">
+  <div id="contact" class="card-wrap aos">
+    <div class="contact-grid">
+      <div>
+        <div class="sec-tag">Kontakt</div>
+        <h2 class="sec-title">Umów wizytę</h2>
+        <p style="color:var(--muted);line-height:1.65;margin-bottom:32px;font-size:.97rem;">
+          Wypełnij formularz lub zadzwoń bezpośrednio. Odpowiem w ciągu kilku godzin i ustalimy najlepszy termin.
+        </p>
+        <div class="ci-item">
+          <div class="ci-icon">📞</div>
+          <div><div class="ci-lbl">Telefon</div><div class="ci-val">605 638 540</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">✉️</div>
+          <div><div class="ci-lbl">Email</div><div class="ci-val">parusdetail@gmail.com</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">🕐</div>
+          <div><div class="ci-lbl">Godziny pracy</div><div class="ci-val">Pon – Sob: 8:00 – 18:00</div></div>
+        </div>
+        <div class="ci-item">
+          <div class="ci-icon">📍</div>
+          <div><div class="ci-lbl">Lokalizacja</div><div class="ci-val">Przyjazd do klienta lub ustalona lokalizacja</div></div>
+        </div>
+      </div>
+
+      <form class="form-cf" id="booking-form">
+        <div class="form-row">
+          <div class="fg">
+            <label>Imię i nazwisko *</label>
+            <input type="text" placeholder="Jan Kowalski" required>
+          </div>
+          <div class="fg">
+            <label>Numer telefonu *</label>
+            <input type="tel" placeholder="600 000 000" required>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Adres e-mail</label>
+          <input type="email" placeholder="jan@email.com">
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label>Marka i model auta *</label>
+            <input type="text" placeholder="np. BMW 5 Series" required>
+          </div>
+          <div class="fg">
+            <label>Wybrany pakiet</label>
+            <select id="pkg-select">
+              <option value="">— Wybierz pakiet —</option>
+              <option>Basic "Fresh"</option>
+              <option>Standard "Detail"</option>
+              <option>Premium "Elite"</option>
+              <option>Usługa dodatkowa</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg">
+          <label>Preferowany termin</label>
+          <input type="datetime-local">
+        </div>
+        <div class="fg">
+          <label>Dodatkowe informacje</label>
+          <textarea placeholder="Opisz stan auta, rodzaj tapicerki lub dodatkowe życzenia..."></textarea>
+        </div>
+        <button type="submit" class="form-submit">Wyślij prośbę o rezerwację &rarr;</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="fl">Parus<span>Detail</span></div>
+      <p>Profesjonalny detailing samochodowy. Przywracamy blask każdemu pojazdowi z dbałością o każdy detal.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/parusdetail" target="_blank">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @parusdetail
+        </a>
+        <a href="https://instagram.com/parowczakkk" target="_blank">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          @parowczakkk
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Usługi</h4>
+      <ul>
+        <li><a href="#services">Mycie i pielęgnacja</a></li>
+        <li><a href="#services">Detailing wnętrza</a></li>
+        <li><a href="#services">Odkurzanie wnętrza</a></li>
+        <li><a href="#services">Czyszczenie plastików</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Nawigacja</h4>
+      <ul>
+        <li><a href="#pricing">Cennik</a></li>
+        <li><a href="#gallery">Galeria</a></li>
+        <li><a href="#reviews">Opinie</a></li>
+        <li><a href="#contact">Umów wizytę</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2025 ParusDetail. Wszelkie prawa zastrzeżone.</span>
+    <span>605 638 540 &nbsp;·&nbsp; parusdetail@gmail.com</span>
+  </div>
+</footer>
+
+<!-- ═══════════════ WHATSAPP ═══════════════ -->
+<a href="https://wa.me/48605638540" target="_blank" class="wa-btn" title="Napisz na WhatsApp" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ═══════════════ THREE.JS ═══════════════ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  const canvas = document.getElementById('hero-canvas');
+
+  /* ── WYDAJNOŚĆ: brak antialiasingu, pixel ratio max 1 ── */
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+  renderer.setPixelRatio(1);                   // największy zysk wydajności
+  renderer.setSize(innerWidth, innerHeight);
+  renderer.setClearColor(0xf0f5ff, 1);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(55, innerWidth / innerHeight, 0.1, 100);
+  camera.position.z = 6;
+
+  /* ── Cząsteczki: 220 → 80 ── */
+  const N = 80;
+  const pos = new Float32Array(N * 3);
+  const vel = new Float32Array(N * 3);
+  for (let i = 0; i < N; i++) {
+    pos[i*3]   = (Math.random() - .5) * 22;
+    pos[i*3+1] = (Math.random() - .5) * 14;
+    pos[i*3+2] = -2 - Math.random() * 9;
+    vel[i*3]   = (Math.random() - .5) * 0.003;
+    vel[i*3+1] = (Math.random() - .5) * 0.003;
+  }
+  const ptGeo = new THREE.BufferGeometry();
+  ptGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+  scene.add(new THREE.Points(ptGeo, new THREE.PointsMaterial({ color: 0x2563eb, size: 0.05, transparent: true, opacity: 0.5 })));
+
+  /* ── Kule: 7 → 4, segmenty 32 → 12 ── */
+  const blobs = [];
+  const blobColors = [0x2563eb, 0x60a5fa, 0x818cf8, 0x3b82f6];
+  for (let i = 0; i < 4; i++) {
+    const r = 0.5 + Math.random() * 1.2;
+    const mesh = new THREE.Mesh(
+      new THREE.SphereGeometry(r, 12, 12),
+      new THREE.MeshBasicMaterial({ color: blobColors[i], transparent: true, opacity: 0.07 + Math.random() * 0.05 })
+    );
+    mesh.position.set((Math.random()-.5)*16, (Math.random()-.5)*9, -3 - Math.random()*5);
+    mesh.userData = { spd: 0.15 + Math.random()*.2, phi: Math.random()*Math.PI*2 };
+    scene.add(mesh); blobs.push(mesh);
+  }
+
+  /* ── Torus knot: segmenty 128 → 60 ── */
+  const tkGeo = new THREE.TorusKnotGeometry(1.15, 0.32, 60, 10, 2, 3);
+  const tkGroup = new THREE.Group();
+  tkGroup.add(new THREE.Mesh(tkGeo, new THREE.MeshBasicMaterial({ color: 0x2563eb, transparent: true, opacity: 0.09 })));
+  tkGroup.add(new THREE.Mesh(tkGeo, new THREE.MeshBasicMaterial({ color: 0x2563eb, wireframe: true, transparent: true, opacity: 0.07 })));
+  tkGroup.position.set(2.8, 0, -0.5);
+  scene.add(tkGroup);
+
+  /* ── Pierścień: segmenty 80 → 36 ── */
+  const ring = new THREE.Mesh(
+    new THREE.TorusGeometry(1.6, 0.04, 8, 36),
+    new THREE.MeshBasicMaterial({ color: 0x2563eb, transparent: true, opacity: 0.1 })
+  );
+  ring.position.set(-1, -1.5, -3);
+  ring.rotation.x = Math.PI / 4;
+  scene.add(ring);
+
+  /* ── Tylko ambient light (brak point lights) ── */
+  scene.add(new THREE.AmbientLight(0xffffff, 1));
+
+  /* ── Mysz: throttle do 60fps ── */
+  let mx = 0, my = 0;
+  document.addEventListener('mousemove', e => {
+    mx = (e.clientX/innerWidth-.5)*2;
+    my = (e.clientY/innerHeight-.5)*2;
+  }, { passive: true });
+
+  /* ── Zatrzymaj animację gdy karta nieaktywna lub hero poza widokiem ── */
+  let heroVisible = true;
+  let pageVisible = true;
+  new IntersectionObserver(([e]) => { heroVisible = e.isIntersecting; }, { threshold: 0 })
+    .observe(canvas);
+  document.addEventListener('visibilitychange', () => { pageVisible = !document.hidden; });
+
+  let t = 0, rafId;
+  function loop() {
+    rafId = requestAnimationFrame(loop);
+    if (!heroVisible || !pageVisible) return;   // nie renderuj jeśli niewidoczne
+    t += 0.01;
+
+    tkGroup.rotation.x = t * 0.25;
+    tkGroup.rotation.y = t * 0.4;
+    ring.rotation.z    = t * 0.18;
+
+    blobs.forEach(b => {
+      b.position.y += Math.sin(t * b.userData.spd + b.userData.phi) * 0.002;
+    });
+
+    const pa = ptGeo.attributes.position.array;
+    for (let i = 0; i < N; i++) {
+      pa[i*3] += vel[i*3]; pa[i*3+1] += vel[i*3+1];
+      if (Math.abs(pa[i*3])   > 11) vel[i*3]   *= -1;
+      if (Math.abs(pa[i*3+1]) > 7)  vel[i*3+1] *= -1;
+    }
+    ptGeo.attributes.position.needsUpdate = true;
+
+    camera.position.x += (mx * 0.3 - camera.position.x) * 0.04;
+    camera.position.y += (-my * 0.2 - camera.position.y) * 0.04;
+    camera.lookAt(scene.position);
+    renderer.render(scene, camera);
+  }
+  loop();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(innerWidth, innerHeight);
+  });
+})();
+
+/* Scroll animations */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.aos').forEach(el => obs.observe(el));
+
+/* 3D card tilt */
+document.querySelectorAll('.svc-card, .rev-card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5;
+    const y = (e.clientY - r.top) / r.height - .5;
+    card.style.transform = `perspective(600px) rotateY(${x*10}deg) rotateX(${-y*10}deg) translateY(-7px)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+
+/* Form submit */
+document.getElementById('booking-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const btn = this.querySelector('.form-submit');
+  btn.textContent = '✓ Prośba wysłana! Odezwę się wkrótce.';
+  btn.style.background = '#10b981';
+  btn.disabled = true;
+});
+
+/* Scroll to contact + pre-select package */
+function scrollToContact(pkg) {
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+  if (pkg) {
+    const sel = document.getElementById('pkg-select');
+    for (let o of sel.options) {
+      if (o.text.includes(pkg.split(' ')[0])) { sel.value = o.value || o.text; break; }
+    }
+  }
+}
+</script>
+</body>
+</html>
