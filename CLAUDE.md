@@ -57,10 +57,13 @@ Pełna strategia: `instagram-strategy.html`
 ---
 
 ## Styl wizualny postów
-- Ciemne tło (`#080809` lub głęboka czerń)
-- Złoty akcent (`#c9a96e`) — liczby, tytuły, podkreślenia
-- Czcionka szeryfowa na duże tytuły, sans-serif na treść
+- Tło: `#0A0A0A` (głęboka czerń)
+- Akcent: `#00AAFF` (niebieski) — liczby, tytuły, ikony, podkreślenia
+- Tekst główny: `#FFFFFF`
+- Tekst wtórny: `#A0AEC0`
+- Czcionka pogrubiona (bold/black) na duże tytuły, regularna na treść
 - Minimalistycznie — jeden główny przekaz na slajd
+- Nazwa konta: `@motoryzacyjneinfo`
 
 ---
 
