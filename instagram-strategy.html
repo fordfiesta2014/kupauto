@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Strategia Instagram — Motoryzacja Edukacyjna</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#080809;--bg2:#0f0f11;--bg3:#161618;--bg4:#1e1e21;--bg5:#252528;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.12);
+  --text:#f0ede8;--muted:#6a6a70;--muted2:#9a9aa0;
+  --accent:#c9a96e;--accent2:#a07840;--accent3:#e8c88a;
+  --green:#4caf7d;--blue:#5b8dee;--red:#e05555;--purple:#9b6dff;
+  --radius:4px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:"DM Sans",sans-serif;font-weight:300;line-height:1.7;overflow-x:hidden;}
+
+/* GRAIN */
+body::before{content:"";position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:1000;opacity:0.6;}
+
+/* HERO */
+.hero{padding:6rem 3rem 4rem;max-width:1200px;margin:0 auto;text-align:center;}
+.hero-eyebrow{font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;justify-content:center;gap:1rem;}
+.hero-eyebrow::before,.hero-eyebrow::after{content:"";width:40px;height:1px;background:var(--accent);}
+.hero-title{font-family:"Cormorant Garamond",serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:300;line-height:1.0;letter-spacing:-0.02em;margin-bottom:1.5rem;}
+.hero-title em{font-style:italic;color:var(--accent);}
+.hero-sub{font-size:1rem;color:var(--muted2);max-width:640px;margin:0 auto 3rem;}
+
+/* PILLAR CHIPS */
+.pillars{display:flex;flex-wrap:wrap;gap:0.6rem;justify-content:center;margin-bottom:1rem;}
+.pill{padding:0.45rem 1.2rem;border-radius:100px;font-size:0.72rem;letter-spacing:0.1em;text-transform:uppercase;font-weight:500;border:1px solid;}
+.pill-gold{color:var(--accent);border-color:rgba(201,169,110,0.3);background:rgba(201,169,110,0.06);}
+.pill-green{color:var(--green);border-color:rgba(76,175,125,0.3);background:rgba(76,175,125,0.06);}
+.pill-blue{color:var(--blue);border-color:rgba(91,141,238,0.3);background:rgba(91,141,238,0.06);}
+.pill-purple{color:var(--purple);border-color:rgba(155,109,255,0.3);background:rgba(155,109,255,0.06);}
+.pill-red{color:var(--red);border-color:rgba(224,85,85,0.3);background:rgba(224,85,85,0.06);}
+
+/* DIVIDER */
+.divider{width:100%;height:1px;background:var(--border);margin:0;}
+
+/* WRAPPER */
+.wrap{max-width:1200px;margin:0 auto;padding:0 3rem;}
+
+/* SECTION */
+.section{padding:5rem 3rem;max-width:1200px;margin:0 auto;}
+.section-label{font-size:0.62rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem;display:flex;align-items:center;gap:1rem;}
+.section-label::before{content:"";width:20px;height:1px;background:var(--accent);}
+.section-title{font-family:"Cormorant Garamond",serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:300;line-height:1.1;margin-bottom:0.75rem;}
+.section-desc{color:var(--muted2);max-width:640px;margin-bottom:3rem;font-size:0.95rem;}
+
+/* FUNNEL STEPS */
+.funnel{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:4rem;}
+.funnel-step{padding:2rem;background:var(--bg2);border-right:1px solid var(--border);position:relative;}
+.funnel-step:last-child{border-right:none;}
+.funnel-step::after{content:"→";position:absolute;right:-14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:1.2rem;z-index:2;}
+.funnel-step:last-child::after{display:none;}
+.funnel-num{font-family:"Cormorant Garamond",serif;font-size:2.5rem;color:var(--accent);opacity:0.3;line-height:1;margin-bottom:0.5rem;}
+.funnel-title{font-size:0.85rem;font-weight:600;margin-bottom:0.4rem;letter-spacing:0.05em;}
+.funnel-desc{font-size:0.78rem;color:var(--muted2);line-height:1.5;}
+
+/* FORMAT GRID */
+.format-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem;margin-bottom:2rem;}
+
+/* FORMAT CARD */
+.format-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:border-color 0.3s,transform 0.3s;}
+.format-card:hover{border-color:var(--border2);transform:translateY(-3px);}
+.format-card-header{padding:1.5rem 1.5rem 1rem;display:flex;align-items:flex-start;gap:1rem;}
+.format-icon{width:44px;height:44px;border-radius:var(--radius);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.icon-gold{background:rgba(201,169,110,0.12);color:var(--accent);}
+.icon-green{background:rgba(76,175,125,0.12);color:var(--green);}
+.icon-blue{background:rgba(91,141,238,0.12);color:var(--blue);}
+.icon-purple{background:rgba(155,109,255,0.12);color:var(--purple);}
+.icon-red{background:rgba(224,85,85,0.12);color:var(--red);}
+.format-meta{flex:1;}
+.format-type{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.25rem;}
+.format-name{font-size:1rem;font-weight:500;line-height:1.2;}
+.format-slides{font-size:0.72rem;color:var(--muted2);margin-top:0.2rem;}
+.format-body{padding:0 1.5rem 1.5rem;}
+.format-hook{font-size:0.82rem;color:var(--muted2);margin-bottom:1rem;padding:0.75rem;background:var(--bg3);border-left:2px solid var(--accent);border-radius:0 var(--radius) var(--radius) 0;}
+.format-hook strong{color:var(--text);display:block;margin-bottom:0.2rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.1em;}
+
+/* EXAMPLE POSTS */
+.examples{display:flex;flex-direction:column;gap:0.6rem;}
+.example-post{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:0.9rem 1rem;cursor:pointer;transition:border-color 0.2s;}
+.example-post:hover{border-color:var(--border2);}
+.post-title-row{display:flex;align-items:center;gap:0.6rem;margin-bottom:0.4rem;}
+.post-num{font-size:0.65rem;color:var(--muted);font-family:"Cormorant Garamond",serif;font-weight:400;min-width:16px;}
+.post-title{font-size:0.88rem;font-weight:500;line-height:1.3;}
+.post-tags{display:flex;gap:0.4rem;flex-wrap:wrap;}
+.tag{font-size:0.6rem;padding:0.15rem 0.55rem;border-radius:100px;letter-spacing:0.08em;}
+.tag-gold{background:rgba(201,169,110,0.1);color:var(--accent);}
+.tag-green{background:rgba(76,175,125,0.1);color:var(--green);}
+.tag-blue{background:rgba(91,141,238,0.1);color:var(--blue);}
+.tag-purple{background:rgba(155,109,255,0.1);color:var(--purple);}
+.tag-red{background:rgba(224,85,85,0.1);color:var(--red);}
+
+/* SLIDE PREVIEW */
+.slide-preview{display:none;margin-top:0.8rem;border-top:1px solid var(--border);padding-top:0.8rem;}
+.slide-preview.open{display:block;}
+.slides-list{display:flex;flex-direction:column;gap:0.4rem;}
+.slide-item{display:flex;gap:0.8rem;align-items:flex-start;padding:0.5rem 0.6rem;background:var(--bg4);border-radius:var(--radius);}
+.slide-n{font-size:0.65rem;color:var(--accent);font-family:"Cormorant Garamond",serif;min-width:20px;padding-top:1px;}
+.slide-content{font-size:0.78rem;color:var(--muted2);line-height:1.4;}
+.slide-content strong{color:var(--text);}
+
+/* MOCKUP PHONE */
+.mockup-section{padding:5rem 3rem;max-width:1200px;margin:0 auto;}
+.mockup-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;}
+.phone-mockup{background:var(--bg2);border:1px solid var(--border);border-radius:24px;overflow:hidden;aspect-ratio:9/16;display:flex;flex-direction:column;position:relative;}
+.phone-mockup.wide{aspect-ratio:1/1;}
+.phone-header{padding:1rem 1.2rem 0.5rem;display:flex;align-items:center;gap:0.6rem;border-bottom:1px solid var(--border);}
+.ph-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));flex-shrink:0;}
+.ph-name{font-size:0.7rem;font-weight:600;}
+.ph-follow{font-size:0.65rem;color:var(--accent);margin-left:auto;}
+.phone-content{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:1.5rem;text-align:center;gap:0.75rem;}
+.ph-label{font-size:0.55rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);opacity:0.8;}
+.ph-big{font-family:"Cormorant Garamond",serif;font-size:clamp(1.5rem,4vw,2.4rem);font-weight:300;line-height:1.1;}
+.ph-big em{font-style:italic;color:var(--accent);}
+.ph-body{font-size:0.72rem;color:var(--muted2);line-height:1.5;max-width:220px;}
+.ph-stat{font-family:"Cormorant Garamond",serif;font-size:3rem;font-weight:300;color:var(--accent);line-height:1;}
+.ph-stat-label{font-size:0.65rem;color:var(--muted2);letter-spacing:0.1em;}
+.ph-divider{width:30px;height:1px;background:var(--border2);}
+.phone-carousel{display:flex;overflow:hidden;flex:1;}
+.carousel-slide{min-width:100%;padding:1.5rem;display:flex;flex-direction:column;justify-content:center;gap:0.6rem;background:var(--bg3);}
+.carousel-slide:nth-child(2){background:var(--bg4);}
+.phone-dots{display:flex;justify-content:center;gap:4px;padding:0.75rem;}
+.dot{width:5px;height:5px;border-radius:50%;background:var(--muted);}
+.dot.active{background:var(--accent);width:14px;border-radius:3px;}
+.phone-footer{padding:0.6rem 1.2rem;display:flex;gap:1.2rem;border-top:1px solid var(--border);}
+.ph-action{font-size:0.65rem;color:var(--muted2);}
+.ph-action.like{color:var(--red);}
+
+/* CONTENT PILLARS */
+.pillars-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:3rem;}
+.pillar-block{background:var(--bg2);padding:1.8rem 1.5rem;}
+.pillar-icon{font-size:1.4rem;margin-bottom:0.8rem;}
+.pillar-name{font-size:0.85rem;font-weight:600;margin-bottom:0.4rem;}
+.pillar-desc{font-size:0.75rem;color:var(--muted2);line-height:1.5;}
+.pillar-pct{font-family:"Cormorant Garamond",serif;font-size:2rem;color:var(--accent);opacity:0.5;float:right;line-height:1;}
+
+/* CALENDAR */
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.cal-day-header{background:var(--bg3);padding:0.5rem;text-align:center;font-size:0.62rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);}
+.cal-day{background:var(--bg2);padding:0.8rem;min-height:90px;}
+.cal-day.empty{background:var(--bg);}
+.cal-day.highlight{background:var(--bg3);border-top:2px solid var(--accent);}
+.cal-num{font-size:0.7rem;color:var(--muted);margin-bottom:0.4rem;}
+.cal-post{font-size:0.65rem;padding:0.25rem 0.4rem;border-radius:2px;margin-bottom:0.25rem;line-height:1.3;}
+.cp-gold{background:rgba(201,169,110,0.12);color:var(--accent);}
+.cp-green{background:rgba(76,175,125,0.12);color:var(--green);}
+.cp-blue{background:rgba(91,141,238,0.12);color:var(--blue);}
+.cp-purple{background:rgba(155,109,255,0.12);color:var(--purple);}
+.cp-red{background:rgba(224,85,85,0.12);color:var(--red);}
+
+/* EBOOK SECTION */
+.ebook-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:2rem;}
+.ebook-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.ebook-cover{height:180px;background:linear-gradient(135deg,var(--bg3) 0%,var(--bg4) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;border-bottom:1px solid var(--border);gap:0.5rem;padding:1.5rem;position:relative;}
+.ebook-cover::before{content:"";position:absolute;inset:0;background:linear-gradient(45deg,rgba(201,169,110,0.03),transparent);}
+.ebook-cover-title{font-family:"Cormorant Garamond",serif;font-size:1.4rem;text-align:center;font-weight:300;line-height:1.2;}
+.ebook-cover-label{font-size:0.6rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--accent);}
+.ebook-spine{width:4px;height:100%;position:absolute;left:0;top:0;background:linear-gradient(to bottom,var(--accent2),var(--accent));}
+.ebook-body{padding:1.5rem;}
+.ebook-meta{font-size:0.72rem;color:var(--muted2);margin-bottom:0.75rem;}
+.ebook-topics{display:flex;flex-direction:column;gap:0.35rem;}
+.ebook-topic{font-size:0.78rem;display:flex;align-items:center;gap:0.5rem;color:var(--muted2);}
+.ebook-topic::before{content:"—";color:var(--accent);font-size:0.65rem;}
+
+/* HOOKS SECTION */
+.hooks-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2rem;}
+.hook-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;}
+.hook-category{font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;}
+.hook-list{display:flex;flex-direction:column;gap:0.6rem;}
+.hook-item{font-size:0.85rem;padding:0.6rem 0.8rem;background:var(--bg3);border-radius:var(--radius);border-left:2px solid var(--accent);line-height:1.4;}
+.hook-item.border-green{border-left-color:var(--green);}
+.hook-item.border-blue{border-left-color:var(--blue);}
+.hook-item.border-purple{border-left-color:var(--purple);}
+
+/* HASHTAGS */
+.hashtag-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-top:2rem;}
+.hashtag-group{margin-bottom:1.2rem;}
+.hashtag-group-title{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:0.6rem;}
+.hashtags{display:flex;flex-wrap:wrap;gap:0.4rem;}
+.hashtag{font-size:0.75rem;color:var(--blue);background:rgba(91,141,238,0.06);padding:0.2rem 0.7rem;border-radius:100px;border:1px solid rgba(91,141,238,0.15);}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:3rem;text-align:center;color:var(--muted);font-size:0.75rem;max-width:1200px;margin:0 auto;}
+
+/* BADGE */
+.badge{display:inline-flex;align-items:center;gap:0.4rem;padding:0.25rem 0.75rem;border-radius:100px;font-size:0.65rem;font-weight:500;letter-spacing:0.05em;}
+.badge-new{background:rgba(201,169,110,0.12);color:var(--accent);border:1px solid rgba(201,169,110,0.2);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .format-grid{grid-template-columns:1fr;}
+  .mockup-grid{grid-template-columns:1fr 1fr;}
+  .ebook-grid,.hooks-grid{grid-template-columns:1fr;}
+  .section,.hero{padding:3rem 1.5rem;}
+  .funnel{grid-template-columns:1fr 1fr;}
+  .calendar{grid-template-columns:repeat(7,1fr);}
+  .cal-day{min-height:60px;}
+}
+@media(max-width:600px){
+  .funnel{grid-template-columns:1fr;}
+  .funnel-step::after{display:none;}
+  .mockup-grid{grid-template-columns:1fr;}
+  .pillars-grid{grid-template-columns:1fr 1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Strategia Contentu</div>
+  <h1 class="hero-title">Instagram<br><em>Motoryzacyjny</em><br><span style="font-size:0.45em;color:var(--muted2);letter-spacing:0.05em;">edukacja · fakty · newsy · e-booki</span></h1>
+  <p class="hero-sub">Kompletna strategia postów — od formatu pojedynczego slajdu po karuzele edukacyjne — z celem budowania bazy obserwujących i sprzedaży e-booków motoryzacyjnych.</p>
+  <div class="pillars">
+    <span class="pill pill-gold">Fakty</span>
+    <span class="pill pill-blue">Newsy</span>
+    <span class="pill pill-green">Ciekawostki</span>
+    <span class="pill pill-purple">Historia</span>
+    <span class="pill pill-red">Mity vs Prawda</span>
+    <span class="pill pill-gold">Porady</span>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FUNNEL -->
+<div class="section">
+  <div class="section-label">Model biznesowy</div>
+  <h2 class="section-title">Lejek sprzedażowy przez Instagram</h2>
+  <p class="section-desc">Każdy post ma konkretną rolę w tej drodze — od pierwszego kontaktu po zakup e-booka.</p>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-num">01</div>
+      <div class="funnel-title">Odkrycie</div>
+      <div class="funnel-desc">Posty z faktami i ciekawostkami trafiają do nowych osób przez algorytm Reels i Explore</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">02</div>
+      <div class="funnel-title">Zainteresowanie</div>
+      <div class="funnel-desc">Karuzele edukacyjne zatrzymują uwagę — użytkownicy zapisują i udostępniają wartościowy content</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">03</div>
+      <div class="funnel-title">Zaufanie</div>
+      <div class="funnel-desc">Seria postów tematycznych buduje autorytet eksperta w danej dziedzinie motoryzacji</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">04</div>
+      <div class="funnel-title">Decyzja</div>
+      <div class="funnel-desc">Link w bio, Stories z CTA, posty „zapowiedzi e-booka" rozgrzewają do zakupu</div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">05</div>
+      <div class="funnel-title">Zakup</div>
+      <div class="funnel-desc">E-book jako naturalne rozszerzenie darmowego contentu — „chcesz więcej? mamy całą książkę"</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CONTENT PILLARS -->
+<div class="section">
+  <div class="section-label">Filary contentu</div>
+  <h2 class="section-title">5 tematów, które budują konto</h2>
+  <p class="section-desc">Każdy filar ma inną rolę — razem tworzą spójną i angażującą strategię treści.</p>
+
+  <div class="pillars-grid">
+    <div class="pillar-block">
+      <div class="pillar-pct">30%</div>
+      <div class="pillar-icon">⚡</div>
+      <div class="pillar-name" style="color:var(--accent)">Szokujące Fakty</div>
+      <div class="pillar-desc">Liczby, rekordy, zaskakujące dane. Najłatwiej się udostępnia. Główny driver zasięgu.</div>
+    </div>
+    <div class="pillar-block">
+      <div class="pillar-pct">20%</div>
+      <div class="pillar-icon">📰</div>
+      <div class="pillar-name" style="color:var(--blue)">Newsy Branżowe</div>
+      <div class="pillar-desc">Najnowsze modele, technologie, recall'e, zmiany w przepisach. Buduje wizerunek „na bieżąco".</div>
+    </div>
+    <div class="pillar-block">
+      <div class="pillar-pct">25%</div>
+      <div class="pillar-icon">🔬</div>
+      <div class="pillar-name" style="color:var(--green)">Edukacja Techniczna</div>
+      <div class="pillar-desc">Jak działa silnik, skrzynia biegów, zawieszenie. Głęboka wartość — główny argument dla e-booka.</div>
+    </div>
+    <div class="pillar-block">
+      <div class="pillar-pct">15%</div>
+      <div class="pillar-icon">🏆</div>
+      <div class="pillar-name" style="color:var(--purple)">Historia & Legendy</div>
+      <div class="pillar-desc">Początki marek, słynne wyścigi, kultowe modele. Emocje i nostalgia = duże zaangażowanie.</div>
+    </div>
+    <div class="pillar-block">
+      <div class="pillar-pct">10%</div>
+      <div class="pillar-icon">❌</div>
+      <div class="pillar-name" style="color:var(--red)">Mity vs Prawda</div>
+      <div class="pillar-desc">Obalanie popularnych mitów motoryzacyjnych. Kontrowersja przyciąga komentarze i debaty.</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- FORMAT CARDS -->
+<div class="section">
+  <div class="section-label">Formaty postów</div>
+  <h2 class="section-title">8 formatów z konkretnymi przykładami</h2>
+  <p class="section-desc">Kliknij na dowolny post żeby zobaczyć strukturę slajdów.</p>
+
+  <div class="format-grid">
+
+    <!-- FORMAT 1: FAKT DNIA -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-gold">⚡</div>
+        <div class="format-meta">
+          <div class="format-type">Format 1 · Pojedynczy slajd</div>
+          <div class="format-name">Fakt Dnia</div>
+          <div class="format-slides">1 slajd · Szybkie zasięgi</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Duża liczba lub zdanie-bomba na ciemnym tle. Krótki podtytuł z kontekstem. Logo w rogu.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Bugatti Chiron zużywa komplet opon w 15 minut przy pełnym gazie</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-gold">Rekord</span>
+              <span class="tag tag-blue">Supercar</span>
+            </div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">—</span><div class="slide-content"><strong>Slajd 1/1:</strong> Wielka liczba „15 min" na środku. Podtytuł: „Tyle wystarcza opony Bugatti Chiron przy prędkości maksymalnej. Komplet kosztuje 42 000 zł." Hashtagi w opisie.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Silnik W16 Bugatti ma 16 świec zapłonowych i 10 chłodnic</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-green">Technika</span>
+              <span class="tag tag-gold">Fakt</span>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">Tesla Model S Plaid: 0-100 km/h szybciej niż mrugnięcie okiem (1,99 s)</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-blue">EV</span>
+              <span class="tag tag-gold">Rekord</span>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">4.</span>
+              <span class="post-title">Na Autobahn jeździ się bez ograniczeń prędkości tylko na 30% odcinków</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-purple">Mit obalony</span>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">5.</span>
+              <span class="post-title">Silnik w F1 obraca się 18 000 razy na minutę — więcej niż blender</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-red">F1</span>
+              <span class="tag tag-gold">Technika</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 2: KARUZELA EDUKACYJNA -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-green">📚</div>
+        <div class="format-meta">
+          <div class="format-type">Format 2 · Karuzela</div>
+          <div class="format-name">Przewodnik Krok po Kroku</div>
+          <div class="format-slides">5–8 slajdów · Zapisywalny content</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Slajd 1 — mocny tytuł z obietnicą. Slajdy 2-7 — jeden punkt = jeden slajd. Ostatni slajd — CTA + logo.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Jak rozpoznać dobry silnik używanego auta — 7 rzeczy do sprawdzenia</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-green">Poradnik</span>
+              <span class="tag tag-gold">Zakup auta</span>
+            </div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Hook:</strong> „7 rzeczy, które sprawdzam ZAWSZE przed kupnem używanego auta. Sprzedawcy tego nie lubią 🧵"</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>Olej:</strong> Kolor, poziom, zapach. Czarny jak smoła = problem. Mleczny = woda w oleju = UCIEKAJ.</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content"><strong>Rozrząd:</strong> Kiedy ostatnia wymiana? Pasek czy łańcuch? Brak dokumentacji = ryzyko.</div></div>
+                <div class="slide-item"><span class="slide-n">4</span><div class="slide-content"><strong>Spaliny:</strong> Biały dym na zimno = normalne. Biały dym na gorąco = uszczelka głowicy.</div></div>
+                <div class="slide-item"><span class="slide-n">5</span><div class="slide-content"><strong>Numer VIN:</strong> Sprawdź historię — CARFAX, Historiapojazdu.gov.pl. Zawsze.</div></div>
+                <div class="slide-item"><span class="slide-n">6</span><div class="slide-content"><strong>Jazda próbna:</strong> Słuchaj. Stuki, szarpanie, wolne reagowanie kierownicy.</div></div>
+                <div class="slide-item"><span class="slide-n">7</span><div class="slide-content"><strong>Diagnostyka OBD:</strong> 50 zł u mechanika. Warto zawsze przed zakupem.</div></div>
+                <div class="slide-item"><span class="slide-n">8</span><div class="slide-content"><strong>CTA:</strong> „Chcesz kompletny przewodnik? Link do e-booka w bio 👆" + logo</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Jak działa turbosprężarka — wyjaśnione w 6 slajdach</span>
+            </div>
+            <div class="post-tags">
+              <span class="tag tag-green">Technika</span>
+              <span class="tag tag-blue">Edukacja</span>
+            </div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Hook:</strong> „Turbo — brzmi skomplikowanie. W 60 sekund to rozumiesz."</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content">Spaliny wychodzące z silnika mają energię cieplną i kinetyczną → trafiają na turbinę.</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content">Turbina obraca sprężarkę → sprężarka tłoczy świeże powietrze do silnika pod ciśnieniem.</div></div>
+                <div class="slide-item"><span class="slide-n">4</span><div class="slide-content">Więcej powietrza = więcej paliwa = więcej mocy. Prosty przepis na moc.</div></div>
+                <div class="slide-item"><span class="slide-n">5</span><div class="slide-content"><strong>Turbo lag:</strong> Dlaczego moc nie przychodzi od razu? Turbina potrzebuje chwili na rozpędzenie.</div></div>
+                <div class="slide-item"><span class="slide-n">6</span><div class="slide-content"><strong>CTA:</strong> „Zapisz ten post — przyda się przy zakupie turbodiesel'a. Więcej w bio 👆"</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">5 błędów przy zmianie opon które kosztują Cię kasę</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-green">Porady</span><span class="tag tag-red">Błędy</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">4.</span>
+              <span class="post-title">Diesel vs Benzyna — co wybrać w 2025 roku? Analiza kosztów</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">Porównanie</span><span class="tag tag-gold">Zakup auta</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 3: MIT vs PRAWDA -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-red">❌</div>
+        <div class="format-meta">
+          <div class="format-type">Format 3 · Karuzela</div>
+          <div class="format-name">Mit vs Prawda</div>
+          <div class="format-slides">2–6 par slajdów · Angażujący</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Slajd MIT — czerwone tło, przekreślona teza. Slajd PRAWDA — zielone tło, wyjaśnienie. Parami.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">5 mitów motoryzacyjnych w które wszyscy wierzą (ale są fałszywe)</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-red">Mity</span><span class="tag tag-green">Edukacja</span></div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Hook:</strong> „Twój mechanik kłamie. Albo po prostu nie wie. 5 mitów, które kosztują cię pieniądze."</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>MIT:</strong> „Olej silnikowy trzeba zmieniać co 5 000 km"</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content"><strong>PRAWDA:</strong> Nowoczesne oleje syntetyczne wytrzymują 15–30 000 km. Sprawdź instrukcję swojego auta.</div></div>
+                <div class="slide-item"><span class="slide-n">4</span><div class="slide-content"><strong>MIT:</strong> „Elektryki nie nadają się na zimę"</div></div>
+                <div class="slide-item"><span class="slide-n">5</span><div class="slide-content"><strong>PRAWDA:</strong> Tracą 15–25% zasięgu na mrozie, ale wciąż są praktyczne. Hyundai Ioniq 6 radzi sobie lepiej niż BMW w chłodzie.</div></div>
+                <div class="slide-item"><span class="slide-n">6</span><div class="slide-content"><strong>MIT:</strong> „Rozgrzewaj silnik kilka minut przed jazdą"</div></div>
+                <div class="slide-item"><span class="slide-n">7</span><div class="slide-content"><strong>PRAWDA:</strong> Nowoczesny silnik rozgrzewa się szybciej podczas jazdy. Postój na biegu jałowym to tylko spalanie paliwa.</div></div>
+                <div class="slide-item"><span class="slide-n">8</span><div class="slide-content"><strong>CTA:</strong> „Który mit Cię zaskoczył? Pisz w komentarzach 👇"</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">„Droższe paliwo = lepiej dla silnika" — prawda czy mit?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-red">Mit</span><span class="tag tag-gold">Paliwo</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">Mity o samochodach elektrycznych — rozbieram je na części</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-red">Mit</span><span class="tag tag-blue">EV</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 4: RANKING / TOP X -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-purple">🏆</div>
+        <div class="format-meta">
+          <div class="format-type">Format 4 · Karuzela</div>
+          <div class="format-name">Ranking / Top X</div>
+          <div class="format-slides">6–10 slajdów · Wysoka zapisywalność</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Odliczanie od X do 1. Każdy slajd = jedna pozycja rankingu z krótkim uzasadnieniem i ciekawostką.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Top 7 najniezawodniejszych silników wszech czasów</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-purple">Ranking</span><span class="tag tag-green">Technika</span></div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Hook:</strong> „7 silników które przejadą milion kilometrów. Sprawdź czy Twoje auto jest na liście."</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>#7:</strong> BMW M57 — turbodiesel 6-cylindrowy. Kultowy w taksówkach. Przebiegi 500 000+ bez remontu.</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content"><strong>#6:</strong> Toyota 1JZ/2JZ — silniki z Supr'y. Niezniszczalne. W tuningu wytrzymują 3x fabryczną moc.</div></div>
+                <div class="slide-item"><span class="slide-n">4</span><div class="slide-content"><strong>#5:</strong> Volvo D5 — turbodiesel do samochodów ciężkich. Przebiegi do 700 000 km znane.</div></div>
+                <div class="slide-item"><span class="slide-n">5</span><div class="slide-content"><strong>#4:</strong> Honda K20/K24 — wolnossący benzyniak. Prosta konstrukcja = niezawodność.</div></div>
+                <div class="slide-item"><span class="slide-n">6</span><div class="slide-content"><strong>#3:</strong> Mercedes OM651 2.2 CDI — obecny w dziesiątkach modeli przez 15 lat produkcji.</div></div>
+                <div class="slide-item"><span class="slide-n">7</span><div class="slide-content"><strong>#2:</strong> Mitsubishi 4D56 — silnik z L200. W Afryce jeździ milion km bez remontu.</div></div>
+                <div class="slide-item"><span class="slide-n">8</span><div class="slide-content"><strong>#1:</strong> Toyota 1HZ — wolnossący diesel z Land Cruisera. Legendarny. Przebiegi do 1 500 000 km.</div></div>
+                <div class="slide-item"><span class="slide-n">9</span><div class="slide-content"><strong>CTA:</strong> „Masz auto z tej listy? Pisz w komentarzach! Więcej o silnikach — e-book w bio 👆"</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Top 5 najdroższych błędów przy zakupie używanego auta</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-red">Błędy</span><span class="tag tag-purple">Ranking</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">10 aut które będą warte fortunę za 20 lat</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-gold">Inwestycja</span><span class="tag tag-purple">Ranking</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">4.</span>
+              <span class="post-title">5 najtańszych aut z najlepszymi silnikami 2025</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-green">Zakup</span><span class="tag tag-purple">Ranking</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 5: HISTORIA / TIMELINE -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-purple">📅</div>
+        <div class="format-meta">
+          <div class="format-type">Format 5 · Karuzela</div>
+          <div class="format-name">Historia / Timeline</div>
+          <div class="format-slides">5–8 slajdów · Emocje i nostalgia</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Linia czasu pionowa lub karuzela. Każdy slajd = epoka/rok z datą i krótką historią.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Jak Ferrari stało się Ferrari — historia od 1929 do dziś</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-purple">Historia</span><span class="tag tag-red">Ferrari</span></div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Hook:</strong> „Facet który przeszedł z Fiata do własnej marki. I chciał, żeby Enzo Fiat go odkupił. Historia Ferrari."</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>1929:</strong> Enzo Ferrari zakłada Scuderia Ferrari jako zespół wyścigowy dla Alfy Romeo.</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content"><strong>1947:</strong> Pierwsze własne auto — Ferrari 125 S. 1,5-litrowy silnik V12. 118 KM.</div></div>
+                <div class="slide-item"><span class="slide-n">4</span><div class="slide-content"><strong>1969:</strong> FIAT kupuje 50% Ferrari za 11 mln USD. Enzo zostaje szefem do śmierci.</div></div>
+                <div class="slide-item"><span class="slide-n">5</span><div class="slide-content"><strong>2002:</strong> Enzo Ferrari — 660 KM, 250 szt. Każde sprzedane zanim weszło do produkcji.</div></div>
+                <div class="slide-item"><span class="slide-n">6</span><div class="slide-content"><strong>2015:</strong> IPO Ferrari — wycena 9,8 mld USD. Dziś ponad 60 mld USD.</div></div>
+                <div class="slide-item"><span class="slide-n">7</span><div class="slide-content"><strong>CTA:</strong> „Jakie Ferrari to twoje marzenie? Komentuj 👇"</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Historia Poloneza — od dumy PRL-u do złomu</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-purple">Historia</span><span class="tag tag-gold">Polska</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">Ewolucja silnika F1 — od 1950 do 2025</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-purple">Historia</span><span class="tag tag-red">F1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 6: PORÓWNANIE SIDE BY SIDE -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-blue">⚖️</div>
+        <div class="format-meta">
+          <div class="format-type">Format 6 · Karuzela lub 1 slajd</div>
+          <div class="format-name">Porównanie A vs B</div>
+          <div class="format-slides">1–4 slajdy · Decyzyjny content</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Podział ekranu 50/50. Lewa strona = opcja A, prawa = opcja B. Tabela lub punkty w dół.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Benzyna vs Diesel w 2025 — ostateczna analiza</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">Porównanie</span><span class="tag tag-gold">Zakup</span></div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Hook:</strong> „Benzyna czy diesel? Odpowiedź zależy od jednej liczby: ile km rocznie?"</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>Koszty zakupu:</strong> Diesel droższy o 3 000–8 000 zł. Benzyna tańsza na wejściu.</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content"><strong>Paliwo:</strong> Diesel oszczędza 2–4 l/100km. Przy 25 000 km/rok oszczędzasz ok. 3 000 zł.</div></div>
+                <div class="slide-item"><span class="slide-n">4</span><div class="slide-content"><strong>Serwis:</strong> Diesel droższy — filtr DPF, wtryski, rozrząd. Benzyna prostsza.</div></div>
+                <div class="slide-item"><span class="slide-n">5</span><div class="slide-content"><strong>Wyrok:</strong> &gt;25 000 km/rok = diesel. &lt;15 000 km/rok = benzyna. Prosto.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Auto z salonu vs używane — co się bardziej opłaca?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">Porównanie</span><span class="tag tag-gold">Zakup</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">Elektryk vs hybryda — które jest lepsze NAPRAWDĘ</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">EV</span><span class="tag tag-green">Porównanie</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 7: QUIZ / ZAGADKA -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-gold">❓</div>
+        <div class="format-meta">
+          <div class="format-type">Format 7 · Pojedynczy slajd</div>
+          <div class="format-name">Quiz / Zagadka</div>
+          <div class="format-slides">1–2 slajdy · Maksymalne komentarze</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Pytanie na środku, 4 odpowiedzi A/B/C/D. Odpowiedź w komentarzu lub na slajdzie 2.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Który silnik ma wyższe obroty maksymalne: F1 czy motocykl MotoGP?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-gold">Quiz</span><span class="tag tag-red">F1</span></div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Pytanie:</strong> F1 kręci do 18 000 rpm. MotoGP do ile? A) 12 000, B) 15 000, C) 17 000, D) 20 000?</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>Odpowiedź:</strong> C) 17 000 rpm — Yamaha YZR-M1. F1 wygrywa o włos! Odpowiedź w komentarzu pina.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Ile koni ma produkcyjne auto z największą mocą w historii?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-gold">Quiz</span><span class="tag tag-purple">Rekord</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">Rozpoznajesz te loga marek aut po samym konturze?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-gold">Quiz</span><span class="tag tag-blue">Identyfikacja</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">4.</span>
+              <span class="post-title">Które auto jest szybsze od zera do setki: Fiat 126p czy… [zaskoczenie]</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-gold">Quiz</span><span class="tag tag-purple">Humor</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FORMAT 8: NEWS / NOWOŚCI -->
+    <div class="format-card">
+      <div class="format-card-header">
+        <div class="format-icon icon-blue">📰</div>
+        <div class="format-meta">
+          <div class="format-type">Format 8 · Pojedynczy slajd lub 3 slajdy</div>
+          <div class="format-name">News Tygodnia</div>
+          <div class="format-slides">1–3 slajdy · Aktualność</div>
+        </div>
+      </div>
+      <div class="format-body">
+        <div class="format-hook">
+          <strong>Schemat wizualny</strong>
+          Nagłówek jak gazeta, podtytuł z kontekstem, zdjęcie/grafika. Krótko i na temat.
+        </div>
+        <div class="examples">
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">1.</span>
+              <span class="post-title">Toyota odwołuje 1,8 mln aut. Powód? Poduszka powietrzna która strzela odłamkami</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">News</span><span class="tag tag-red">Recall</span></div>
+            <div class="slide-preview">
+              <div class="slides-list">
+                <div class="slide-item"><span class="slide-n">1</span><div class="slide-content"><strong>Nagłówek:</strong> „RECALL ALERT" + wielka liczba „1,8 mln". Krótki opis problemu z inflatorami Takata.</div></div>
+                <div class="slide-item"><span class="slide-n">2</span><div class="slide-content"><strong>Jak sprawdzić:</strong> 3 kroki — sprawdź VIN, zadzwoń do dealera, naprawiaj NATYCHMIAST. Bezpieczeństwo.</div></div>
+                <div class="slide-item"><span class="slide-n">3</span><div class="slide-content"><strong>CTA:</strong> „Sprawdź czy Twoje auto jest na liście. Link w bio." + zapis do powiadomień.</div></div>
+              </div>
+            </div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">2.</span>
+              <span class="post-title">Nowe przepisy drogowe od 2025 — co się zmienia dla kierowców w Polsce</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">News</span><span class="tag tag-gold">Przepisy</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">3.</span>
+              <span class="post-title">Nowe BMW M5 2025 — hybryda z 727 KM. Koniec epoki?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">News</span><span class="tag tag-green">Nowości</span></div>
+          </div>
+          <div class="example-post" onclick="toggleSlides(this)">
+            <div class="post-title-row">
+              <span class="post-num">4.</span>
+              <span class="post-title">Ceny paliw znowu w górę — kiedy to się skończy?</span>
+            </div>
+            <div class="post-tags"><span class="tag tag-blue">News</span><span class="tag tag-red">Ceny</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /format-grid -->
+</div>
+
+<div class="divider"></div>
+
+<!-- PHONE MOCKUPS -->
+<div class="mockup-section">
+  <div class="section-label" style="margin-bottom:1.5rem;">Wizualizacja postów</div>
+  <h2 class="section-title">Jak to wygląda na telefonie</h2>
+  <p class="section-desc" style="margin-bottom:2rem;">Trzy przykładowe posty — fakt dnia, karuzela edukacyjna i quiz.</p>
+
+  <div class="mockup-grid">
+
+    <!-- MOCKUP 1: Fakt dnia -->
+    <div class="phone-mockup">
+      <div class="phone-header">
+        <div class="ph-avatar"></div>
+        <div>
+          <div class="ph-name">moto.edukacja</div>
+        </div>
+        <div class="ph-follow">Obserwuj</div>
+      </div>
+      <div class="phone-content" style="background:var(--bg3);">
+        <div class="ph-label">Fakt dnia</div>
+        <div class="ph-stat">1,99 s</div>
+        <div class="ph-stat-label">0 → 100 km/h</div>
+        <div class="ph-divider"></div>
+        <div class="ph-big" style="font-size:1.1rem;">Tesla Model S Plaid</div>
+        <div class="ph-body" style="font-size:0.65rem;">Szybciej niż mrugnięcie okiem. To najszybsze produkcyjne auto na świecie do setki.</div>
+        <div class="ph-label" style="font-size:0.5rem;margin-top:0.5rem;">@moto.edukacja</div>
+      </div>
+      <div class="phone-footer">
+        <span class="ph-action like">♥ Polub</span>
+        <span class="ph-action">💬 Komentarz</span>
+        <span class="ph-action">📤 Udostępnij</span>
+      </div>
+    </div>
+
+    <!-- MOCKUP 2: Karuzela -->
+    <div class="phone-mockup">
+      <div class="phone-header">
+        <div class="ph-avatar"></div>
+        <div>
+          <div class="ph-name">moto.edukacja</div>
+        </div>
+        <div class="ph-follow">Obserwuj</div>
+      </div>
+      <div style="flex:1;display:flex;flex-direction:column;">
+        <div class="carousel-slide" style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:0.5rem;padding:1.5rem;">
+          <div style="font-size:0.55rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--accent);">Slajd 3 / 7</div>
+          <div style="font-size:0.75rem;font-weight:600;color:var(--accent);margin-bottom:0.2rem;">Spaliny białe na gorąco?</div>
+          <div style="font-size:0.85rem;font-family:'Cormorant Garamond',serif;font-weight:300;line-height:1.3;font-size:1rem;">Uszczelka głowicy. Uciekaj.</div>
+          <div style="font-size:0.7rem;color:var(--muted2);line-height:1.4;margin-top:0.25rem;">Biały dym przy rozgrzanym silniku to woda w komorze spalania. Naprawa: 2 000–5 000 zł.</div>
+          <div style="margin-top:0.5rem;font-size:0.6rem;color:var(--muted);">← Przesuń aby zobaczyć więcej →</div>
+        </div>
+      </div>
+      <div class="phone-dots">
+        <div class="dot"></div><div class="dot"></div><div class="dot active"></div>
+        <div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+      <div class="phone-footer">
+        <span class="ph-action like">♥ Polub</span>
+        <span class="ph-action">💬 Komentarz</span>
+        <span class="ph-action">🔖 Zapisz</span>
+      </div>
+    </div>
+
+    <!-- MOCKUP 3: Quiz -->
+    <div class="phone-mockup">
+      <div class="phone-header">
+        <div class="ph-avatar"></div>
+        <div>
+          <div class="ph-name">moto.edukacja</div>
+        </div>
+        <div class="ph-follow">Obserwuj</div>
+      </div>
+      <div class="phone-content" style="background:var(--bg3);gap:0.6rem;">
+        <div class="ph-label">Quiz motoryzacyjny</div>
+        <div class="ph-big" style="font-size:1rem;">Ile koni ma<br><em>Bugatti Tourbillon</em>?</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;width:100%;margin-top:0.3rem;">
+          <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:var(--radius);padding:0.5rem;text-align:center;font-size:0.7rem;">A) 1 600 KM</div>
+          <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:var(--radius);padding:0.5rem;text-align:center;font-size:0.7rem;">B) 1 800 KM</div>
+          <div style="background:rgba(201,169,110,0.15);border:1px solid var(--accent);border-radius:var(--radius);padding:0.5rem;text-align:center;font-size:0.7rem;color:var(--accent);">C) 1 800 KM ✓</div>
+          <div style="background:var(--bg4);border:1px solid var(--border2);border-radius:var(--radius);padding:0.5rem;text-align:center;font-size:0.7rem;">D) 2 000 KM</div>
+        </div>
+        <div style="font-size:0.62rem;color:var(--muted2);text-align:center;">Pisz odpowiedź w komentarzu 👇</div>
+      </div>
+      <div class="phone-footer">
+        <span class="ph-action like">♥ Polub</span>
+        <span class="ph-action">💬 456 komentarzy</span>
+        <span class="ph-action">📤 Udostępnij</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOOKS SECTION -->
+<div class="section">
+  <div class="section-label">Copywriting</div>
+  <h2 class="section-title">Najlepsze otwierające zdania (hooks)</h2>
+  <p class="section-desc">Pierwsze 2 sekundy decydują czy ktoś zostaje. Używaj tych schematów hook'ów.</p>
+
+  <div class="hooks-grid">
+    <div class="hook-card">
+      <div class="hook-category">Hooki szokowe — fakty</div>
+      <div class="hook-list">
+        <div class="hook-item">„Twój mechanik nigdy Ci tego nie powie, ale…"</div>
+        <div class="hook-item">„Wydałem X zł na błąd który można było uniknąć za 0 zł."</div>
+        <div class="hook-item">„Liczba X. Tyle kierowców nie wie jak działa własne auto."</div>
+        <div class="hook-item">„Kupujesz używane auto? Najpierw przeczytaj to."</div>
+      </div>
+    </div>
+    <div class="hook-card">
+      <div class="hook-category">Hooki edukacyjne — karuzele</div>
+      <div class="hook-list">
+        <div class="hook-item border-green">„W 60 sekund tłumaczę jak działa [X]. Zapisz post."</div>
+        <div class="hook-item border-green">„Szkoła motoryzacji. Lekcja [X]: [temat]."</div>
+        <div class="hook-item border-green">„[X] rzeczy, których żałuję że nie wiedziałem kupując pierwsze auto."</div>
+        <div class="hook-item border-green">„Przesuń jeśli interesujesz się [tematem]. Nie bądź ignorantem."</div>
+      </div>
+    </div>
+    <div class="hook-card">
+      <div class="hook-category">Hooki debatowe — zaangażowanie</div>
+      <div class="hook-list">
+        <div class="hook-item border-blue">„Diesel jest lepszy od benzyny. Fani benzyny — wyjaśnię dlaczego."</div>
+        <div class="hook-item border-blue">„Elektryki to przyszłość? Mam inne zdanie. Czytaj dalej."</div>
+        <div class="hook-item border-blue">„Hotowa kontrowersja: [opinia]. Zgadzasz się? Komentarz 👇"</div>
+      </div>
+    </div>
+    <div class="hook-card">
+      <div class="hook-category">Hooki e-book / sprzedażowe</div>
+      <div class="hook-list">
+        <div class="hook-item border-purple">„Napisałem e-booka bo sam popełniłem te błędy."</div>
+        <div class="hook-item border-purple">„To co tu pokazuję to tylko 1/10 tego co jest w e-booku."</div>
+        <div class="hook-item border-purple">„Zaoszczędziłem X zł tym trickiem. Pełna lista w e-booku."</div>
+        <div class="hook-item border-purple">„Chcesz wiedzieć więcej? Czytelnicy e-booka mnie polecają."</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- EBOOKS -->
+<div class="section">
+  <div class="section-label">Monetyzacja</div>
+  <h2 class="section-title">Pomysły na e-booki motoryzacyjne</h2>
+  <p class="section-desc">Każdy e-book to naturalny finał serii postów na dany temat. Budujesz temat przez 3–4 tygodnie, potem sprzedajesz.</p>
+
+  <div class="ebook-grid">
+    <div class="ebook-card">
+      <div class="ebook-cover">
+        <div class="ebook-spine"></div>
+        <div class="ebook-cover-label">E-book #1</div>
+        <div class="ebook-cover-title">Jak Kupić Dobre<br>Używane Auto</div>
+        <div class="ebook-cover-label">Kompletny Przewodnik</div>
+      </div>
+      <div class="ebook-body">
+        <div class="ebook-meta">Idealne po serii postów o zakupie używanego auta · Cena: 49–79 zł</div>
+        <div class="ebook-topics">
+          <div class="ebook-topic">10 błędów przy oglądaniu auta</div>
+          <div class="ebook-topic">Jak sprawdzić historię VIN krok po kroku</div>
+          <div class="ebook-topic">Checklist mechaniczna przed zakupem</div>
+          <div class="ebook-topic">Jak negocjować cenę skutecznie</div>
+          <div class="ebook-topic">Umowa kupna-sprzedaży — co musi zawierać</div>
+          <div class="ebook-topic">Red flagi których nie ignoruj nigdy</div>
+        </div>
+      </div>
+    </div>
+    <div class="ebook-card">
+      <div class="ebook-cover">
+        <div class="ebook-spine"></div>
+        <div class="ebook-cover-label">E-book #2</div>
+        <div class="ebook-cover-title">Silniki bez Tajemnic<br></div>
+        <div class="ebook-cover-label">Od Zera do Eksperta</div>
+      </div>
+      <div class="ebook-body">
+        <div class="ebook-meta">Po serii „jak działa" · Cena: 59–89 zł</div>
+        <div class="ebook-topics">
+          <div class="ebook-topic">Jak działa silnik czterosuwowy — grafiki</div>
+          <div class="ebook-topic">Turbo, kompressor, wolnossący — porównanie</div>
+          <div class="ebook-topic">Najniezawodniejsze silniki na rynku</div>
+          <div class="ebook-topic">Czytanie objawów awarii silnika</div>
+          <div class="ebook-topic">Oleje — które i kiedy wymieniać</div>
+          <div class="ebook-topic">Słownik motoryzacyjny dla laika</div>
+        </div>
+      </div>
+    </div>
+    <div class="ebook-card">
+      <div class="ebook-cover">
+        <div class="ebook-spine"></div>
+        <div class="ebook-cover-label">E-book #3</div>
+        <div class="ebook-cover-title">Auto na Rok:<br>Oszczędności</div>
+        <div class="ebook-cover-label">Praktyczny Poradnik</div>
+      </div>
+      <div class="ebook-body">
+        <div class="ebook-meta">Po serii o kosztach eksploatacji · Cena: 39–59 zł</div>
+        <div class="ebook-topics">
+          <div class="ebook-topic">Jak zaoszczędzić na paliwie realnie</div>
+          <div class="ebook-topic">Kiedy serwisować — harmonogram na 3 lata</div>
+          <div class="ebook-topic">Co możesz zrobić sam vs co u mechanika</div>
+          <div class="ebook-topic">Ubezpieczenie — jak nie przepłacić</div>
+          <div class="ebook-topic">Opony — kiedy i gdzie kupować tanio</div>
+          <div class="ebook-topic">Kalkulator TCO — całkowity koszt posiadania</div>
+        </div>
+      </div>
+    </div>
+    <div class="ebook-card">
+      <div class="ebook-cover">
+        <div class="ebook-spine"></div>
+        <div class="ebook-cover-label">E-book #4</div>
+        <div class="ebook-cover-title">Elektryki:<br>Prawda i Mity</div>
+        <div class="ebook-cover-label">Czy Warto w 2025?</div>
+      </div>
+      <div class="ebook-body">
+        <div class="ebook-meta">Po serii o elektromobilności · Cena: 49–79 zł</div>
+        <div class="ebook-topics">
+          <div class="ebook-topic">Jak działa bateria litowo-jonowa</div>
+          <div class="ebook-topic">Ile naprawdę kosztuje ładowanie</div>
+          <div class="ebook-topic">Porównanie 10 najpopularniejszych EV</div>
+          <div class="ebook-topic">Zimą z elektrykiem — praktyczny test</div>
+          <div class="ebook-topic">Dotacje i ulgi w Polsce 2025</div>
+          <div class="ebook-topic">Dla kogo elektryk NIE jest dobrym wyborem</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- CALENDAR -->
+<div class="section">
+  <div class="section-label">Plan contentu</div>
+  <h2 class="section-title">Przykładowy tydzień publikacji</h2>
+  <p class="section-desc">Optymalny rytm: 4–5 postów tygodniowo. Najlepsze godziny: 18:00–20:00 i 8:00–9:00.</p>
+
+  <div style="overflow-x:auto;margin-top:1rem;">
+    <div class="calendar" style="min-width:700px;">
+      <div class="cal-day-header">Pon</div>
+      <div class="cal-day-header">Wt</div>
+      <div class="cal-day-header">Śr</div>
+      <div class="cal-day-header">Czw</div>
+      <div class="cal-day-header">Pt</div>
+      <div class="cal-day-header">Sob</div>
+      <div class="cal-day-header">Nd</div>
+
+      <div class="cal-day highlight">
+        <div class="cal-num">Pon 18:00</div>
+        <div class="cal-post cp-gold">⚡ Fakt Dnia — 1 slajd</div>
+        <div class="cal-post" style="font-size:0.6rem;color:var(--muted)">np. rekord prędkości</div>
+      </div>
+      <div class="cal-day empty"></div>
+      <div class="cal-day highlight">
+        <div class="cal-num">Śr 18:00</div>
+        <div class="cal-post cp-green">📚 Karuzela edukacyjna</div>
+        <div class="cal-post" style="font-size:0.6rem;color:var(--muted)">5–8 slajdów, „jak działa"</div>
+      </div>
+      <div class="cal-day empty"></div>
+      <div class="cal-day highlight">
+        <div class="cal-num">Pt 08:00</div>
+        <div class="cal-post cp-red">❌ Mit vs Prawda</div>
+        <div class="cal-post" style="font-size:0.6rem;color:var(--muted)">debata + komentarze</div>
+      </div>
+      <div class="cal-day highlight">
+        <div class="cal-num">Sob 12:00</div>
+        <div class="cal-post cp-gold">❓ Quiz tygodnia</div>
+        <div class="cal-post" style="font-size:0.6rem;color:var(--muted)">angażujący, 1–2 slajdy</div>
+      </div>
+      <div class="cal-day empty"></div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+    <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Zasady rytmu publikacji</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;">
+      <div>
+        <div style="font-size:0.8rem;font-weight:500;color:var(--accent);margin-bottom:0.3rem;">Poniedziałek</div>
+        <div style="font-size:0.78rem;color:var(--muted2);">Fakt/statystyka. Ludzie wracają do pracy i scrollują rano i wieczorem.</div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem;font-weight:500;color:var(--green);margin-bottom:0.3rem;">Środa</div>
+        <div style="font-size:0.78rem;color:var(--muted2);">Głęboka edukacja. Mid-week — ludzie mają czas na przeglądanie karuzeli.</div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem;font-weight:500;color:var(--red);margin-bottom:0.3rem;">Piątek rano</div>
+        <div style="font-size:0.78rem;color:var(--muted2);">Kontrowersja/mit. Piątkowy poranny scroll — świetna dla debaty.</div>
+      </div>
+      <div>
+        <div style="font-size:0.8rem;font-weight:500;color:var(--blue);margin-bottom:0.3rem;">Sobota południe</div>
+        <div style="font-size:0.78rem;color:var(--muted2);">Quiz i zabawa. Weekend = relaks = chętnie grają w quizy.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HASHTAGI -->
+<div class="section">
+  <div class="section-label">Dystrybucja</div>
+  <h2 class="section-title">Zestawy hashtagów</h2>
+  <p class="section-desc">Mieszaj hashtagi duże, średnie i niszowe. Nigdy nie używaj tego samego zestawu dwa razy z rzędu.</p>
+
+  <div class="hashtag-box">
+    <div class="hashtag-group">
+      <div class="hashtag-group-title">Hashtagi główne (duże, zasięg)</div>
+      <div class="hashtags">
+        <span class="hashtag">#motoryzacja</span>
+        <span class="hashtag">#samochody</span>
+        <span class="hashtag">#auto</span>
+        <span class="hashtag">#cars</span>
+        <span class="hashtag">#automotive</span>
+        <span class="hashtag">#motoryzacjapl</span>
+        <span class="hashtag">#samochódplusbezpieczny</span>
+      </div>
+    </div>
+    <div class="hashtag-group">
+      <div class="hashtag-group-title">Hashtagi edukacyjne (średnie)</div>
+      <div class="hashtags">
+        <span class="hashtag">#faktymotoryzacyjne</span>
+        <span class="hashtag">#ciekawostkimotoryzacyjne</span>
+        <span class="hashtag">#motoryzacjafakty</span>
+        <span class="hashtag">#autofakty</span>
+        <span class="hashtag">#edukacjamotoryzacyjna</span>
+        <span class="hashtag">#wiedzaomotoryzacji</span>
+        <span class="hashtag">#zakupauta</span>
+        <span class="hashtag">#używaneauto</span>
+      </div>
+    </div>
+    <div class="hashtag-group">
+      <div class="hashtag-group-title">Hashtagi tematyczne (niszowe, precyzyjne)</div>
+      <div class="hashtags">
+        <span class="hashtag">#silnikmotoryzacja</span>
+        <span class="hashtag">#turbosprężarka</span>
+        <span class="hashtag">#dieselvsbenzyna</span>
+        <span class="hashtag">#elektryczneauto</span>
+        <span class="hashtag">#historiamarki</span>
+        <span class="hashtag">#mechanikporadnik</span>
+        <span class="hashtag">#autopolecane</span>
+        <span class="hashtag">#niezawodnysilnik</span>
+        <span class="hashtag">#mitymotoryzacyjne</span>
+        <span class="hashtag">#detailingauta</span>
+      </div>
+    </div>
+    <div class="hashtag-group" style="margin-bottom:0;">
+      <div class="hashtag-group-title">Hashtagi brandingowe (własne — buduj od zera)</div>
+      <div class="hashtags">
+        <span class="hashtag" style="border-color:rgba(201,169,110,0.4);color:var(--accent);">#motoedukacja</span>
+        <span class="hashtag" style="border-color:rgba(201,169,110,0.4);color:var(--accent);">#faktyomotoryzacji</span>
+        <span class="hashtag" style="border-color:rgba(201,169,110,0.4);color:var(--accent);">#wiedzaomoto</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- BIO STRATEGY -->
+<div class="section">
+  <div class="section-label">Profil Instagram</div>
+  <h2 class="section-title">Bio, które konwertuje</h2>
+  <p class="section-desc">Masz 5 sekund żeby ktoś kliknął „Obserwuj". Każda linijka ma cel.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;">
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+      <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Przykładowe bio</div>
+      <div style="background:var(--bg3);border-radius:var(--radius);padding:1.2rem;font-size:0.88rem;line-height:1.8;border-left:3px solid var(--accent);">
+        <div style="font-weight:600;">🔧 Motoryzacja bez tajemnic</div>
+        <div style="color:var(--muted2);">Fakty · Porady · Ciekawostki</div>
+        <div style="color:var(--muted2);">Pomagam kupić, zrozumieć i nie przepłacić</div>
+        <div style="color:var(--accent);">👇 Darmowy e-book dla nowych obserwujących</div>
+        <div style="color:var(--blue);">linktr.ee/motoedukacja</div>
+      </div>
+    </div>
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;">
+      <div style="font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem;">Dlaczego tak</div>
+      <div style="display:flex;flex-direction:column;gap:0.75rem;">
+        <div style="font-size:0.78rem;color:var(--muted2);">
+          <span style="color:var(--accent);">Linijka 1</span> — Kim jesteś. Szybko i konkretnie.
+        </div>
+        <div style="font-size:0.78rem;color:var(--muted2);">
+          <span style="color:var(--accent);">Linijka 2</span> — Słowa kluczowe, po których Cię znajdą.
+        </div>
+        <div style="font-size:0.78rem;color:var(--muted2);">
+          <span style="color:var(--accent);">Linijka 3</span> — Co daje obserwowanie Ciebie. Korzyść.
+        </div>
+        <div style="font-size:0.78rem;color:var(--muted2);">
+          <span style="color:var(--accent);">Linijka 4</span> — CTA z darmowym lead magnet'em (np. e-book rozdawany za obserwowanie).
+        </div>
+        <div style="font-size:0.78rem;color:var(--muted2);">
+          <span style="color:var(--accent);">Link</span> — Linktree z e-bookami, linkiem do sklepu i newsletterem.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);margin-bottom:0.5rem;">Strategia Instagram · Motoryzacja Edukacyjna</div>
+  <div>Cel: zbudować autorytet → zdobyć obserwujących → sprzedawać e-booki · Wersja 1.0 · 2025</div>
+</footer>
+
+<script>
+function toggleSlides(el) {
+  const preview = el.querySelector('.slide-preview');
+  if (!preview) return;
+  const isOpen = preview.classList.contains('open');
+  // close all in same parent
+  el.closest('.examples').querySelectorAll('.slide-preview').forEach(p => p.classList.remove('open'));
+  if (!isOpen) preview.classList.add('open');
+}
+</script>
+</body>
+</html>
