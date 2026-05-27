@@ -458,6 +458,188 @@
       .gal-grid { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; gap: 8px; }
     }
+
+    /* ═══════════════ BOOKING WIZARD ═══════════════ */
+    .booking-section { padding: 0 48px; margin-bottom: 80px; }
+    .wizard-wrap {
+      background: #fff; border-radius: 32px;
+      box-shadow: var(--shadow-lg); padding: 60px;
+      max-width: 1100px; margin: 0 auto;
+    }
+    .wizard-progress {
+      display: flex; justify-content: space-between;
+      position: relative; margin-bottom: 44px;
+    }
+    .wizard-progress::before {
+      content: ''; position: absolute; top: 20px; left: 10%; right: 10%;
+      height: 2px; background: var(--border); z-index: 0;
+    }
+    .progress-step {
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
+      position: relative; z-index: 1; flex: 1;
+    }
+    .ps-dot {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: #fff; border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 0.88rem; color: var(--muted);
+      transition: all .3s;
+    }
+    .ps-lbl { font-size: 0.72rem; font-weight: 700; color: var(--muted); text-align: center; }
+    .progress-step.active .ps-dot { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .progress-step.active .ps-lbl { color: var(--blue); }
+    .progress-step.done .ps-dot { background: var(--green); border-color: var(--green); color: #fff; }
+    .progress-step.done .ps-lbl { color: var(--green); }
+    .wizard-step { display: none; animation: fadeUp .35s ease; }
+    .wizard-step.active { display: block; }
+    .step-title { font-size: 1.55rem; font-weight: 900; margin-bottom: 8px; color: var(--dark); }
+    .step-sub { color: var(--muted); margin-bottom: 28px; font-size: 0.95rem; line-height: 1.6; }
+    .wz-label { font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--muted); margin-bottom: 12px; margin-top: 4px; }
+
+    .option-grid { display: grid; gap: 13px; margin-bottom: 26px; }
+    .size-grid { grid-template-columns: repeat(3, 1fr); }
+    .pkg-grid { grid-template-columns: repeat(3, 1fr); }
+    .option-tile {
+      border: 2px solid var(--border); border-radius: 18px; padding: 22px 16px;
+      cursor: pointer; transition: all .22s; position: relative; text-align: center;
+      background: #fff; display: block;
+    }
+    .option-tile:hover { border-color: rgba(37,99,235,0.4); box-shadow: 0 4px 18px rgba(37,99,235,0.1); transform: translateY(-2px); }
+    .option-tile.selected { border-color: var(--blue); background: rgba(37,99,235,0.04); box-shadow: 0 0 0 4px rgba(37,99,235,0.1); }
+    .option-tile input { position: absolute; opacity: 0; pointer-events: none; }
+    .tile-icon { font-size: 2rem; margin-bottom: 9px; display: block; }
+    .tile-name { font-weight: 800; font-size: 0.95rem; color: var(--dark); display: block; margin-bottom: 4px; }
+    .tile-price { color: var(--blue); font-weight: 800; font-size: 1rem; display: block; margin: 6px 0; }
+    .tile-desc { color: var(--muted); font-size: 0.78rem; line-height: 1.45; display: block; }
+    .tile-badge {
+      display: inline-block; font-size: 0.63rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 1px; color: var(--muted); background: var(--bg);
+      border-radius: 20px; padding: 3px 10px; margin-bottom: 8px;
+    }
+    .tile-badge.popular { background: rgba(16,185,129,0.12); color: var(--green); }
+
+    .wz-price-bar {
+      background: linear-gradient(135deg, var(--blue) 0%, #6366f1 100%);
+      border-radius: 16px; padding: 18px 28px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 36px; color: #fff;
+    }
+    .wz-price-label { font-weight: 600; font-size: 0.9rem; opacity: 0.85; }
+    .wz-price-value { font-size: 2rem; font-weight: 900; letter-spacing: -1px; }
+    .wz-price-note { font-size: 0.7rem; opacity: 0.65; margin-top: 2px; }
+
+    .addons-wizard { display: grid; grid-template-columns: repeat(2, 1fr); gap: 11px; margin-bottom: 20px; }
+    .addon-check-item {
+      border: 2px solid var(--border); border-radius: 14px; padding: 14px 15px;
+      cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 11px;
+      position: relative; background: #fff;
+    }
+    .addon-check-item:hover { border-color: rgba(37,99,235,0.35); }
+    .addon-check-item.selected { border-color: var(--blue); background: rgba(37,99,235,0.04); }
+    .addon-check-item.addon-suggested { border-color: rgba(16,185,129,0.35); background: rgba(16,185,129,0.03); }
+    .addon-check-item.addon-suggested.selected { border-color: var(--green); background: rgba(16,185,129,0.06); }
+    .suggested-badge {
+      position: absolute; top: -10px; left: 12px;
+      background: var(--green); color: #fff;
+      font-size: 0.59rem; font-weight: 800; padding: 2px 9px; border-radius: 20px; white-space: nowrap;
+    }
+    .addon-check-item input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; accent-color: var(--blue); cursor: pointer; }
+    .addon-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .addon-info { flex: 1; }
+    .addon-check-name { font-weight: 700; font-size: 0.87rem; color: var(--dark); }
+    .addon-check-price { color: var(--blue); font-weight: 800; font-size: 0.81rem; margin-top: 2px; }
+    .upsell-banner {
+      background: linear-gradient(135deg, rgba(16,185,129,0.07), rgba(37,99,235,0.05));
+      border: 1px solid rgba(16,185,129,0.22); border-radius: 12px;
+      padding: 13px 17px; margin-bottom: 20px; font-size: 0.87rem; color: var(--text); line-height: 1.5;
+    }
+
+    .wz-date-wrap { max-width: 280px; margin-bottom: 26px; }
+    .time-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; margin-top: 14px; }
+    .time-slot {
+      border: 2px solid var(--border); border-radius: 10px; padding: 11px 6px;
+      text-align: center; cursor: pointer; font-size: 0.9rem; font-weight: 700;
+      transition: all .2s; color: var(--text);
+    }
+    .time-slot:hover:not(.booked) { border-color: var(--blue); color: var(--blue); }
+    .time-slot.selected { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .time-slot.booked { background: var(--bg); color: var(--border); cursor: not-allowed; text-decoration: line-through; font-weight: 400; }
+
+    .contact-strip {
+      display: flex; gap: 24px; flex-wrap: wrap;
+      background: var(--bg); border-radius: 16px; padding: 18px 22px;
+      margin-bottom: 32px; align-items: center;
+    }
+    .cs-item { display: flex; align-items: center; gap: 9px; }
+    .cs-icon { font-size: 1.1rem; }
+    .cs-meta .cs-label { color: var(--muted); font-size: 0.72rem; }
+    .cs-meta .cs-val { font-weight: 700; font-size: 0.9rem; color: var(--dark); }
+
+    .summary-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+    .summary-table td { padding: 10px 2px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .summary-table tr:last-child td { border-bottom: none; }
+    .s-label { color: var(--muted); width: 45%; }
+    .s-value { text-align: right; font-weight: 700; color: var(--dark); }
+    .summary-total {
+      background: rgba(37,99,235,0.07); border: 2px solid rgba(37,99,235,0.15);
+      border-radius: 14px; padding: 18px 22px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;
+    }
+    .st-label { font-weight: 700; font-size: 0.95rem; }
+    .st-note { font-size: 0.73rem; color: var(--muted); margin-top: 2px; }
+    .st-amount { font-size: 2rem; font-weight: 900; color: var(--blue); }
+    .terms-row { display: flex; align-items: flex-start; gap: 12px; }
+    .terms-row input[type="checkbox"] { width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px; accent-color: var(--blue); }
+    .terms-row label { font-size: 0.82rem; color: var(--muted); line-height: 1.5; cursor: pointer; }
+
+    .wizard-footer {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 34px; padding-top: 22px; border-top: 1px solid var(--border);
+    }
+    .btn-wiz-back {
+      background: transparent; color: var(--muted); padding: 13px 26px;
+      border-radius: 100px; font-size: 0.95rem; font-weight: 700;
+      border: 2px solid var(--border); cursor: pointer; transition: all .2s;
+    }
+    .btn-wiz-back:hover { border-color: var(--text); color: var(--text); }
+    .btn-wiz-next, .btn-wiz-submit {
+      background: var(--blue); color: #fff; padding: 14px 40px;
+      border-radius: 100px; font-size: 1rem; font-weight: 700; border: none;
+      cursor: pointer; box-shadow: 0 6px 22px rgba(37,99,235,0.3); transition: all .2s;
+    }
+    .btn-wiz-next:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-wiz-submit { background: var(--green); box-shadow: 0 6px 22px rgba(16,185,129,0.3); }
+    .btn-wiz-submit:hover { background: #0d9668; transform: translateY(-2px); }
+
+    .wz-success { display: none; text-align: center; padding: 40px 0 20px; animation: fadeUp .5s ease; }
+    .success-icon { font-size: 4rem; margin-bottom: 16px; }
+    .success-title { font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: var(--dark); }
+    .success-sub { color: var(--muted); font-size: 0.97rem; line-height: 1.65; margin-bottom: 30px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .order-badge {
+      display: inline-block; background: rgba(37,99,235,0.07);
+      border: 2px solid rgba(37,99,235,0.18);
+      border-radius: 14px; padding: 18px 40px; margin-bottom: 30px;
+    }
+    .ob-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2.5px; color: var(--muted); margin-bottom: 4px; }
+    .ob-number { font-size: 2rem; font-weight: 900; color: var(--blue); letter-spacing: 6px; }
+    .success-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 900px) {
+      .booking-section { padding: 0 20px; }
+      .wizard-wrap { padding: 36px 26px; }
+      .size-grid, .pkg-grid { grid-template-columns: 1fr; }
+      .addons-wizard { grid-template-columns: 1fr; }
+      .time-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .wizard-wrap { padding: 26px 16px; }
+      .ps-lbl { display: none; }
+      .time-grid { grid-template-columns: repeat(2, 1fr); }
+      .wz-price-bar { flex-direction: column; gap: 4px; text-align: center; }
+      .summary-total { flex-direction: column; gap: 8px; text-align: center; }
+      .wizard-footer { flex-direction: column-reverse; gap: 12px; }
+      .btn-wiz-back, .btn-wiz-next, .btn-wiz-submit { width: 100%; text-align: center; justify-content: center; display: flex; }
+    }
   </style>
 </head>
 <body>
@@ -757,76 +939,201 @@
   </div>
 </div>
 
-<!-- ═══════════════ CONTACT ═══════════════ -->
-<div class="contact-bg">
-  <div id="contact" class="card-wrap aos">
-    <div class="contact-grid">
-      <div>
-        <div class="sec-tag">Kontakt</div>
-        <h2 class="sec-title">Umów wizytę</h2>
-        <p style="color:var(--muted);line-height:1.65;margin-bottom:32px;font-size:.97rem;">
-          Wypełnij formularz lub zadzwoń bezpośrednio. Odpowiem w ciągu kilku godzin i ustalimy najlepszy termin.
-        </p>
-        <div class="ci-item">
-          <div class="ci-icon">📞</div>
-          <div><div class="ci-lbl">Telefon</div><div class="ci-val">605 638 540</div></div>
-        </div>
-        <div class="ci-item">
-          <div class="ci-icon">✉️</div>
-          <div><div class="ci-lbl">Email</div><div class="ci-val">parusdetail@gmail.com</div></div>
-        </div>
-        <div class="ci-item">
-          <div class="ci-icon">🕐</div>
-          <div><div class="ci-lbl">Godziny pracy</div><div class="ci-val">Pon – Sob: 8:00 – 18:00</div></div>
-        </div>
-        <div class="ci-item">
-          <div class="ci-icon">📍</div>
-          <div><div class="ci-lbl">Lokalizacja</div><div class="ci-val">Przyjazd do klienta lub ustalona lokalizacja</div></div>
-        </div>
+<!-- ═══════════════ BOOKING WIZARD ═══════════════ -->
+<div class="booking-section" id="contact">
+  <div class="section-wrap" style="padding-bottom:0">
+    <div class="sec-tag">Rezerwacja Online</div>
+    <h2 class="sec-title">Umów wizytę w kilku krokach</h2>
+    <p class="sec-sub">Wybierz usługę, termin i zostaw swoje dane — resztą zajmuję się ja.</p>
+  </div>
+
+  <div class="wizard-wrap aos">
+
+    <!-- Pasek kontaktowy -->
+    <div class="contact-strip">
+      <div class="cs-item">
+        <span class="cs-icon">📞</span>
+        <div class="cs-meta"><div class="cs-label">Telefon</div><div class="cs-val">605 638 540</div></div>
+      </div>
+      <div class="cs-item">
+        <span class="cs-icon">✉️</span>
+        <div class="cs-meta"><div class="cs-label">E-mail</div><div class="cs-val">parusdetail@gmail.com</div></div>
+      </div>
+      <div class="cs-item">
+        <span class="cs-icon">🕐</span>
+        <div class="cs-meta"><div class="cs-label">Godziny pracy</div><div class="cs-val">Pon – Sob: 8:00 – 18:00</div></div>
+      </div>
+      <div class="cs-item">
+        <span class="cs-icon">📍</span>
+        <div class="cs-meta"><div class="cs-label">Lokalizacja</div><div class="cs-val">Dojazd do klienta / ustalona lokalizacja</div></div>
+      </div>
+    </div>
+
+    <!-- Progress steps -->
+    <div class="wizard-progress" id="wz-progress">
+      <div class="progress-step active" data-s="1"><div class="ps-dot">1</div><div class="ps-lbl">Pakiet</div></div>
+      <div class="progress-step" data-s="2"><div class="ps-dot">2</div><div class="ps-lbl">Dodatki</div></div>
+      <div class="progress-step" data-s="3"><div class="ps-dot">3</div><div class="ps-lbl">Termin</div></div>
+      <div class="progress-step" data-s="4"><div class="ps-dot">4</div><div class="ps-lbl">Dane</div></div>
+      <div class="progress-step" data-s="5"><div class="ps-dot">5</div><div class="ps-lbl">Podsumowanie</div></div>
+    </div>
+
+    <!-- Pasek ceny -->
+    <div class="wz-price-bar" id="wz-price-bar">
+      <div><div class="wz-price-label">Szacowana cena usługi</div><div class="wz-price-note">Cena orientacyjna — ostateczna po oględzinach</div></div>
+      <div class="wz-price-value" id="wz-price-display">— zł</div>
+    </div>
+
+    <!-- KROK 1: Pakiet i rozmiar -->
+    <div class="wizard-step active" id="wz-step-1">
+      <div class="step-title">Wybierz usługę</div>
+      <div class="step-sub">Wskaż rozmiar pojazdu i rodzaj pakietu. Cena zaktualizuje się automatycznie.</div>
+
+      <div class="wz-label">Rozmiar pojazdu</div>
+      <div class="option-grid size-grid">
+        <label class="option-tile" data-type="size" data-value="maly">
+          <input type="radio" name="car-size" value="maly">
+          <span class="tile-icon">🚗</span>
+          <span class="tile-name">Małe auto</span>
+          <span class="tile-desc">Hatchback, miejski</span>
+        </label>
+        <label class="option-tile" data-type="size" data-value="kompakt">
+          <input type="radio" name="car-size" value="kompakt">
+          <span class="tile-icon">🚙</span>
+          <span class="tile-name">Kompakt / Sedan</span>
+          <span class="tile-desc">Golf, Astra, Octavia, Passat...</span>
+        </label>
+        <label class="option-tile" data-type="size" data-value="suv">
+          <input type="radio" name="car-size" value="suv">
+          <span class="tile-icon">🚐</span>
+          <span class="tile-name">SUV / Kombi / Van</span>
+          <span class="tile-desc">Duże auta, rodzinne, dostawcze</span>
+        </label>
       </div>
 
-      <form class="form-cf" id="booking-form">
+      <div class="wz-label">Pakiet</div>
+      <div class="option-grid pkg-grid">
+        <label class="option-tile" data-type="pkg" data-value="basic">
+          <input type="radio" name="pkg" value="basic">
+          <span class="tile-badge">Pakiet 01</span>
+          <span class="tile-name">Basic "Fresh"</span>
+          <span class="tile-price" id="tp-basic">od 249 zł</span>
+          <span class="tile-desc">Mycie, odkurzanie, plastiki, szyby, woskowanie lakieru</span>
+        </label>
+        <label class="option-tile" data-type="pkg" data-value="standard">
+          <input type="radio" name="pkg" value="standard">
+          <span class="tile-badge popular">Najpopularniejszy</span>
+          <span class="tile-name">Standard "Detail"</span>
+          <span class="tile-price" id="tp-standard">od 429 zł</span>
+          <span class="tile-desc">Basic + dekontaminacja, sealant, pranie foteli i dywaników</span>
+        </label>
+        <label class="option-tile" data-type="pkg" data-value="premium">
+          <input type="radio" name="pkg" value="premium">
+          <span class="tile-badge">Pakiet 03</span>
+          <span class="tile-name">Premium "Elite"</span>
+          <span class="tile-price" id="tp-premium">od 849 zł</span>
+          <span class="tile-desc">Pełen detailing + korekta lakieru, glinkowanie, ozonowanie</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- KROK 2: Dodatki / Upsell -->
+    <div class="wizard-step" id="wz-step-2">
+      <div class="step-title">Usługi dodatkowe</div>
+      <div class="step-sub">Skonfiguruj zlecenie pod swoje potrzeby. Zaznaczenie usługi automatycznie aktualizuje wycenę.</div>
+      <div class="upsell-banner" id="upsell-banner">💡 Wybierz usługi, które Cię interesują.</div>
+      <div class="addons-wizard" id="addons-list"></div>
+    </div>
+
+    <!-- KROK 3: Termin -->
+    <div class="wizard-step" id="wz-step-3">
+      <div class="step-title">Wybierz termin</div>
+      <div class="step-sub">Dostępne terminy od poniedziałku do soboty, godz. 8:00 – 17:00.</div>
+      <div class="wz-date-wrap">
+        <div class="fg">
+          <label>Data wizyty *</label>
+          <input type="date" id="wz-date" class="fg input" style="padding:13px 16px;border:2px solid var(--border);border-radius:12px;font-size:0.93rem;font-family:inherit;color:var(--text);background:var(--bg);outline:none;transition:border-color .2s;width:100%">
+        </div>
+      </div>
+      <div class="wz-label" id="wz-time-label" style="display:none">Godzina wizyty *</div>
+      <div class="time-grid" id="time-slots"></div>
+    </div>
+
+    <!-- KROK 4: Dane kontaktowe -->
+    <div class="wizard-step" id="wz-step-4">
+      <div class="step-title">Twoje dane</div>
+      <div class="step-sub">Wypełnij dane kontaktowe i szczegóły pojazdu. Informacje potrzebne do wystawienia karty zlecenia.</div>
+      <div class="form-cf">
         <div class="form-row">
           <div class="fg">
             <label>Imię i nazwisko *</label>
-            <input type="text" placeholder="Jan Kowalski" required>
+            <input type="text" id="wz-name" placeholder="Jan Kowalski" required>
           </div>
           <div class="fg">
             <label>Numer telefonu *</label>
-            <input type="tel" placeholder="600 000 000" required>
+            <input type="tel" id="wz-phone" placeholder="600 000 000" required>
           </div>
         </div>
         <div class="fg">
-          <label>Adres e-mail</label>
-          <input type="email" placeholder="jan@email.com">
+          <label>Adres e-mail (do potwierdzenia)</label>
+          <input type="email" id="wz-email" placeholder="jan@email.com">
         </div>
         <div class="form-row">
           <div class="fg">
             <label>Marka i model auta *</label>
-            <input type="text" placeholder="np. BMW 5 Series" required>
+            <input type="text" id="wz-car" placeholder="np. BMW 5 Series" required>
           </div>
           <div class="fg">
-            <label>Wybrany pakiet</label>
-            <select id="pkg-select">
-              <option value="">— Wybierz pakiet —</option>
-              <option>Basic "Fresh"</option>
-              <option>Standard "Detail"</option>
-              <option>Premium "Elite"</option>
-              <option>Usługa dodatkowa</option>
-            </select>
+            <label>Rok produkcji</label>
+            <input type="number" id="wz-year" placeholder="2018" min="1990" max="2030">
           </div>
         </div>
         <div class="fg">
-          <label>Preferowany termin</label>
-          <input type="datetime-local">
+          <label>Dodatkowe informacje / stan auta</label>
+          <textarea id="wz-notes" placeholder="Opisz stan auta, rodzaj tapicerki, czy jest sierść, zapachy lub inne życzenia..."></textarea>
         </div>
-        <div class="fg">
-          <label>Dodatkowe informacje</label>
-          <textarea placeholder="Opisz stan auta, rodzaj tapicerki lub dodatkowe życzenia..."></textarea>
-        </div>
-        <button type="submit" class="form-submit">Wyślij prośbę o rezerwację &rarr;</button>
-      </form>
+      </div>
     </div>
+
+    <!-- KROK 5: Podsumowanie -->
+    <div class="wizard-step" id="wz-step-5">
+      <div class="step-title">Podsumowanie zlecenia</div>
+      <div class="step-sub">Sprawdź szczegóły przed potwierdzeniem. Po kliknięciu „Potwierdź" otrzymasz numer zlecenia.</div>
+      <table class="summary-table" id="summary-table"></table>
+      <div class="summary-total">
+        <div><div class="st-label">Łączna kwota (orientacyjnie)</div><div class="st-note">Ostateczna cena po oględzinach pojazdu</div></div>
+        <div class="st-amount" id="summary-price">0 zł</div>
+      </div>
+      <div class="terms-row">
+        <input type="checkbox" id="wz-terms">
+        <label for="wz-terms">Wyrażam zgodę na przetwarzanie danych osobowych w celu realizacji usługi i potwierdzam zapoznanie się z warunkami świadczenia usług przez ParusDetail.</label>
+      </div>
+    </div>
+
+    <!-- SUKCES -->
+    <div class="wz-success" id="wz-success">
+      <div class="success-icon">✅</div>
+      <h2 class="success-title">Rezerwacja przyjęta!</h2>
+      <p class="success-sub">Twoja prośba o wizytę została zarejestrowana. Skontaktuję się z Tobą w ciągu kilku godzin, aby potwierdzić termin i szczegóły.</p>
+      <div class="order-badge">
+        <div class="ob-label">Numer zlecenia</div>
+        <div class="ob-number" id="order-number">PD-0000</div>
+      </div>
+      <div class="success-actions">
+        <button onclick="wzDownloadPDF()" class="btn-blue">📄 Pobierz kartę zlecenia</button>
+        <a href="https://wa.me/48605638540" target="_blank" class="btn-outline">💬 WhatsApp</a>
+        <a href="status.html" class="btn-outline">🔍 Śledź status zlecenia</a>
+      </div>
+    </div>
+
+    <!-- Nawigacja -->
+    <div class="wizard-footer" id="wz-footer">
+      <button class="btn-wiz-back" id="wz-btn-back" style="display:none">← Wstecz</button>
+      <div></div>
+      <button class="btn-wiz-next" id="wz-btn-next">Dalej →</button>
+      <button class="btn-wiz-submit" id="wz-btn-submit" style="display:none">✓ Potwierdź rezerwację</button>
+    </div>
+
   </div>
 </div>
 
@@ -1011,23 +1318,319 @@ document.querySelectorAll('.svc-card, .rev-card').forEach(card => {
   card.addEventListener('mouseleave', () => { card.style.transform = ''; });
 });
 
-/* Form submit */
-document.getElementById('booking-form').addEventListener('submit', function(e) {
-  e.preventDefault();
-  const btn = this.querySelector('.form-submit');
-  btn.textContent = '✓ Prośba wysłana! Odezwę się wkrótce.';
-  btn.style.background = '#10b981';
-  btn.disabled = true;
-});
+/* ═══════════════ BOOKING WIZARD ENGINE ═══════════════ */
 
-/* Scroll to contact + pre-select package */
+const PRICES = {
+  basic:    { maly: 249, kompakt: 329, suv: 409 },
+  standard: { maly: 429, kompakt: 549, suv: 699 },
+  premium:  { maly: 849, kompakt: 1099, suv: 1399 }
+};
+
+const ADDONS = [
+  { id:'siersc',      name:'Usuwanie sierści',          price:80,  icon:'🐾', suggest:['basic','standard'] },
+  { id:'fotel',       name:'Pranie fotela (1 szt.)',     price:65,  icon:'💺', suggest:['basic'] },
+  { id:'kanapa',      name:'Pranie kanapy',              price:180, icon:'🛋️', suggest:['basic','standard'] },
+  { id:'podsufitka',  name:'Pranie podsufitki',          price:180, icon:'🔝', suggest:['premium'] },
+  { id:'silnik',      name:'Mycie komory silnika',       price:150, icon:'⚙️', suggest:['standard','premium'] },
+  { id:'wycieraczka', name:'Niewidzialna wycieraczka',   price:120, icon:'🌧️', suggest:['standard'] },
+  { id:'dekont',      name:'Dekontaminacja lakieru',     price:180, icon:'🧪', suggest:['basic'] },
+  { id:'glinka',      name:'Glinkowanie lakieru',        price:180, icon:'✨', suggest:['standard'] },
+  { id:'ozon',        name:'Ozonowanie wnętrza',         price:120, icon:'💨', suggest:['basic','standard'] },
+  { id:'reflektory',  name:'Renowacja reflektorów',      price:150, icon:'💡', suggest:['standard','premium'] }
+];
+
+const WZ = {
+  step: 1, total: 5,
+  size: null, pkg: null, addons: [],
+  date: null, time: null,
+  name: '', phone: '', email: '', car: '', year: '', notes: '',
+  orderId: null
+};
+
+function wzBasePrice() {
+  return (WZ.size && WZ.pkg) ? PRICES[WZ.pkg][WZ.size] : 0;
+}
+function wzAddonsTotal() {
+  return WZ.addons.reduce((s, id) => { const a = ADDONS.find(x => x.id === id); return s + (a ? a.price : 0); }, 0);
+}
+function wzTotal() { return wzBasePrice() + wzAddonsTotal(); }
+
+function wzUpdatePrice() {
+  const t = wzTotal();
+  const el = document.getElementById('wz-price-display');
+  if (el) el.textContent = t > 0 ? t + ' zł' : '— zł';
+}
+
+function wzUpdatePkgTiles() {
+  if (!WZ.size) return;
+  ['basic','standard','premium'].forEach(p => {
+    const el = document.getElementById('tp-' + p);
+    if (el) el.textContent = 'od ' + PRICES[p][WZ.size] + ' zł';
+  });
+}
+
+function wzGoTo(n) {
+  document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+  const target = document.getElementById('wz-step-' + n);
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.progress-step').forEach((s, i) => {
+    s.classList.remove('active','done');
+    if (i + 1 < n) s.classList.add('done');
+    if (i + 1 === n) s.classList.add('active');
+  });
+
+  WZ.step = n;
+  const back = document.getElementById('wz-btn-back');
+  const next = document.getElementById('wz-btn-next');
+  const sub  = document.getElementById('wz-btn-submit');
+  back.style.display = n === 1 ? 'none' : '';
+  if (n === WZ.total) { next.style.display = 'none'; sub.style.display = ''; wzBuildSummary(); }
+  else { next.style.display = ''; sub.style.display = 'none'; }
+
+  if (n === 2) wzBuildAddons();
+  if (n === 3) wzInitDate();
+
+  document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function wzValidate(n) {
+  if (n === 1) {
+    if (!WZ.size) { alert('Wybierz rozmiar pojazdu.'); return false; }
+    if (!WZ.pkg)  { alert('Wybierz pakiet.'); return false; }
+    return true;
+  }
+  if (n === 3) {
+    if (!WZ.date) { alert('Wybierz datę wizyty.'); return false; }
+    if (!WZ.time) { alert('Wybierz godzinę wizyty.'); return false; }
+    return true;
+  }
+  if (n === 4) {
+    WZ.name  = (document.getElementById('wz-name').value  || '').trim();
+    WZ.phone = (document.getElementById('wz-phone').value || '').trim();
+    WZ.email = (document.getElementById('wz-email').value || '').trim();
+    WZ.car   = (document.getElementById('wz-car').value   || '').trim();
+    WZ.year  = (document.getElementById('wz-year').value  || '').trim();
+    WZ.notes = (document.getElementById('wz-notes').value || '').trim();
+    if (!WZ.name)  { alert('Podaj imię i nazwisko.'); return false; }
+    if (!WZ.phone) { alert('Podaj numer telefonu.'); return false; }
+    if (!WZ.car)   { alert('Podaj markę i model auta.'); return false; }
+    return true;
+  }
+  return true;
+}
+
+function wzNext() { if (wzValidate(WZ.step)) wzGoTo(WZ.step + 1); }
+function wzBack() { if (WZ.step > 1) wzGoTo(WZ.step - 1); }
+
+function wzBuildAddons() {
+  const list = document.getElementById('addons-list');
+  const banner = document.getElementById('upsell-banner');
+  if (!list) return;
+  list.innerHTML = '';
+
+  const suggested = ADDONS.filter(a => a.suggest.includes(WZ.pkg)).slice(0,3);
+  const names = { basic:'Basic "Fresh"', standard:'Standard "Detail"', premium:'Premium "Elite"' };
+  if (banner && suggested.length) {
+    banner.innerHTML = '💡 Klienci wybierający <strong>' + names[WZ.pkg] + '</strong> najczęściej dokupują: <strong>' + suggested.map(a=>a.name).join(', ') + '</strong>';
+  }
+
+  ADDONS.forEach(addon => {
+    const isSugg = addon.suggest.includes(WZ.pkg);
+    const isSel  = WZ.addons.includes(addon.id);
+    const label  = document.createElement('label');
+    label.className = 'addon-check-item' + (isSugg ? ' addon-suggested' : '') + (isSel ? ' selected' : '');
+    label.innerHTML = (isSugg ? '<span class="suggested-badge">⭐ Polecane</span>' : '') +
+      '<input type="checkbox" value="' + addon.id + '"' + (isSel ? ' checked' : '') + '>' +
+      '<span class="addon-icon">' + addon.icon + '</span>' +
+      '<div class="addon-info"><div class="addon-check-name">' + addon.name + '</div>' +
+      '<div class="addon-check-price">+' + addon.price + ' zł</div></div>';
+    label.querySelector('input').addEventListener('change', function() {
+      if (this.checked) { if (!WZ.addons.includes(addon.id)) WZ.addons.push(addon.id); label.classList.add('selected'); }
+      else { WZ.addons = WZ.addons.filter(x => x !== addon.id); label.classList.remove('selected'); }
+      wzUpdatePrice();
+    });
+    list.appendChild(label);
+  });
+}
+
+function wzInitDate() {
+  const inp = document.getElementById('wz-date');
+  if (!inp) return;
+  const tom = new Date(); tom.setDate(tom.getDate() + 1);
+  inp.min = tom.toISOString().split('T')[0];
+  if (!inp.value) inp.value = inp.min;
+  WZ.date = inp.value;
+  wzBuildSlots(inp.value);
+  inp.addEventListener('change', function() { WZ.date = this.value; WZ.time = null; wzBuildSlots(this.value); });
+}
+
+function wzBuildSlots(dateStr) {
+  const grid = document.getElementById('time-slots');
+  const lbl  = document.getElementById('wz-time-label');
+  if (!grid) return;
+  lbl.style.display = '';
+  grid.innerHTML = '';
+  const hours = ['8:00','9:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00'];
+  const orders = JSON.parse(localStorage.getItem('pd_orders') || '[]');
+  const taken  = orders.filter(o => o.date === dateStr && o.status !== 'anulowano').map(o => o.time);
+  hours.forEach(h => {
+    const s = document.createElement('div');
+    const isBooked = taken.includes(h);
+    s.className = 'time-slot' + (isBooked ? ' booked' : '') + (WZ.time === h ? ' selected' : '');
+    s.textContent = h;
+    if (!isBooked) s.addEventListener('click', () => {
+      document.querySelectorAll('.time-slot').forEach(x => x.classList.remove('selected'));
+      s.classList.add('selected');
+      WZ.time = h;
+    });
+    grid.appendChild(s);
+  });
+}
+
+function wzFmtDate(ds) {
+  if (!ds) return '—';
+  const d = new Date(ds + 'T12:00:00');
+  return d.toLocaleDateString('pl-PL', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+}
+
+function wzBuildSummary() {
+  const pkgN = { basic:'Basic "Fresh"', standard:'Standard "Detail"', premium:'Premium "Elite"' };
+  const szN  = { maly:'Małe auto', kompakt:'Kompakt / Sedan', suv:'SUV / Kombi / Van' };
+  const rows = [
+    ['Pakiet', pkgN[WZ.pkg] || '—'],
+    ['Rozmiar auta', szN[WZ.size] || '—'],
+    ['Data wizyty', wzFmtDate(WZ.date)],
+    ['Godzina', WZ.time || '—'],
+    ['Pojazd', WZ.car + (WZ.year ? ' (' + WZ.year + ')' : '') || '—'],
+    ['Klient', WZ.name || '—'],
+    ['Telefon', WZ.phone || '—'],
+    ['E-mail', WZ.email || '—'],
+    ['Cena bazowa', wzBasePrice() + ' zł']
+  ];
+  WZ.addons.forEach(id => { const a = ADDONS.find(x => x.id===id); if(a) rows.push([a.name, '+'+a.price+' zł']); });
+  document.getElementById('summary-table').innerHTML = rows.map(([l,v]) =>
+    '<tr><td class="s-label">'+l+'</td><td class="s-value">'+v+'</td></tr>'
+  ).join('');
+  document.getElementById('summary-price').textContent = wzTotal() + ' zł';
+}
+
+function wzGenId() { return 'PD-' + (Math.floor(Math.random()*9000)+1000); }
+
+function wzSubmit() {
+  if (!document.getElementById('wz-terms').checked) {
+    alert('Zaakceptuj zgodę na przetwarzanie danych.');
+    return;
+  }
+  const id = wzGenId();
+  WZ.orderId = id;
+  const order = {
+    orderId: id, status: 'przyjeto',
+    size: WZ.size, pkg: WZ.pkg, addons: WZ.addons,
+    date: WZ.date, time: WZ.time,
+    name: WZ.name, phone: WZ.phone, email: WZ.email,
+    car: WZ.car, year: WZ.year, notes: WZ.notes,
+    total: wzTotal(), createdAt: new Date().toISOString()
+  };
+  const orders = JSON.parse(localStorage.getItem('pd_orders') || '[]');
+  orders.push(order);
+  localStorage.setItem('pd_orders', JSON.stringify(orders));
+
+  document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('wz-success').style.display = '';
+  document.getElementById('order-number').textContent = id;
+  document.getElementById('wz-footer').style.display   = 'none';
+  document.getElementById('wz-price-bar').style.display = 'none';
+  document.getElementById('contact').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function wzDownloadPDF() {
+  const pkgN = { basic:'Basic "Fresh"', standard:'Standard "Detail"', premium:'Premium "Elite"' };
+  const szN  = { maly:'Małe auto', kompakt:'Kompakt / Sedan', suv:'SUV / Kombi / Van' };
+  const addonsText = WZ.addons.length
+    ? WZ.addons.map(id => { const a = ADDONS.find(x=>x.id===id); return a ? a.name+' (+'+a.price+' zł)' : id; }).join('\n  ')
+    : 'Brak';
+  const txt = [
+    '╔══════════════════════════════════════╗',
+    '║    PARUSDETAIL — KARTA ZLECENIA      ║',
+    '╚══════════════════════════════════════╝',
+    '',
+    'Nr zlecenia : ' + WZ.orderId,
+    'Wystawiona  : ' + new Date().toLocaleDateString('pl-PL'),
+    '',
+    '─── DANE KLIENTA ───────────────────────',
+    'Imię/Nazwisko : ' + WZ.name,
+    'Telefon       : ' + WZ.phone,
+    'E-mail        : ' + (WZ.email || '—'),
+    '',
+    '─── POJAZD ─────────────────────────────',
+    'Marka/Model   : ' + WZ.car + (WZ.year ? ' (' + WZ.year + ')' : ''),
+    'Rozmiar       : ' + (szN[WZ.size] || '—'),
+    '',
+    '─── USŁUGA ─────────────────────────────',
+    'Pakiet        : ' + (pkgN[WZ.pkg] || '—'),
+    'Usługi dod.   :',
+    '  ' + addonsText,
+    '',
+    '─── TERMIN ─────────────────────────────',
+    'Data          : ' + wzFmtDate(WZ.date),
+    'Godzina       : ' + (WZ.time || '—'),
+    '',
+    '─── WYCENA ─────────────────────────────',
+    'Cena bazowa   : ' + wzBasePrice() + ' zł',
+    'Usługi dod.   : ' + wzAddonsTotal() + ' zł',
+    'RAZEM (orient.): ' + wzTotal() + ' zł',
+    '',
+    'Uwagi: ' + (WZ.notes || '—'),
+    '',
+    '════════════════════════════════════════',
+    'ParusDetail | 605 638 540',
+    'parusdetail@gmail.com | @parusdetail',
+    '════════════════════════════════════════'
+  ].join('\n');
+
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href = url; a.download = 'Zlecenie-' + WZ.orderId + '.txt'; a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* Init wizard */
+(function() {
+  document.querySelectorAll('[data-type="size"]').forEach(tile => {
+    tile.addEventListener('click', () => {
+      document.querySelectorAll('[data-type="size"]').forEach(t => t.classList.remove('selected'));
+      tile.classList.add('selected');
+      WZ.size = tile.dataset.value;
+      wzUpdatePkgTiles();
+      wzUpdatePrice();
+    });
+  });
+  document.querySelectorAll('[data-type="pkg"]').forEach(tile => {
+    tile.addEventListener('click', () => {
+      document.querySelectorAll('[data-type="pkg"]').forEach(t => t.classList.remove('selected'));
+      tile.classList.add('selected');
+      WZ.pkg = tile.dataset.value;
+      wzUpdatePrice();
+    });
+  });
+  document.getElementById('wz-btn-next').addEventListener('click', wzNext);
+  document.getElementById('wz-btn-back').addEventListener('click', wzBack);
+  document.getElementById('wz-btn-submit').addEventListener('click', wzSubmit);
+  wzGoTo(1);
+})();
+
+/* Scroll to contact + pre-select package (compatibility with pricing buttons) */
 function scrollToContact(pkg) {
   document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
   if (pkg) {
-    const sel = document.getElementById('pkg-select');
-    for (let o of sel.options) {
-      if (o.text.includes(pkg.split(' ')[0])) { sel.value = o.value || o.text; break; }
-    }
+    const map = { 'Basic':'basic', 'Standard':'standard', 'Premium':'premium' };
+    const key = map[pkg.split(' ')[0]];
+    if (key) setTimeout(() => {
+      const tile = document.querySelector('[data-type="pkg"][data-value="' + key + '"]');
+      if (tile) tile.click();
+    }, 700);
   }
 }
 </script>

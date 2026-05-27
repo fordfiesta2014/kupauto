@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ParusDetail — Panel Właściciela</title>
+<style>
+:root {
+  --blue:#2563eb; --blue-dark:#1d4ed8; --green:#10b981; --red:#ef4444;
+  --orange:#f59e0b; --bg:#f5f8ff; --white:#fff; --dark:#0f172a;
+  --text:#1e293b; --muted:#64748b; --border:#e2e8f0; --radius:16px;
+  --shadow:0 4px 24px rgba(37,99,235,0.07);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+/* LOGIN */
+.login-screen{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#0f172a 0%,#1e3a8a 100%);
+}
+.login-card{
+  background:#fff;border-radius:24px;padding:48px 40px;
+  width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0,0,0,0.3);
+}
+.login-logo{font-size:1.6rem;font-weight:900;color:var(--blue);margin-bottom:4px;}
+.login-logo span{color:var(--dark);}
+.login-sub{color:var(--muted);font-size:0.9rem;margin-bottom:32px;}
+.login-label{font-size:0.82rem;font-weight:700;margin-bottom:8px;display:block;}
+.login-input{
+  width:100%;padding:13px 16px;border:2px solid var(--border);border-radius:12px;
+  font-size:1rem;font-family:inherit;color:var(--text);background:var(--bg);
+  outline:none;transition:border-color .2s;margin-bottom:20px;
+}
+.login-input:focus{border-color:var(--blue);}
+.login-btn{
+  width:100%;padding:14px;background:var(--blue);color:#fff;border:none;
+  border-radius:100px;font-size:1rem;font-weight:700;cursor:pointer;
+  transition:background .2s;
+}
+.login-btn:hover{background:var(--blue-dark);}
+.login-err{color:var(--red);font-size:0.85rem;margin-top:10px;display:none;}
+
+/* APP */
+.app{display:none;}
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:14px 32px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{font-size:1.2rem;font-weight:900;color:var(--blue);}
+.nav-logo span{color:var(--dark);}
+.nav-logo small{font-size:0.65rem;color:var(--muted);font-weight:500;display:block;letter-spacing:1px;text-transform:uppercase;}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-logout{
+  padding:8px 20px;background:transparent;border:2px solid var(--border);
+  border-radius:100px;font-size:0.85rem;font-weight:700;color:var(--muted);cursor:pointer;
+  transition:all .2s;
+}
+.nav-logout:hover{border-color:var(--red);color:var(--red);}
+
+.container{max-width:1300px;margin:0 auto;padding:32px;}
+
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:32px;}
+.stat-card{
+  background:#fff;border-radius:var(--radius);padding:24px 22px;
+  box-shadow:var(--shadow);border:1px solid var(--border);
+}
+.stat-label{font-size:0.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:8px;}
+.stat-value{font-size:2rem;font-weight:900;color:var(--dark);}
+.stat-sub{font-size:0.78rem;color:var(--muted);margin-top:4px;}
+.stat-card.blue .stat-value{color:var(--blue);}
+.stat-card.green .stat-value{color:var(--green);}
+.stat-card.orange .stat-value{color:var(--orange);}
+
+/* Section */
+.section-card{background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px;}
+.sc-header{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.sc-title{font-size:1rem;font-weight:800;color:var(--dark);}
+.sc-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.sc-body{padding:0;}
+
+/* Filter tabs */
+.filter-tabs{display:flex;gap:8px;flex-wrap:wrap;}
+.ftab{
+  padding:7px 16px;border-radius:100px;font-size:0.82rem;font-weight:700;
+  border:2px solid var(--border);background:#fff;color:var(--muted);cursor:pointer;transition:all .2s;
+}
+.ftab.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+.ftab:hover:not(.active){border-color:var(--blue);color:var(--blue);}
+
+/* Search */
+.search-input{
+  padding:9px 16px;border:2px solid var(--border);border-radius:100px;
+  font-size:0.85rem;font-family:inherit;color:var(--text);outline:none;
+  transition:border-color .2s;width:220px;
+}
+.search-input:focus{border-color:var(--blue);}
+
+/* Orders table */
+.orders-table{width:100%;border-collapse:collapse;}
+.orders-table th{
+  text-align:left;padding:12px 16px;font-size:0.74rem;font-weight:800;
+  text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);
+  border-bottom:2px solid var(--border);background:var(--bg);
+}
+.orders-table td{
+  padding:14px 16px;border-bottom:1px solid var(--border);
+  font-size:0.88rem;vertical-align:middle;
+}
+.orders-table tr:last-child td{border-bottom:none;}
+.orders-table tr:hover td{background:rgba(37,99,235,0.02);}
+
+.order-id{font-weight:900;color:var(--blue);font-size:0.85rem;letter-spacing:1px;}
+.client-name{font-weight:700;}
+.client-phone{color:var(--muted);font-size:0.81rem;}
+.pkg-badge{
+  display:inline-block;padding:3px 10px;border-radius:100px;
+  font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;
+}
+.pkg-basic{background:rgba(37,99,235,0.1);color:var(--blue);}
+.pkg-standard{background:rgba(16,185,129,0.1);color:var(--green);}
+.pkg-premium{background:rgba(245,158,11,0.1);color:var(--orange);}
+
+.status-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  padding:4px 12px;border-radius:100px;font-size:0.74rem;font-weight:800;
+  cursor:pointer;border:none;transition:all .2s;font-family:inherit;
+}
+.s-przyjeto {background:rgba(37,99,235,0.1);color:var(--blue);}
+.s-wtrakcie {background:rgba(245,158,11,0.1);color:var(--orange);}
+.s-gotowe   {background:rgba(16,185,129,0.1);color:var(--green);}
+.s-wydano   {background:rgba(100,116,139,0.1);color:var(--muted);}
+.s-anulowano{background:rgba(239,68,68,0.1);color:var(--red);}
+
+.price-cell{font-weight:900;color:var(--dark);}
+.date-cell{font-size:0.83rem;color:var(--muted);}
+.actions-cell{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+.btn-sm{
+  padding:5px 12px;border-radius:8px;font-size:0.75rem;font-weight:700;
+  border:1.5px solid var(--border);background:#fff;cursor:pointer;
+  color:var(--text);transition:all .2s;white-space:nowrap;
+}
+.btn-sm:hover{border-color:var(--blue);color:var(--blue);}
+.btn-sm.del:hover{border-color:var(--red);color:var(--red);}
+
+/* Order detail modal */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex;}
+.modal{
+  background:#fff;border-radius:24px;padding:40px;
+  max-width:600px;width:100%;max-height:90vh;overflow-y:auto;
+  position:relative;box-shadow:0 20px 60px rgba(0,0,0,0.25);
+  animation:fadeUp .3s ease;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.modal-close{
+  position:absolute;top:16px;right:16px;
+  background:var(--bg);border:none;border-radius:50%;
+  width:36px;height:36px;font-size:1.1rem;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+}
+.modal-title{font-size:1.2rem;font-weight:900;margin-bottom:20px;}
+.detail-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);font-size:0.9rem;}
+.detail-row:last-child{border-bottom:none;}
+.detail-label{color:var(--muted);}
+.detail-value{font-weight:700;text-align:right;}
+.status-select{
+  padding:8px 14px;border:2px solid var(--border);border-radius:10px;
+  font-size:0.9rem;font-family:inherit;color:var(--text);background:#fff;
+  cursor:pointer;outline:none;transition:border-color .2s;
+}
+.status-select:focus{border-color:var(--blue);}
+.modal-actions{display:flex;gap:12px;margin-top:24px;flex-wrap:wrap;}
+.btn-primary{
+  flex:1;padding:12px;background:var(--blue);color:#fff;border:none;
+  border-radius:100px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:background .2s;
+}
+.btn-primary:hover{background:var(--blue-dark);}
+.btn-secondary{
+  flex:1;padding:12px;background:transparent;color:var(--text);
+  border:2px solid var(--border);border-radius:100px;font-size:0.95rem;font-weight:700;cursor:pointer;transition:all .2s;
+}
+.btn-secondary:hover{border-color:var(--text);}
+
+/* Empty state */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);}
+.empty-icon{font-size:3rem;margin-bottom:12px;}
+.empty-text{font-weight:700;font-size:1rem;color:var(--dark);margin-bottom:6px;}
+
+/* Notes section */
+.notes-section{padding:24px;border-top:1px solid var(--border);}
+.notes-input{
+  width:100%;padding:13px 16px;border:2px solid var(--border);border-radius:12px;
+  font-size:0.9rem;font-family:inherit;color:var(--text);background:var(--bg);
+  outline:none;resize:vertical;min-height:80px;transition:border-color .2s;
+}
+.notes-input:focus{border-color:var(--blue);}
+
+/* Toast */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:9999;
+  background:var(--dark);color:#fff;padding:14px 22px;
+  border-radius:12px;font-size:0.88rem;font-weight:600;
+  box-shadow:0 8px 24px rgba(0,0,0,0.25);
+  transform:translateY(80px);opacity:0;transition:all .3s;
+}
+.toast.show{transform:translateY(0);opacity:1;}
+
+@media(max-width:900px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .orders-table th:nth-child(4),.orders-table td:nth-child(4),
+  .orders-table th:nth-child(6),.orders-table td:nth-child(6){display:none;}
+}
+@media(max-width:640px){
+  .container{padding:16px;}
+  .stats-grid{grid-template-columns:1fr 1fr;}
+  .sc-header{flex-direction:column;align-items:flex-start;}
+  nav{padding:12px 16px;}
+  .modal{padding:24px 18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-card">
+    <div class="login-logo">Parus<span>Detail</span></div>
+    <div class="login-sub">Panel właściciela — zaloguj się, aby kontynuować.</div>
+    <label class="login-label" for="pass-input">Hasło dostępu</label>
+    <input type="password" id="pass-input" class="login-input" placeholder="••••••••" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Zaloguj się →</button>
+    <div class="login-err" id="login-err">Nieprawidłowe hasło. Spróbuj ponownie.</div>
+    <p style="margin-top:20px;font-size:0.78rem;color:var(--muted);">Domyślne hasło: <strong>parusdetail2024</strong><br>Zmień je w ustawieniach po pierwszym logowaniu.</p>
+  </div>
+</div>
+
+<!-- APP -->
+<div class="app" id="app">
+
+<nav>
+  <div class="nav-logo">Parus<span>Detail</span><small>Panel właściciela</small></div>
+  <div class="nav-right">
+    <span style="font-size:0.82rem;color:var(--muted)" id="nav-date"></span>
+    <a href="detailing.html" target="_blank" style="font-size:0.82rem;color:var(--blue);text-decoration:none;font-weight:700;">→ Strona główna</a>
+    <button class="nav-logout" onclick="doLogout()">Wyloguj</button>
+  </div>
+</nav>
+
+<div class="container">
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card blue">
+      <div class="stat-label">Dziś</div>
+      <div class="stat-value" id="s-today-count">0</div>
+      <div class="stat-sub">zleceń na dziś</div>
+    </div>
+    <div class="stat-card green">
+      <div class="stat-label">Przychód (miesiąc)</div>
+      <div class="stat-value" id="s-month-rev">0 zł</div>
+      <div class="stat-sub" id="s-month-count">0 zleceń</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-label">W realizacji</div>
+      <div class="stat-value" id="s-active">0</div>
+      <div class="stat-sub">aktywnych zleceń</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Łącznie zleceń</div>
+      <div class="stat-value" id="s-total">0</div>
+      <div class="stat-sub">od początku działalności</div>
+    </div>
+  </div>
+
+  <!-- Orders -->
+  <div class="section-card">
+    <div class="sc-header">
+      <div class="sc-title">📋 Zlecenia</div>
+      <div class="sc-actions">
+        <input type="text" class="search-input" id="search-input" placeholder="Szukaj (imię, nr, auto)…" oninput="renderOrders()">
+        <div class="filter-tabs">
+          <button class="ftab active" data-filter="all" onclick="setFilter(this,'all')">Wszystkie</button>
+          <button class="ftab" data-filter="przyjeto" onclick="setFilter(this,'przyjeto')">🔵 Przyjęte</button>
+          <button class="ftab" data-filter="wtrakcie" onclick="setFilter(this,'wtrakcie')">🟡 W trakcie</button>
+          <button class="ftab" data-filter="gotowe" onclick="setFilter(this,'gotowe')">🟢 Gotowe</button>
+          <button class="ftab" data-filter="wydano" onclick="setFilter(this,'wydano')">⚫ Wydane</button>
+        </div>
+        <button class="btn-sm" onclick="clearAllOrders()" style="color:var(--red);border-color:var(--red);">Wyczyść wszystkie</button>
+      </div>
+    </div>
+    <div class="sc-body" style="overflow-x:auto">
+      <table class="orders-table">
+        <thead>
+          <tr>
+            <th>Nr zlecenia</th>
+            <th>Klient</th>
+            <th>Pojazd</th>
+            <th>Pakiet</th>
+            <th>Termin</th>
+            <th>Kwota</th>
+            <th>Status</th>
+            <th>Akcje</th>
+          </tr>
+        </thead>
+        <tbody id="orders-tbody"></tbody>
+      </table>
+      <div class="empty-state" id="empty-state" style="display:none">
+        <div class="empty-icon">📭</div>
+        <div class="empty-text">Brak zleceń</div>
+        <div>Nowe rezerwacje pojawią się tutaj automatycznie.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ORDER DETAIL MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnBg(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title" id="modal-title">Szczegóły zlecenia</div>
+    <div id="modal-details"></div>
+    <div style="margin-top:20px">
+      <div style="font-size:0.82rem;font-weight:700;margin-bottom:8px;color:var(--muted)">ZMIEŃ STATUS</div>
+      <select class="status-select" id="modal-status-sel" onchange="updateStatusFromModal()">
+        <option value="przyjeto">🔵 Przyjęto</option>
+        <option value="wtrakcie">🟡 W trakcie</option>
+        <option value="gotowe">🟢 Gotowe do odbioru</option>
+        <option value="wydano">⚫ Wydano klientowi</option>
+        <option value="anulowano">🔴 Anulowano</option>
+      </select>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-primary" onclick="printOrderCard()">🖨️ Drukuj kartę</button>
+      <button class="btn-secondary" onclick="closeModal()">Zamknij</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const ADMIN_PASS = 'parusdetail2024';
+const ADDONS_DEF = [
+  {id:'siersc',name:'Usuwanie sierści',price:80},
+  {id:'fotel',name:'Pranie fotela (1 szt.)',price:65},
+  {id:'kanapa',name:'Pranie kanapy',price:180},
+  {id:'podsufitka',name:'Pranie podsufitki',price:180},
+  {id:'silnik',name:'Mycie komory silnika',price:150},
+  {id:'wycieraczka',name:'Niewidzialna wycieraczka',price:120},
+  {id:'dekont',name:'Dekontaminacja lakieru',price:180},
+  {id:'glinka',name:'Glinkowanie lakieru',price:180},
+  {id:'ozon',name:'Ozonowanie wnętrza',price:120},
+  {id:'reflektory',name:'Renowacja reflektorów',price:150}
+];
+const PKG_NAMES = {basic:'Basic "Fresh"',standard:'Standard "Detail"',premium:'Premium "Elite"'};
+const SZ_NAMES  = {maly:'Małe auto',kompakt:'Kompakt/Sedan',suv:'SUV/Kombi/Van'};
+
+let currentFilter = 'all';
+let currentOrderId = null;
+
+function doLogin() {
+  const val = document.getElementById('pass-input').value;
+  const err = document.getElementById('login-err');
+  if (val === ADMIN_PASS) {
+    sessionStorage.setItem('pd_admin', '1');
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    initApp();
+  } else {
+    err.style.display = 'block';
+    document.getElementById('pass-input').value = '';
+  }
+}
+document.getElementById('pass-input').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  sessionStorage.removeItem('pd_admin');
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+  document.getElementById('pass-input').value = '';
+}
+
+function initApp() {
+  document.getElementById('nav-date').textContent = new Date().toLocaleDateString('pl-PL',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  updateStats();
+  renderOrders();
+}
+
+function getOrders() { return JSON.parse(localStorage.getItem('pd_orders') || '[]'); }
+function saveOrders(orders) { localStorage.setItem('pd_orders', JSON.stringify(orders)); }
+
+function updateStats() {
+  const orders = getOrders();
+  const today  = new Date().toISOString().split('T')[0];
+  const monthStart = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().split('T')[0];
+
+  const todayCount = orders.filter(o => o.date === today).length;
+  const monthOrders = orders.filter(o => o.createdAt && o.createdAt >= monthStart && o.status !== 'anulowano');
+  const monthRev = monthOrders.reduce((s,o) => s + (o.total || 0), 0);
+  const active = orders.filter(o => ['przyjeto','wtrakcie'].includes(o.status)).length;
+
+  document.getElementById('s-today-count').textContent = todayCount;
+  document.getElementById('s-month-rev').textContent   = monthRev + ' zł';
+  document.getElementById('s-month-count').textContent = monthOrders.length + ' zleceń';
+  document.getElementById('s-active').textContent      = active;
+  document.getElementById('s-total').textContent       = orders.length;
+}
+
+function setFilter(btn, f) {
+  document.querySelectorAll('.ftab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  currentFilter = f;
+  renderOrders();
+}
+
+function renderOrders() {
+  let orders = getOrders();
+  const q = (document.getElementById('search-input').value || '').toLowerCase();
+  if (currentFilter !== 'all') orders = orders.filter(o => o.status === currentFilter);
+  if (q) orders = orders.filter(o =>
+    (o.name||'').toLowerCase().includes(q) ||
+    (o.orderId||'').toLowerCase().includes(q) ||
+    (o.car||'').toLowerCase().includes(q) ||
+    (o.phone||'').includes(q)
+  );
+  orders.sort((a,b) => (b.createdAt||'') > (a.createdAt||'') ? 1 : -1);
+
+  const tbody = document.getElementById('orders-tbody');
+  const empty = document.getElementById('empty-state');
+
+  if (!orders.length) { tbody.innerHTML=''; empty.style.display=''; return; }
+  empty.style.display = 'none';
+
+  const STATUS_MAP = {
+    przyjeto:  {cls:'s-przyjeto',  label:'🔵 Przyjęto'},
+    wtrakcie:  {cls:'s-wtrakcie',  label:'🟡 W trakcie'},
+    gotowe:    {cls:'s-gotowe',    label:'🟢 Gotowe'},
+    wydano:    {cls:'s-wydano',    label:'⚫ Wydano'},
+    anulowano: {cls:'s-anulowano', label:'🔴 Anulowano'}
+  };
+
+  tbody.innerHTML = orders.map(o => {
+    const st = STATUS_MAP[o.status] || STATUS_MAP.przyjeto;
+    const pkgCls = 'pkg-'+(o.pkg||'basic');
+    return `<tr>
+      <td><span class="order-id">${o.orderId||'—'}</span></td>
+      <td>
+        <div class="client-name">${esc(o.name||'—')}</div>
+        <div class="client-phone">${esc(o.phone||'')}</div>
+      </td>
+      <td>${esc(o.car||'—')} ${o.year?'('+o.year+')':''}</td>
+      <td><span class="pkg-badge ${pkgCls}">${PKG_NAMES[o.pkg]||o.pkg||'—'}</span></td>
+      <td class="date-cell">${fmtDate(o.date)}<br>${o.time||''}</td>
+      <td class="price-cell">${(o.total||0)+' zł'}</td>
+      <td>
+        <button class="status-badge ${st.cls}" onclick="quickStatus('${o.orderId}')" title="Kliknij by zmienić status">
+          ${st.label}
+        </button>
+      </td>
+      <td class="actions-cell">
+        <button class="btn-sm" onclick="openModal('${o.orderId}')">Szczegóły</button>
+        <button class="btn-sm del" onclick="deleteOrder('${o.orderId}')">Usuń</button>
+      </td>
+    </tr>`;
+  }).join('');
+}
+
+function esc(s){ const d=document.createElement('div');d.textContent=s;return d.innerHTML; }
+
+function fmtDate(ds) {
+  if (!ds) return '—';
+  const d = new Date(ds+'T12:00:00');
+  return d.toLocaleDateString('pl-PL',{day:'2-digit',month:'2-digit',year:'numeric'});
+}
+
+function quickStatus(id) {
+  const orders = getOrders();
+  const o = orders.find(x=>x.orderId===id);
+  if (!o) return;
+  const seq = ['przyjeto','wtrakcie','gotowe','wydano'];
+  const idx = seq.indexOf(o.status);
+  o.status = seq[(idx+1) % seq.length];
+  saveOrders(orders);
+  renderOrders();
+  updateStats();
+  showToast('Status zmieniony na: ' + o.status);
+}
+
+function deleteOrder(id) {
+  if (!confirm('Usunąć zlecenie ' + id + '?')) return;
+  const orders = getOrders().filter(o=>o.orderId!==id);
+  saveOrders(orders);
+  renderOrders();
+  updateStats();
+  showToast('Zlecenie usunięte.');
+}
+
+function clearAllOrders() {
+  if (!confirm('Usunąć WSZYSTKIE zlecenia? Tej operacji nie można cofnąć.')) return;
+  localStorage.removeItem('pd_orders');
+  renderOrders();
+  updateStats();
+  showToast('Wszystkie zlecenia usunięte.');
+}
+
+function openModal(id) {
+  const orders = getOrders();
+  const o = orders.find(x=>x.orderId===id);
+  if (!o) return;
+  currentOrderId = id;
+
+  const addonsText = (o.addons||[]).length
+    ? (o.addons).map(aid => { const a=ADDONS_DEF.find(x=>x.id===aid); return a?a.name+' (+'+a.price+' zł)':aid; }).join(', ')
+    : 'Brak';
+
+  const rows = [
+    ['Nr zlecenia', o.orderId||'—'],
+    ['Klient', (o.name||'—') + ' | ' + (o.phone||'')],
+    ['E-mail', o.email||'—'],
+    ['Pojazd', (o.car||'—') + (o.year?' ('+o.year+')':'')],
+    ['Rozmiar', SZ_NAMES[o.size]||o.size||'—'],
+    ['Pakiet', PKG_NAMES[o.pkg]||o.pkg||'—'],
+    ['Usługi dodatkowe', addonsText],
+    ['Data wizyty', fmtDate(o.date) + (o.time?' godz. '+o.time:'')],
+    ['Kwota orientacyjna', (o.total||0)+' zł'],
+    ['Uwagi klienta', o.notes||'—'],
+    ['Przyjęto', o.createdAt ? new Date(o.createdAt).toLocaleString('pl-PL') : '—']
+  ];
+
+  document.getElementById('modal-title').textContent = 'Zlecenie ' + (o.orderId||'');
+  document.getElementById('modal-details').innerHTML = rows.map(([l,v])=>
+    '<div class="detail-row"><span class="detail-label">'+l+'</span><span class="detail-value">'+esc(v)+'</span></div>'
+  ).join('');
+
+  const sel = document.getElementById('modal-status-sel');
+  sel.value = o.status || 'przyjeto';
+
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function updateStatusFromModal() {
+  if (!currentOrderId) return;
+  const orders = getOrders();
+  const o = orders.find(x=>x.orderId===currentOrderId);
+  if (!o) return;
+  o.status = document.getElementById('modal-status-sel').value;
+  saveOrders(orders);
+  renderOrders();
+  updateStats();
+  showToast('Status zlecenia zaktualizowany.');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  currentOrderId = null;
+}
+function closeModalOnBg(e) { if(e.target===document.getElementById('modal-overlay')) closeModal(); }
+
+function printOrderCard() {
+  const orders = getOrders();
+  const o = orders.find(x=>x.orderId===currentOrderId);
+  if (!o) return;
+  const addonsText = (o.addons||[]).length
+    ? (o.addons).map(aid=>{const a=ADDONS_DEF.find(x=>x.id===aid);return a?a.name+' +'+a.price+' zł':aid;}).join(', ')
+    : 'Brak';
+  const w = window.open('','_blank');
+  w.document.write(`
+    <html><head><title>Zlecenie ${o.orderId}</title>
+    <style>body{font-family:Arial,sans-serif;max-width:600px;margin:40px auto;color:#1e293b;}
+    h1{font-size:1.4rem;margin-bottom:4px;}
+    .sub{color:#64748b;font-size:0.85rem;margin-bottom:24px;}
+    table{width:100%;border-collapse:collapse;}
+    td{padding:9px 4px;border-bottom:1px solid #e2e8f0;font-size:0.9rem;}
+    td:first-child{color:#64748b;width:45%;}
+    td:last-child{font-weight:700;}
+    .total{background:#f5f8ff;border-radius:8px;padding:14px;margin-top:16px;display:flex;justify-content:space-between;align-items:center;}
+    .total-label{font-weight:700;}
+    .total-amount{font-size:1.6rem;font-weight:900;color:#2563eb;}
+    footer{margin-top:32px;font-size:0.78rem;color:#64748b;border-top:1px solid #e2e8f0;padding-top:16px;}</style>
+    </head><body>
+    <h1>ParusDetail — Karta Zlecenia</h1>
+    <div class="sub">Nr: ${o.orderId} | Wystawiona: ${new Date().toLocaleDateString('pl-PL')}</div>
+    <table>
+      <tr><td>Klient</td><td>${esc(o.name||'—')}</td></tr>
+      <tr><td>Telefon</td><td>${esc(o.phone||'—')}</td></tr>
+      <tr><td>E-mail</td><td>${esc(o.email||'—')}</td></tr>
+      <tr><td>Pojazd</td><td>${esc(o.car||'—')} ${o.year?'('+o.year+')':''}</td></tr>
+      <tr><td>Rozmiar auta</td><td>${SZ_NAMES[o.size]||o.size||'—'}</td></tr>
+      <tr><td>Pakiet</td><td>${PKG_NAMES[o.pkg]||o.pkg||'—'}</td></tr>
+      <tr><td>Usługi dodatkowe</td><td>${esc(addonsText)}</td></tr>
+      <tr><td>Termin</td><td>${fmtDate(o.date)} godz. ${o.time||'—'}</td></tr>
+      <tr><td>Uwagi</td><td>${esc(o.notes||'—')}</td></tr>
+    </table>
+    <div class="total">
+      <span class="total-label">Kwota orientacyjna</span>
+      <span class="total-amount">${o.total||0} zł</span>
+    </div>
+    <footer>ParusDetail | tel: 605 638 540 | parusdetail@gmail.com | @parusdetail</footer>
+    <script>window.print();<\/script>
+    </body></html>
+  `);
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
+}
+
+// Auto-login if session active
+if (sessionStorage.getItem('pd_admin')) {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'block';
+  initApp();
+}
+
+// Refresh every 30 seconds
+setInterval(() => { if(sessionStorage.getItem('pd_admin')){ updateStats(); renderOrders(); } }, 30000);
+</script>
+</body>
+</html>
