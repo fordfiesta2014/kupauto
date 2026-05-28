@@ -1618,7 +1618,7 @@ function wzSubmit() {
   localStorage.setItem('pd_orders', JSON.stringify(orders));
 
   document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
-  document.getElementById('wz-success').style.display = '';
+  document.getElementById('wz-success').style.display = 'block';
   document.getElementById('order-number').textContent = id;
   document.getElementById('wz-status-link').href = 'status.html?id=' + encodeURIComponent(id);
   document.getElementById('wz-footer').style.display   = 'none';
