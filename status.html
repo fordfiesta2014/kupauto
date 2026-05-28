@@ -18,10 +18,32 @@ nav{
   border-bottom:1px solid var(--border);padding:14px 40px;
   display:flex;align-items:center;justify-content:space-between;
 }
-.logo{font-size:1.35rem;font-weight:900;color:var(--blue);}
+.logo{font-size:1.35rem;font-weight:900;color:var(--blue);text-decoration:none;}
 .logo span{color:var(--dark);}
-.back-link{font-size:0.85rem;font-weight:700;color:var(--blue);text-decoration:none;}
-.back-link:hover{text-decoration:underline;}
+.nav-menu{display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:0.92rem;transition:color .2s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-divider-v{width:1px;height:20px;background:var(--border);margin:0 4px;align-self:center;}
+.nav-pages{flex-direction:row;}
+.nav-page-link{font-size:0.83rem!important;font-weight:700!important;color:var(--text)!important;padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);transition:all .2s!important;white-space:nowrap;text-decoration:none;display:inline-block;}
+.nav-page-link:hover{border-color:var(--blue)!important;color:var(--blue)!important;}
+.active-page{border-color:var(--blue)!important;color:var(--blue)!important;background:rgba(37,99,235,.06)!important;}
+.nav-cta{background:var(--blue);color:#fff!important;padding:10px 22px;border-radius:100px;font-weight:700!important;font-size:0.88rem!important;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--blue-dark)!important;}
+.nav-toggle{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;background:none;border:none;cursor:pointer;padding:0;}
+.nav-toggle span{display:block;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:900px){
+  .nav-toggle{display:flex;}
+  .nav-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(255,255,255,.98);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:0;z-index:998;}
+  .nav-menu.open{display:flex;}
+  .nav-links,.nav-pages{flex-direction:column!important;gap:4px!important;width:100%;}
+  .nav-divider-v{display:none!important;}
+  .nav-cta{display:block;text-align:center;width:100%;margin-top:12px;}
+}
 
 .page-wrap{max-width:680px;margin:0 auto;padding:60px 24px;}
 .page-title{font-size:2rem;font-weight:900;margin-bottom:8px;}
@@ -131,9 +153,25 @@ nav{
 </head>
 <body>
 
-<nav>
-  <div class="logo">Parus<span>Detail</span></div>
-  <a href="detailing.html" class="back-link">← Wróć do strony głównej</a>
+<nav id="main-nav">
+  <a href="detailing.html" class="logo">Parus<span>Detail</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu" id="nav-menu">
+    <ul class="nav-links">
+      <li><a href="detailing.html#services">Usługi</a></li>
+      <li><a href="detailing.html#pricing">Cennik</a></li>
+      <li><a href="detailing.html#gallery">Galeria</a></li>
+      <li><a href="detailing.html#reviews">Opinie</a></li>
+    </ul>
+    <div class="nav-divider-v"></div>
+    <ul class="nav-links nav-pages">
+      <li><a href="status.html" class="nav-page-link active-page">📦 Status zlecenia</a></li>
+      <li><a href="regulamin.html" class="nav-page-link">📋 Regulamin</a></li>
+    </ul>
+    <a href="detailing.html#contact" class="nav-cta">Umów wizytę</a>
+  </div>
 </nav>
 
 <div class="page-wrap">
@@ -298,6 +336,13 @@ if (urlId) {
   document.getElementById('order-input').value = urlId.toUpperCase();
   searchOrder();
 }
+
+(function(){
+  const t=document.getElementById('nav-toggle'),m=document.getElementById('nav-menu');
+  if(!t||!m)return;
+  t.addEventListener('click',()=>{t.classList.toggle('open');m.classList.toggle('open');});
+  m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{t.classList.remove('open');m.classList.remove('open');}));
+})();
 </script>
 </body>
 </html>

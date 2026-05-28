@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ParusDetail — Regulamin usług</title>
+<style>
+:root{
+  --blue:#2563eb;--blue-dark:#1d4ed8;--green:#10b981;
+  --bg:#f5f8ff;--white:#fff;--dark:#0f172a;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);}
+
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:14px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-size:1.35rem;font-weight:900;color:var(--blue);text-decoration:none;}
+.logo span{color:var(--dark);}
+.nav-menu{display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:0.92rem;transition:color .2s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-divider-v{width:1px;height:20px;background:var(--border);margin:0 6px;align-self:center;}
+.nav-pages{flex-direction:row;gap:8px!important;}
+.nav-page-link{font-size:0.83rem!important;font-weight:700!important;color:var(--text)!important;padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);transition:all .2s!important;white-space:nowrap;text-decoration:none;display:inline-block;}
+.nav-page-link:hover{border-color:var(--blue)!important;color:var(--blue)!important;}
+.nav-page-link.active-page{border-color:var(--blue)!important;color:var(--blue)!important;background:rgba(37,99,235,.06)!important;}
+.nav-cta{background:var(--blue);color:#fff!important;padding:10px 22px;border-radius:100px;font-weight:700!important;font-size:0.88rem!important;text-decoration:none;transition:background .2s;white-space:nowrap;}
+.nav-cta:hover{background:var(--blue-dark)!important;}
+.nav-toggle{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;background:none;border:none;cursor:pointer;padding:0;}
+.nav-toggle span{display:block;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:900px){
+  nav{padding:14px 20px;}
+  .nav-toggle{display:flex;}
+  .nav-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(255,255,255,.98);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:0;z-index:998;box-shadow:0 8px 32px rgba(0,0,0,.08);}
+  .nav-menu.open{display:flex;}
+  .nav-links,.nav-pages{flex-direction:column!important;gap:4px!important;width:100%;}
+  .nav-links a{padding:10px 4px!important;font-size:1rem!important;}
+  .nav-divider-v{display:none!important;}
+  .nav-page-link{display:block;margin-bottom:4px;}
+  .nav-cta{display:block;text-align:center;width:100%;margin-top:12px;}
+}
+
+.page-wrap{max-width:820px;margin:0 auto;padding:60px 24px 100px;}
+.page-header{margin-bottom:52px;}
+.page-tag{font-size:0.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;}
+.page-title{font-size:2.4rem;font-weight:900;margin-bottom:14px;color:var(--dark);}
+.page-date{font-size:0.83rem;color:var(--muted);}
+
+.reg-section{margin-bottom:44px;}
+.reg-section h2{font-size:1.15rem;font-weight:900;color:var(--dark);margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid var(--border);}
+.reg-section h2 span{color:var(--blue);margin-right:10px;}
+.reg-section p{font-size:0.93rem;color:var(--text);line-height:1.75;margin-bottom:12px;}
+.reg-section ul{padding-left:22px;display:flex;flex-direction:column;gap:9px;margin-bottom:12px;}
+.reg-section ul li{font-size:0.93rem;color:var(--text);line-height:1.65;}
+
+.info-box{background:#fff;border-radius:16px;padding:24px 28px;border:1.5px solid var(--border);margin-bottom:12px;line-height:1.8;}
+.info-box p{font-size:0.93rem;margin-bottom:6px;}
+.info-box p:last-child{margin-bottom:0;}
+.info-box strong{color:var(--dark);}
+
+footer{background:var(--dark);color:rgba(255,255,255,.55);padding:36px 40px;text-align:center;font-size:0.83rem;}
+footer a{color:rgba(255,255,255,.7);text-decoration:none;}
+footer a:hover{color:#fff;}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="detailing.html" class="logo">Parus<span>Detail</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Otwórz menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="nav-menu" id="nav-menu">
+    <ul class="nav-links">
+      <li><a href="detailing.html#services">Usługi</a></li>
+      <li><a href="detailing.html#pricing">Cennik</a></li>
+      <li><a href="detailing.html#gallery">Galeria</a></li>
+      <li><a href="detailing.html#reviews">Opinie</a></li>
+    </ul>
+    <div class="nav-divider-v"></div>
+    <ul class="nav-links nav-pages">
+      <li><a href="status.html" class="nav-page-link">📦 Status zlecenia</a></li>
+      <li><a href="regulamin.html" class="nav-page-link active-page">📋 Regulamin</a></li>
+    </ul>
+    <a href="detailing.html#contact" class="nav-cta">Umów wizytę</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+  <div class="page-header">
+    <div class="page-tag">Dokumenty</div>
+    <h1 class="page-title">Regulamin usług ParusDetail</h1>
+    <p class="page-date">Obowiązuje od: 1 stycznia 2025 &nbsp;·&nbsp; Wersja 1.2</p>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§1</span> Postanowienia ogólne</h2>
+    <p>Niniejszy regulamin określa warunki świadczenia usług detailingu samochodowego przez ParusDetail, zwanego dalej „Wykonawcą", na rzecz Klientów.</p>
+    <p>Wykonawca świadczy profesjonalne usługi pielęgnacji i detailingu pojazdów samochodowych na terenie całej Polski, zarówno w siedzibie warsztatu, jak i z dojazdem do Klienta.</p>
+    <p>Dokonanie rezerwacji lub skorzystanie z usług oznacza akceptację niniejszego regulaminu w całości.</p>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§2</span> Rezerwacja i terminy</h2>
+    <ul>
+      <li>Rezerwacji można dokonać przez formularz online na stronie, telefonicznie pod numerem <strong>605 638 540</strong> lub przez WhatsApp/Messenger.</li>
+      <li>Termin uważa się za potwierdzony po otrzymaniu przez Klienta potwierdzenia SMS lub e-mail.</li>
+      <li>Odwołanie wizyty jest bezpłatne pod warunkiem zgłoszenia co najmniej <strong>24 godziny przed planowanym terminem</strong>.</li>
+      <li>Przy odwołaniu z mniej niż 24h wyprzedzeniem Wykonawca zastrzega sobie prawo pobrania opłaty manipulacyjnej w wysokości 50 zł.</li>
+      <li>W przypadku niestawienia się bez odwołania pobrana zaliczka nie podlega zwrotowi.</li>
+    </ul>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§3</span> Ceny i płatności</h2>
+    <p>Podane ceny są cenami orientacyjnymi i mogą ulec zmianie po ocenie stanu pojazdu. Ostateczna wycena jest ustalana przed przystąpieniem do pracy.</p>
+    <ul>
+      <li>Płatność gotówką lub przelewem bankowym po zakończeniu usługi.</li>
+      <li>W przypadku usług powyżej 500 zł Wykonawca może wymagać zaliczki w wysokości do 30% wartości zlecenia.</li>
+      <li>Faktura VAT wystawiana jest na życzenie Klienta.</li>
+      <li>W przypadku braku płatności w terminie naliczane są ustawowe odsetki za opóźnienie.</li>
+    </ul>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§4</span> Realizacja usług</h2>
+    <ul>
+      <li>Czas realizacji usługi zależy od wybranego pakietu i stanu pojazdu — szacunkowy czas podawany jest przy rezerwacji.</li>
+      <li>Wykonawca nie ponosi odpowiedzialności za opóźnienia wynikające z niezgodnego z zapowiedzią stanu pojazdu.</li>
+      <li>Klient jest zobowiązany przekazać pojazd czysty z rzeczy osobistych, dokumentów i wartościowych przedmiotów.</li>
+      <li>Wykonawca nie ponosi odpowiedzialności za pozostawione w pojeździe przedmioty wartościowe.</li>
+      <li>Wykonawca wykonuje usługę z należytą starannością, zgodnie z najlepszymi praktykami branżowymi.</li>
+    </ul>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§5</span> Reklamacje i gwarancja</h2>
+    <p>Wykonawca udziela gwarancji na wykonane usługi w następującym zakresie:</p>
+    <div class="info-box">
+      <p><strong>Pakiet Basic</strong> — 7 dni na zgłoszenie zastrzeżeń co do jakości mycia i odkurzania.</p>
+      <p><strong>Pakiet Standard</strong> — 14 dni gwarancji na pranie tapicerki i czyszczenie plastików.</p>
+      <p><strong>Pakiet Premium</strong> — 30 dni gwarancji na polerowanie i zabezpieczenie lakieru.</p>
+    </div>
+    <ul>
+      <li>Reklamacje należy zgłaszać na adres <strong>parusdetail@gmail.com</strong> lub telefonicznie pod nr 605 638 540.</li>
+      <li>Reklamacja zostanie rozpatrzona w terminie 14 dni roboczych.</li>
+      <li>Gwarancja nie obejmuje uszkodzeń powstałych po wydaniu pojazdu wynikających z eksploatacji lub zdarzeń losowych.</li>
+    </ul>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§6</span> Ochrona danych osobowych (RODO)</h2>
+    <p>Administratorem danych osobowych jest właściciel firmy ParusDetail. Dane osobowe Klientów (imię, telefon, e-mail) są przetwarzane wyłącznie w celu:</p>
+    <ul>
+      <li>realizacji usług i obsługi rezerwacji,</li>
+      <li>wysyłania potwierdzeń i przypomnień o wizytach,</li>
+      <li>wystawiania dokumentów sprzedaży.</li>
+    </ul>
+    <p>Dane nie są przekazywane podmiotom trzecim. Klient ma prawo dostępu, sprostowania i usunięcia swoich danych — wystarczy kontakt na <strong>parusdetail@gmail.com</strong>.</p>
+  </div>
+
+  <div class="reg-section">
+    <h2><span>§7</span> Postanowienia końcowe</h2>
+    <p>W sprawach nieuregulowanych niniejszym regulaminem stosuje się przepisy Kodeksu Cywilnego oraz innych obowiązujących aktów prawnych.</p>
+    <p>Wykonawca zastrzega sobie prawo zmiany regulaminu. O zmianach Klienci będą informowani z co najmniej 7-dniowym wyprzedzeniem.</p>
+    <p>Wszelkie spory rozstrzygane będą polubownie. W przypadku braku porozumienia właściwym sądem jest sąd miejsca siedziby Wykonawcy.</p>
+  </div>
+
+  <div class="info-box">
+    <strong>Dane kontaktowe:</strong><br>
+    ParusDetail &nbsp;·&nbsp; tel. <a href="tel:+48605638540" style="color:var(--blue);font-weight:700;">605 638 540</a>
+    &nbsp;·&nbsp; <a href="mailto:parusdetail@gmail.com" style="color:var(--blue);font-weight:700;">parusdetail@gmail.com</a>
+  </div>
+</div>
+
+<footer>
+  <p>&copy; 2025 ParusDetail. Wszelkie prawa zastrzeżone.
+  &nbsp;·&nbsp; <a href="detailing.html">Strona główna</a>
+  &nbsp;·&nbsp; <a href="status.html">Status zlecenia</a>
+  &nbsp;·&nbsp; <a href="regulamin.html">Regulamin</a></p>
+</footer>
+
+<script>
+(function(){
+  const t=document.getElementById('nav-toggle'),m=document.getElementById('nav-menu');
+  if(!t||!m)return;
+  t.addEventListener('click',()=>{t.classList.toggle('open');m.classList.toggle('open');});
+  m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{t.classList.remove('open');m.classList.remove('open');}));
+})();
+</script>
+</body>
+</html>

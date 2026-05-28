@@ -53,13 +53,17 @@ nav{
 .nav-logo{font-size:1.2rem;font-weight:900;color:var(--blue);}
 .nav-logo span{color:var(--dark);}
 .nav-logo small{font-size:0.65rem;color:var(--muted);font-weight:500;display:block;letter-spacing:1px;text-transform:uppercase;}
-.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-right{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
 .nav-logout{
   padding:8px 20px;background:transparent;border:2px solid var(--border);
   border-radius:100px;font-size:0.85rem;font-weight:700;color:var(--muted);cursor:pointer;
   transition:all .2s;
 }
 .nav-logout:hover{border-color:var(--red);color:var(--red);}
+.nav-page-link{font-size:0.83rem;font-weight:700;color:var(--text);padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-block;}
+.nav-page-link:hover{border-color:var(--blue);color:var(--blue);}
+.active-page{border-color:var(--blue);color:var(--blue);background:rgba(37,99,235,.06);}
+.nav-divider-v-admin{width:1px;height:20px;background:var(--border);margin:0 4px;align-self:center;display:inline-block;vertical-align:middle;}
 
 .container{max-width:1300px;margin:0 auto;padding:32px;}
 
@@ -252,7 +256,10 @@ nav{
   <div class="nav-logo">Parus<span>Detail</span><small>Panel właściciela</small></div>
   <div class="nav-right">
     <span style="font-size:0.82rem;color:var(--muted)" id="nav-date"></span>
-    <a href="detailing.html" target="_blank" style="font-size:0.82rem;color:var(--blue);text-decoration:none;font-weight:700;">→ Strona główna</a>
+    <a href="status.html" class="nav-page-link">📦 Status zlecenia</a>
+    <a href="regulamin.html" class="nav-page-link">📋 Regulamin</a>
+    <span class="nav-divider-v-admin"></span>
+    <a href="detailing.html" target="_blank" class="nav-page-link active-page">🏠 Strona główna</a>
     <button class="nav-logout" onclick="doLogout()">Wyloguj</button>
   </div>
 </nav>
