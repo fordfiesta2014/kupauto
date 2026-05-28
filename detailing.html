@@ -672,12 +672,21 @@
     .success-title { font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: var(--dark); }
     .success-sub { color: var(--muted); font-size: 0.97rem; line-height: 1.65; margin-bottom: 30px; max-width: 480px; margin-left: auto; margin-right: auto; }
     .order-badge {
-      display: inline-block; background: rgba(37,99,235,0.07);
-      border: 2px solid rgba(37,99,235,0.18);
-      border-radius: 14px; padding: 18px 40px; margin-bottom: 30px;
+      display: inline-block; background: rgba(37,99,235,0.06);
+      border: 2.5px solid rgba(37,99,235,0.25);
+      border-radius: 20px; padding: 22px 44px 18px; margin-bottom: 30px;
     }
-    .ob-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2.5px; color: var(--muted); margin-bottom: 4px; }
-    .ob-number { font-size: 2rem; font-weight: 900; color: var(--blue); letter-spacing: 6px; }
+    .ob-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: 6px; }
+    .ob-number { font-size: 2.4rem; font-weight: 900; color: var(--blue); letter-spacing: 8px; margin-bottom: 10px; }
+    .ob-copy-btn {
+      display: inline-block; background: var(--blue); color: #fff;
+      border: none; border-radius: 100px; padding: 7px 20px;
+      font-size: 0.82rem; font-weight: 700; cursor: pointer;
+      transition: background .2s; margin-bottom: 10px;
+    }
+    .ob-copy-btn:hover { background: var(--blue-dark); }
+    .ob-copy-btn.copied { background: var(--green); }
+    .ob-hint { font-size: 0.78rem; color: var(--muted); line-height: 1.5; max-width: 280px; margin: 0 auto; }
     .success-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
 
     @media (max-width: 900px) {
@@ -1185,13 +1194,15 @@
       <h2 class="success-title">Rezerwacja przyjęta!</h2>
       <p class="success-sub">Twoja prośba o wizytę została zarejestrowana. Skontaktuję się z Tobą w ciągu kilku godzin, aby potwierdzić termin i szczegóły.</p>
       <div class="order-badge">
-        <div class="ob-label">Numer zlecenia</div>
+        <div class="ob-label">Twój numer zlecenia — zapisz go!</div>
         <div class="ob-number" id="order-number">PD-0000</div>
+        <button class="ob-copy-btn" id="ob-copy-btn" onclick="wzCopyOrderId()" title="Skopiuj numer">📋 Kopiuj</button>
+        <div class="ob-hint">Użyj tego numeru na stronie „Status zlecenia", aby śledzić postęp</div>
       </div>
       <div class="success-actions">
-        <button onclick="wzDownloadPDF()" class="btn-blue">📄 Pobierz kartę zlecenia</button>
+        <a href="status.html" class="btn-blue" id="wz-status-link">🔍 Sprawdź status zlecenia →</a>
+        <button onclick="wzDownloadPDF()" class="btn-outline">📄 Pobierz kartę zlecenia</button>
         <a href="https://wa.me/48605638540" target="_blank" class="btn-outline">💬 WhatsApp</a>
-        <a href="status.html" class="btn-outline">🔍 Śledź status zlecenia</a>
       </div>
     </div>
 
@@ -1609,9 +1620,23 @@ function wzSubmit() {
   document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
   document.getElementById('wz-success').style.display = '';
   document.getElementById('order-number').textContent = id;
+  document.getElementById('wz-status-link').href = 'status.html?id=' + encodeURIComponent(id);
   document.getElementById('wz-footer').style.display   = 'none';
   document.getElementById('wz-price-bar').style.display = 'none';
   document.getElementById('contact').scrollIntoView({ behavior:'smooth', block:'start' });
+}
+
+function wzCopyOrderId() {
+  const num = document.getElementById('order-number').textContent;
+  navigator.clipboard.writeText(num).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = num; document.body.appendChild(ta);
+    ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+  });
+  const btn = document.getElementById('ob-copy-btn');
+  btn.textContent = '✓ Skopiowano!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = '📋 Kopiuj'; btn.classList.remove('copied'); }, 2500);
 }
 
 function wzDownloadPDF() {
