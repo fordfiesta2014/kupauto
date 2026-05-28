@@ -64,6 +64,7 @@ Pełna strategia: `instagram-strategy.html`
 - Czcionka pogrubiona (bold/black) na duże tytuły, regularna na treść
 - Minimalistycznie — jeden główny przekaz na slajd
 - Nazwa konta: `@motoryzacyjneinfo`
+- **Rozmiar czcionki**: nagłówki/tytuły — domyślny z szablonu; tekst treści (body) — minimum **36px**, żeby był czytelny na telefonie
 
 ---
 
