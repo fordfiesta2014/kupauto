@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ParusDetail — Finanse</title>
+<style>
+:root{
+  --blue:#2563eb;--blue-dark:#1d4ed8;--green:#10b981;--red:#ef4444;
+  --orange:#f59e0b;--purple:#8b5cf6;
+  --bg:#f5f8ff;--white:#fff;--dark:#0f172a;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+  --shadow:0 4px 24px rgba(37,99,235,0.07);--radius:16px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:100;background:rgba(255,255,255,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;}
+.logo{font-size:1.35rem;font-weight:900;color:var(--blue);text-decoration:none;}
+.logo span{color:var(--dark);}
+.nav-menu{display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:.92rem;transition:color .2s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-divider-v{width:1px;height:20px;background:var(--border);margin:0 4px;align-self:center;}
+.nav-page-link{font-size:.83rem;font-weight:700;color:var(--text);padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-block;}
+.nav-page-link:hover,.nav-page-link.active-page{border-color:var(--blue);color:var(--blue);background:rgba(37,99,235,.06);}
+.nav-cta{background:var(--blue);color:#fff!important;padding:10px 22px;border-radius:100px;font-weight:700;font-size:.88rem;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--blue-dark);}
+.nav-toggle{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;background:none;border:none;cursor:pointer;padding:0;}
+.nav-toggle span{display:block;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:900px){
+  .nav-toggle{display:flex;}
+  .nav-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(255,255,255,.98);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:0;z-index:998;}
+  .nav-menu.open{display:flex;}
+  .nav-links{flex-direction:column!important;gap:4px!important;width:100%;}
+  .nav-divider-v{display:none!important;}
+  .nav-cta{display:block;text-align:center;width:100%;margin-top:12px;}
+}
+
+/* ── LAYOUT ── */
+.page{max-width:1140px;margin:0 auto;padding:40px 24px 80px;}
+
+/* ── HEADER ── */
+.page-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:16px;margin-bottom:28px;}
+.page-tag{font-size:.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.page-header h1{font-size:2rem;font-weight:900;color:var(--dark);}
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.fsel{padding:9px 16px;border:2px solid var(--border);border-radius:100px;font-size:.88rem;font-weight:600;font-family:inherit;color:var(--text);background:#fff;outline:none;cursor:pointer;transition:border-color .2s;}
+.fsel:focus{border-color:var(--blue);}
+.btn-exp{padding:9px 20px;background:#fff;border:2px solid var(--border);border-radius:100px;font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text);}
+.btn-exp:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ── KPI CARDS ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:24px;}
+.kpi{background:#fff;border-radius:var(--radius);padding:22px 20px;box-shadow:var(--shadow);border:1.5px solid var(--border);position:relative;overflow:hidden;}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
+.kpi.k-green::before{background:var(--green);}
+.kpi.k-red::before{background:var(--red);}
+.kpi.k-blue::before{background:var(--blue);}
+.kpi.k-purple::before{background:var(--purple);}
+.kpi.k-orange::before{background:var(--orange);}
+.kpi-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:6px;}
+.kpi-val{font-size:1.8rem;font-weight:900;color:var(--dark);margin-bottom:2px;}
+.kpi-sub{font-size:.77rem;color:var(--muted);}
+.kpi-trend{font-size:.78rem;font-weight:700;margin-top:6px;}
+.kpi-trend.up{color:var(--green);}
+.kpi-trend.down{color:var(--red);}
+.kpi-trend.neutral{color:var(--muted);}
+
+/* ── CHART ROW ── */
+.chart-row{display:grid;grid-template-columns:2fr 1fr;gap:20px;margin-bottom:20px;}
+.chart-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px;margin-bottom:20px;}
+
+/* ── CARD ── */
+.card{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow);border:1.5px solid var(--border);}
+.card-title{font-size:.95rem;font-weight:900;color:var(--dark);margin-bottom:18px;display:flex;align-items:center;gap:7px;}
+
+/* ── BAR CHART ── */
+.bars{display:flex;align-items:flex-end;gap:10px;height:130px;margin-top:8px;}
+.bc{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bf{width:100%;border-radius:5px 5px 0 0;transition:height .5s ease;min-height:3px;position:relative;cursor:default;}
+.bf:hover::after{content:attr(data-tip);position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);background:var(--dark);color:#fff;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:8px;white-space:nowrap;pointer-events:none;z-index:10;}
+.bc-lbl{font-size:.68rem;color:var(--muted);font-weight:600;text-align:center;}
+
+/* ── REVENUE vs COST LEGEND ── */
+.legend{display:flex;gap:16px;margin-bottom:12px;}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:var(--muted);}
+.leg-dot{width:10px;height:10px;border-radius:50%;}
+
+/* ── PACKAGE BARS ── */
+.pkg-row{margin-bottom:14px;}
+.pkg-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.pkg-name{font-size:.85rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+.pkg-amt{font-size:.85rem;font-weight:800;}
+.bar-bg{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;}
+.bar-fill{height:8px;border-radius:4px;transition:width .6s ease;}
+.pkg-meta{font-size:.72rem;color:var(--muted);margin-top:3px;}
+
+/* ── ORDERS TABLE ── */
+.tbl-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.tbl-cnt{font-size:.78rem;color:var(--muted);font-weight:600;}
+.srch{padding:8px 14px;border:1.5px solid var(--border);border-radius:100px;font-size:.85rem;font-family:inherit;outline:none;width:190px;transition:border-color .2s;}
+.srch:focus{border-color:var(--blue);}
+table{width:100%;border-collapse:collapse;}
+th{font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:0 10px 10px;text-align:left;border-bottom:2px solid var(--border);}
+td{padding:11px 10px;font-size:.87rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(37,99,235,.02);}
+.chip{display:inline-flex;align-items:center;padding:3px 10px;border-radius:100px;font-size:.73rem;font-weight:700;}
+.chip-przyjeto{background:rgba(100,116,139,.1);color:var(--muted);}
+.chip-wtrakcie{background:rgba(245,158,11,.12);color:var(--orange);}
+.chip-gotowe{background:rgba(16,185,129,.12);color:var(--green);}
+.chip-wydano{background:rgba(37,99,235,.1);color:var(--blue);}
+.chip-anulowano{background:rgba(239,68,68,.1);color:var(--red);}
+.pkg-chip{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.73rem;font-weight:700;background:rgba(37,99,235,.08);color:var(--blue);}
+.amt-col{font-weight:800;color:var(--dark);}
+.empty{text-align:center;padding:36px;color:var(--muted);}
+.empty-ico{font-size:2rem;margin-bottom:8px;}
+
+/* ── PROFIT BANNER ── */
+.profit-banner{border-radius:var(--radius);padding:22px 28px;margin-bottom:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.pb-profit{background:linear-gradient(135deg,#ecfdf5,#d1fae5);border:1.5px solid #6ee7b7;}
+.pb-loss{background:linear-gradient(135deg,#fef2f2,#fee2e2);border:1.5px solid #fca5a5;}
+.pb-neutral{background:linear-gradient(135deg,#eff6ff,#dbeafe);border:1.5px solid #93c5fd;}
+.pb-left .pb-label{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:4px;}
+.pb-val{font-size:2.2rem;font-weight:900;}
+.pb-profit .pb-val{color:#059669;}
+.pb-loss .pb-val{color:var(--red);}
+.pb-neutral .pb-val{color:var(--blue);}
+.pb-right{text-align:right;}
+.pb-note{font-size:.82rem;color:var(--muted);max-width:280px;line-height:1.5;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:1000px){.kpi-grid{grid-template-columns:1fr 1fr 1fr}.chart-row{grid-template-columns:1fr}.chart-row-3{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){nav{padding:14px 16px;}.page{padding:20px 12px 60px;}.kpi-grid{grid-template-columns:1fr 1fr;}.chart-row-3{grid-template-columns:1fr;}.kpi-val{font-size:1.5rem;}th:nth-child(5),td:nth-child(5){display:none;}}
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="detailing.html" class="logo">Parus<span>Detail</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-menu" id="nav-menu">
+    <ul class="nav-links">
+      <li><a href="detailing.html#services">Usługi</a></li>
+      <li><a href="detailing.html#pricing">Cennik</a></li>
+      <li><a href="detailing.html#contact">Rezerwacja</a></li>
+    </ul>
+    <div class="nav-divider-v"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <a href="admin.html" class="nav-page-link">⚙️ Panel</a>
+      <a href="magazyn.html" class="nav-page-link">🗄️ Koszty</a>
+      <a href="finanse.html" class="nav-page-link active-page">💰 Finanse</a>
+      <a href="status.html" class="nav-page-link">📦 Status</a>
+    </div>
+    <a href="detailing.html#contact" class="nav-cta" style="margin-left:6px">Umów wizytę</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div>
+      <div class="page-tag">Panel właściciela</div>
+      <h1>💰 Raport finansowy</h1>
+    </div>
+    <div class="controls">
+      <select class="fsel" id="f-month"></select>
+      <select class="fsel" id="f-year"></select>
+      <button class="btn-exp" onclick="exportReport()">⬇️ Eksport CSV</button>
+    </div>
+  </div>
+
+  <!-- KPI -->
+  <div class="kpi-grid">
+    <div class="kpi k-green">
+      <div class="kpi-label">Przychody (mies.)</div>
+      <div class="kpi-val" id="k-rev">0 zł</div>
+      <div class="kpi-sub" id="k-rev-sub">wydane zlecenia</div>
+      <div class="kpi-trend" id="k-rev-trend"></div>
+    </div>
+    <div class="kpi k-red">
+      <div class="kpi-label">Koszty (mies.)</div>
+      <div class="kpi-val" id="k-cost">0 zł</div>
+      <div class="kpi-sub" id="k-cost-sub">produkty, narzędzia</div>
+      <div class="kpi-trend" id="k-cost-trend"></div>
+    </div>
+    <div class="kpi k-blue">
+      <div class="kpi-label">Zysk brutto</div>
+      <div class="kpi-val" id="k-profit">0 zł</div>
+      <div class="kpi-sub" id="k-profit-sub">przychody − koszty</div>
+    </div>
+    <div class="kpi k-purple">
+      <div class="kpi-label">Zlecenia (mies.)</div>
+      <div class="kpi-val" id="k-orders">0</div>
+      <div class="kpi-sub" id="k-orders-sub">śr. wartość: — zł</div>
+    </div>
+  </div>
+
+  <!-- PROFIT BANNER -->
+  <div class="profit-banner pb-neutral" id="profit-banner">
+    <div class="pb-left">
+      <div class="pb-label">Wynik miesiąca</div>
+      <div class="pb-val" id="pb-val">0 zł</div>
+    </div>
+    <div class="pb-right">
+      <div class="pb-note" id="pb-note">Dodaj przychody i koszty, aby zobaczyć wynik finansowy miesiąca.</div>
+    </div>
+  </div>
+
+  <!-- CHART: 6 miesięcy -->
+  <div class="card" style="margin-bottom:20px">
+    <div class="card-title">📈 Przychody vs Koszty — ostatnie 6 miesięcy</div>
+    <div class="legend">
+      <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Przychody</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--red)"></div>Koszty</div>
+      <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>Zysk</div>
+    </div>
+    <div class="bars" id="chart-bars"></div>
+    <div style="display:flex;gap:10px;margin-top:6px;" id="chart-labels"></div>
+  </div>
+
+  <!-- CHART ROW: pakiety + kategorie kosztów + top zlecenie -->
+  <div class="chart-row-3">
+    <div class="card">
+      <div class="card-title">📦 Przychody wg pakietu</div>
+      <div id="pkg-chart"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">💸 Koszty wg kategorii</div>
+      <div id="cost-chart"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">🏆 Rekordy miesiąca</div>
+      <div id="records"></div>
+    </div>
+  </div>
+
+  <!-- ORDERS TABLE -->
+  <div class="card">
+    <div class="tbl-hd">
+      <div class="card-title" style="margin-bottom:0">📋 Zlecenia miesiąca</div>
+      <div style="display:flex;gap:10px;align-items:center;">
+        <span class="tbl-cnt" id="tbl-cnt">0 zleceń</span>
+        <input class="srch" id="srch" placeholder="🔍 Szukaj..." oninput="renderTable()">
+      </div>
+    </div>
+    <div id="tbl-wrap"></div>
+  </div>
+
+</div>
+
+<script>
+/* ── CONSTANTS ── */
+const MONTHS_PL = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+const MONTHS_SH = ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
+const PKG = { basic:{label:'Basic "Fresh"',color:'#60a5fa'}, standard:{label:'Standard "Detail"',color:'#2563eb'}, premium:{label:'Premium "Elite"',color:'#1d4ed8'} };
+const COST_CATS = {
+  detailing:{label:'Detailing',color:'#2563eb'}, narzedzia:{label:'Narzędzia',color:'#f59e0b'},
+  czesci:{label:'Części',color:'#ef4444'}, materialy:{label:'Materiały',color:'#10b981'}, inne:{label:'Inne',color:'#8b5cf6'}
+};
+const STATUS_PAID = ['gotowe','wydano'];
+
+/* ── DATA ── */
+const loadOrders   = () => JSON.parse(localStorage.getItem('pd_orders')   || '[]');
+const loadExpenses = () => JSON.parse(localStorage.getItem('pd_expenses') || '[]');
+
+/* ── FILTER HELPERS ── */
+function getFilter(){ return { month: +document.getElementById('f-month').value, year: +document.getElementById('f-year').value }; }
+function inMonth(dateStr, m, y){ const d=new Date(dateStr+'T12:00:00'); return d.getFullYear()===y && d.getMonth()===m; }
+function monthOrders(m,y){ return loadOrders().filter(o => inMonth(o.createdAt||o.date, m, y)); }
+function paidOrders(m,y){ return monthOrders(m,y).filter(o => STATUS_PAID.includes(o.status)); }
+function monthExpenses(m,y){ return loadExpenses().filter(e => inMonth(e.date, m, y)); }
+function revOf(arr){ return arr.reduce((s,o)=>s+(o.total||0),0); }
+function costOf(arr){ return arr.reduce((s,e)=>s+(e.total||0),0); }
+
+/* ── INIT ── */
+(function(){
+  const now = new Date();
+  const fm = document.getElementById('f-month');
+  const fy = document.getElementById('f-year');
+  MONTHS_PL.forEach((m,i)=>{ const o=document.createElement('option'); o.value=i; o.textContent=m; fm.appendChild(o); });
+  fm.value = now.getMonth();
+  for(let y=now.getFullYear();y>=now.getFullYear()-4;y--){ const o=document.createElement('option'); o.value=y; o.textContent=y; fy.appendChild(o); }
+  fy.value = now.getFullYear();
+  fm.addEventListener('change', refresh);
+  fy.addEventListener('change', refresh);
+  refresh();
+})();
+
+function refresh(){ renderKPI(); renderProfitBanner(); renderMainChart(); renderPkgChart(); renderCostChart(); renderRecords(); renderTable(); }
+
+/* ── KPI ── */
+function renderKPI(){
+  const {month,year}=getFilter();
+  const prevM = month===0?11:month-1, prevY = month===0?year-1:year;
+  const rev   = revOf(paidOrders(month,year));
+  const cost  = costOf(monthExpenses(month,year));
+  const profit= rev - cost;
+  const orders= monthOrders(month,year);
+  const prevRev  = revOf(paidOrders(prevM,prevY));
+  const prevCost = costOf(monthExpenses(prevM,prevY));
+
+  set('k-rev', fmt(rev));
+  set('k-rev-sub', paidOrders(month,year).length+' rozliczonych zleceń');
+  set('k-cost', fmt(cost));
+  set('k-cost-sub', monthExpenses(month,year).length+' pozycji kosztów');
+  set('k-profit', fmt(profit));
+  set('k-profit-sub', profit>=0 ? '🟢 na plusie' : '🔴 na minusie');
+  set('k-orders', orders.length);
+  const avg = orders.length ? Math.round(revOf(paidOrders(month,year))/Math.max(paidOrders(month,year).length,1)) : 0;
+  set('k-orders-sub','śr. wartość: '+(avg?fmt(avg):'—'));
+
+  trend('k-rev-trend', rev, prevRev, 'vs poprzedni miesiąc');
+  trend('k-cost-trend', cost, prevCost, 'vs poprzedni miesiąc', true);
+}
+
+function trend(id, curr, prev, label, invertGood=false){
+  const el=document.getElementById(id);
+  if(!el||!prev){ el.textContent=''; return; }
+  const pct = Math.round(((curr-prev)/prev)*100);
+  const up = pct > 0;
+  const good = invertGood ? !up : up;
+  el.textContent = (up?'▲':'▼')+' '+Math.abs(pct)+'% '+label;
+  el.className = 'kpi-trend '+(pct===0?'neutral':good?'up':'down');
+}
+
+/* ── PROFIT BANNER ── */
+function renderProfitBanner(){
+  const {month,year}=getFilter();
+  const rev  = revOf(paidOrders(month,year));
+  const cost = costOf(monthExpenses(month,year));
+  const profit = rev-cost;
+  const banner = document.getElementById('profit-banner');
+  const valEl  = document.getElementById('pb-val');
+  const noteEl = document.getElementById('pb-note');
+
+  banner.className = 'profit-banner ' + (profit>0?'pb-profit':profit<0?'pb-loss':'pb-neutral');
+  valEl.textContent = fmt(Math.abs(profit));
+
+  if(rev===0 && cost===0){
+    noteEl.textContent = 'Brak danych. Dodaj zlecenia w panelu admina i koszty w Magazynie.';
+  } else if(profit>0){
+    const margin = Math.round((profit/rev)*100);
+    noteEl.textContent = `Świetnie! Marża brutto wynosi ${margin}%. Przychody ${fmt(rev)} − koszty ${fmt(cost)} = zysk ${fmt(profit)}.`;
+  } else if(profit<0){
+    noteEl.textContent = `Koszty (${fmt(cost)}) przekraczają przychody (${fmt(rev)}) o ${fmt(Math.abs(profit))}. Sprawdź czy wszystkie zlecenia mają status "Wydano".`;
+  } else {
+    noteEl.textContent = `Wychodzi na zero. Przychody i koszty się równoważą (${fmt(rev)}).`;
+  }
+}
+
+/* ── MAIN CHART (6 months) ── */
+function renderMainChart(){
+  const now = new Date();
+  const months = Array.from({length:6},(_,i)=>{
+    const d = new Date(now.getFullYear(), now.getMonth()-5+i, 1);
+    return {m:d.getMonth(), y:d.getFullYear(), lbl:MONTHS_SH[d.getMonth()]};
+  });
+  const data = months.map(({m,y})=>({
+    rev:  revOf(paidOrders(m,y)),
+    cost: costOf(monthExpenses(m,y)),
+    lbl:  MONTHS_SH[m]
+  }));
+  data.forEach(d=>d.profit=d.rev-d.cost);
+
+  const maxVal = Math.max(...data.flatMap(d=>[d.rev,d.cost]),1);
+  const wrap = document.getElementById('chart-bars');
+  const lbls = document.getElementById('chart-labels');
+
+  wrap.innerHTML = data.map(d=>{
+    const rh = Math.round((d.rev/maxVal)*110);
+    const ch = Math.round((d.cost/maxVal)*110);
+    const ph = Math.abs(Math.round((d.profit/maxVal)*110));
+    return `<div class="bc" style="flex:1;display:flex;align-items:flex-end;gap:3px;justify-content:center">
+      <div class="bf" style="height:${rh}px;background:var(--green);flex:1" data-tip="${d.lbl} przychody: ${fmt(d.rev)}"></div>
+      <div class="bf" style="height:${ch}px;background:var(--red);flex:1" data-tip="${d.lbl} koszty: ${fmt(d.cost)}"></div>
+      <div class="bf" style="height:${ph}px;background:${d.profit>=0?'var(--blue)':'var(--orange)'};flex:1" data-tip="${d.lbl} zysk: ${fmt(d.profit)}"></div>
+    </div>`;
+  }).join('');
+
+  lbls.innerHTML = data.map(d=>`<div style="flex:1;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600">${d.lbl}</div>`).join('');
+}
+
+/* ── PACKAGE CHART ── */
+function renderPkgChart(){
+  const {month,year}=getFilter();
+  const orders = paidOrders(month,year);
+  const totals = {basic:0,standard:0,premium:0};
+  const counts = {basic:0,standard:0,premium:0};
+  orders.forEach(o=>{ if(totals[o.pkg]!==undefined){ totals[o.pkg]+=(o.total||0); counts[o.pkg]++; } });
+  const max = Math.max(...Object.values(totals),1);
+  const el = document.getElementById('pkg-chart');
+
+  if(!orders.length){ el.innerHTML='<p style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px 0">Brak rozliczonych zleceń</p>'; return; }
+
+  el.innerHTML = Object.entries(PKG).map(([key,pkg])=>{
+    const pct = Math.round((totals[key]/max)*100);
+    return `<div class="pkg-row">
+      <div class="pkg-hd">
+        <span class="pkg-name" style="color:${pkg.color}">${pkg.label}</span>
+        <span class="pkg-amt">${fmt(totals[key])}</span>
+      </div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:${pkg.color}"></div></div>
+      <div class="pkg-meta">${counts[key]} zlec. · śr. ${counts[key]?fmt(totals[key]/counts[key]):'—'}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ── COST CHART ── */
+function renderCostChart(){
+  const {month,year}=getFilter();
+  const exps = monthExpenses(month,year);
+  const totals = Object.fromEntries(Object.keys(COST_CATS).map(k=>[k,0]));
+  exps.forEach(e=>{ if(totals[e.cat]!==undefined) totals[e.cat]+=e.total; });
+  const max = Math.max(...Object.values(totals),1);
+  const el = document.getElementById('cost-chart');
+
+  if(!exps.length){ el.innerHTML='<p style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px 0">Brak kosztów. <a href="magazyn.html" style="color:var(--blue);font-weight:700">Dodaj w Magazynie →</a></p>'; return; }
+
+  el.innerHTML = Object.entries(COST_CATS).map(([key,cat])=>{
+    const pct = Math.round((totals[key]/max)*100);
+    return `<div class="pkg-row">
+      <div class="pkg-hd">
+        <span class="pkg-name" style="color:${cat.color}">${cat.label}</span>
+        <span class="pkg-amt">${fmt(totals[key])}</span>
+      </div>
+      <div class="bar-bg"><div class="bar-fill" style="width:${pct}%;background:${cat.color}"></div></div>
+    </div>`;
+  }).join('');
+}
+
+/* ── RECORDS ── */
+function renderRecords(){
+  const {month,year}=getFilter();
+  const orders = paidOrders(month,year);
+  const allOrders = monthOrders(month,year);
+  const el = document.getElementById('records');
+
+  if(!allOrders.length){ el.innerHTML='<p style="color:var(--muted);font-size:.85rem;text-align:center;padding:16px 0">Brak danych tego miesiąca</p>'; return; }
+
+  const best = orders.length ? orders.reduce((a,b)=>a.total>b.total?a:b) : null;
+  const rev  = revOf(orders);
+  const cost = costOf(monthExpenses(month,year));
+  const margin = rev && cost ? Math.round(((rev-cost)/rev)*100) : null;
+
+  const items = [
+    { ico:'💎', lbl:'Najlepsze zlecenie', val: best ? fmt(best.total)+' ('+((PKG[best.pkg]||{}).label||best.pkg||'—')+')' : '—' },
+    { ico:'📊', lbl:'Marża brutto',        val: margin!==null ? margin+'%' : '—' },
+    { ico:'🔢', lbl:'Wszystkich zleceń',   val: allOrders.length },
+    { ico:'✅', lbl:'Rozliczonych',        val: orders.length },
+    { ico:'⏳', lbl:'Oczekujących',        val: allOrders.filter(o=>!STATUS_PAID.includes(o.status)).length },
+    { ico:'📅', lbl:'Rok narastająco',     val: fmt(revOf(loadOrders().filter(o=>new Date((o.createdAt||o.date)+'').getFullYear()===year && STATUS_PAID.includes(o.status)))) },
+  ];
+
+  el.innerHTML = items.map(r=>`
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid var(--border);">
+      <span style="font-size:.82rem;color:var(--muted)">${r.ico} ${r.lbl}</span>
+      <span style="font-size:.88rem;font-weight:800;color:var(--dark)">${r.val}</span>
+    </div>`).join('');
+}
+
+/* ── TABLE ── */
+function renderTable(){
+  const {month,year}=getFilter();
+  const srch = (document.getElementById('srch').value||'').toLowerCase();
+  let data = monthOrders(month,year);
+  if(srch) data = data.filter(o=>(o.name||'').toLowerCase().includes(srch)||(o.car||'').toLowerCase().includes(srch)||(o.orderId||'').toLowerCase().includes(srch));
+
+  document.getElementById('tbl-cnt').textContent = data.length+' zleceń';
+
+  const wrap = document.getElementById('tbl-wrap');
+  if(!data.length){
+    wrap.innerHTML='<div class="empty"><div class="empty-ico">📭</div>Brak zleceń w wybranym miesiącu.</div>';
+    return;
+  }
+
+  const ST = {przyjeto:'Przyjęto',wtrakcie:'W realizacji',gotowe:'Gotowe',wydano:'Wydano',anulowano:'Anulowano'};
+  const rows = data.map(o=>{
+    const d = o.createdAt ? new Date(o.createdAt).toLocaleDateString('pl-PL',{day:'2-digit',month:'2-digit'}) : (o.date||'—');
+    const pkg = (PKG[o.pkg]||{}).label || o.pkg || '—';
+    const paid = STATUS_PAID.includes(o.status);
+    return `<tr>
+      <td style="font-weight:700;color:var(--blue)">${o.orderId||'—'}</td>
+      <td>${d}</td>
+      <td>${esc(o.name||'—')}<br><span style="font-size:.75rem;color:var(--muted)">${esc(o.car||'')}</span></td>
+      <td><span class="pkg-chip">${pkg}</span></td>
+      <td><span class="chip chip-${o.status||'przyjeto'}">${ST[o.status]||o.status||'—'}</span></td>
+      <td class="amt-col" style="${paid?'color:var(--green)':'color:var(--muted)'}">${fmt(o.total||0)}</td>
+    </tr>`;
+  }).join('');
+
+  const total = revOf(paidOrders(month,year));
+  wrap.innerHTML = `<table>
+    <thead><tr><th>Nr</th><th>Data</th><th>Klient / Auto</th><th>Pakiet</th><th>Status</th><th>Kwota</th></tr></thead>
+    <tbody>${rows}</tbody>
+    <tfoot><tr style="background:rgba(37,99,235,.04)">
+      <td colspan="5" style="padding:11px 10px;font-weight:800;font-size:.85rem;color:var(--muted)">SUMA ROZLICZONYCH</td>
+      <td style="padding:11px 10px;font-weight:900;font-size:1rem;color:var(--green)">${fmt(total)}</td>
+    </tr></tfoot>
+  </table>`;
+}
+
+/* ── EXPORT ── */
+function exportReport(){
+  const {month,year}=getFilter();
+  const orders = monthOrders(month,year);
+  const exps   = monthExpenses(month,year);
+  const rev    = revOf(paidOrders(month,year));
+  const cost   = costOf(exps);
+
+  const lines = [
+    'PARUSDETAIL — RAPORT FINANSOWY',
+    MONTHS_PL[month]+' '+year,
+    '','=== PODSUMOWANIE ===',
+    'Przychody (rozliczone);'+rev.toFixed(2).replace('.',','),
+    'Koszty;'+cost.toFixed(2).replace('.',','),
+    'Zysk brutto;'+(rev-cost).toFixed(2).replace('.',','),
+    'Liczba zleceń;'+orders.length,
+    '','=== ZLECENIA ===',
+    'Nr zlecenia;Data;Klient;Auto;Pakiet;Status;Kwota',
+    ...orders.map(o=>[
+      o.orderId||'',
+      o.createdAt?new Date(o.createdAt).toLocaleDateString('pl-PL'):(o.date||''),
+      '"'+(o.name||'').replace(/"/g,'""')+'"',
+      '"'+(o.car||'').replace(/"/g,'""')+'"',
+      (PKG[o.pkg]||{}).label||o.pkg||'',
+      o.status||'',
+      (o.total||0).toFixed(2).replace('.',',')
+    ].join(';')),
+    '','=== KOSZTY ===',
+    'Data;Kategoria;Produkt;Ilość;Cena szt.;Łącznie',
+    ...exps.map(e=>[
+      e.date,
+      (COST_CATS[e.cat]||{}).label||e.cat||'',
+      '"'+(e.name||'').replace(/"/g,'""')+'"',
+      e.qty, (e.price||0).toFixed(2).replace('.',','),
+      (e.total||0).toFixed(2).replace('.',',')
+    ].join(';'))
+  ];
+
+  const csv = '﻿'+lines.join('\n');
+  const blob = new Blob([csv],{type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download='ParusDetail-raport-'+MONTHS_PL[month]+'-'+year+'.csv';
+  a.click(); URL.revokeObjectURL(url);
+}
+
+/* ── HELPERS ── */
+function fmt(n){ return (Math.round(n*100)/100).toLocaleString('pl-PL',{minimumFractionDigits:2,maximumFractionDigits:2})+' zł'; }
+function esc(s){ const d=document.createElement('div'); d.textContent=String(s); return d.innerHTML; }
+function set(id,v){ const el=document.getElementById(id); if(el) el.textContent=v; }
+
+/* ── MOBILE NAV ── */
+(function(){
+  const t=document.getElementById('nav-toggle'),m=document.getElementById('nav-menu');
+  if(!t||!m)return;
+  t.addEventListener('click',()=>{t.classList.toggle('open');m.classList.toggle('open');});
+  m.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{t.classList.remove('open');m.classList.remove('open');}));
+})();
+</script>
+</body>
+</html>
