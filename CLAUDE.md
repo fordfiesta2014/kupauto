@@ -100,3 +100,30 @@ Kiedy tworzę post lub Reels — **zawsze**:
 3. Podaj opis do posta (caption) z CTA i hashtagami
 4. Zasugeruj styl wizualny (kolory, układ tekstu na slajdzie)
 5. Ostatni slajd zawsze z CTA nawiązującym do e-booka lub obserwowania
+6. Slajd 1 zawsze według szablonu cover z `content-topics.md`
+
+### Tworzenie postów newsowych — OBOWIĄZKOWE:
+Przed każdym postem newsowym **zawsze** użyj WebSearch:
+- Szukaj: `motoryzacja polska [aktualny miesiąc rok]`
+- Szukaj: `nowe przepisy drogowe Polska [rok]`
+- Szukaj: `recall wycofanie [marka] [rok]`
+- Szukaj: `nowe auto [marka] [rok] Polska`
+Nie twórz postów newsowych na podstawie samej wiedzy — zawsze weryfikuj aktualność.
+
+### Tematy postów:
+Korzystaj z bazy tematów w `content-topics.md`. Po użyciu tematu zaznacz go jako `[x]`.
+
+---
+
+## System Tygodniowego Uczenia Się
+Każdy tydzień → aktualizuj `content-topics.md` sekcja "Wyniki i uczenie się":
+1. Użytkownik podaje wyniki postów (zasięg, komentarze, zapisy)
+2. Claude dodaje wnioski do `content-topics.md`
+3. Kolejne posty uwzględniają te wnioski
+
+**Jak "szkolić" Claude:**
+- Powiedz mi co zadziałało: "Post o X miał 500 wyświetleń, a Y tylko 50"
+- Powiedz mi co nie zadziałało: "Za mało konkretów", "Za długi tekst"
+- Powiedz co chcesz inaczej: "Chcę agresywniejsze hooki"
+- Ja zaktualizuję CLAUDE.md i content-topics.md z tymi wnioskami
+- Od następnego tygodnia stosuję nowe zasady automatycznie
