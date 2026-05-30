@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ParusDetail — Koszty & Magazyn</title>
+<style>
+:root{
+  --blue:#2563eb;--blue-dark:#1d4ed8;--green:#10b981;--red:#ef4444;
+  --orange:#f59e0b;--purple:#8b5cf6;--pink:#ec4899;
+  --bg:#f5f8ff;--white:#fff;--dark:#0f172a;--text:#1e293b;--muted:#64748b;--border:#e2e8f0;
+  --shadow:0 4px 24px rgba(37,99,235,0.07);--radius:16px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:14px 40px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.logo{font-size:1.35rem;font-weight:900;color:var(--blue);text-decoration:none;}
+.logo span{color:var(--dark);}
+.nav-menu{display:flex;align-items:center;gap:6px;}
+.nav-links{display:flex;gap:20px;list-style:none;}
+.nav-links a{text-decoration:none;color:var(--muted);font-weight:500;font-size:0.92rem;transition:color .2s;}
+.nav-links a:hover{color:var(--blue);}
+.nav-divider-v{width:1px;height:20px;background:var(--border);margin:0 4px;align-self:center;}
+.nav-page-link{font-size:0.83rem;font-weight:700;color:var(--text);padding:6px 14px;border-radius:100px;border:1.5px solid var(--border);transition:all .2s;white-space:nowrap;text-decoration:none;display:inline-block;}
+.nav-page-link:hover,.nav-page-link.active-page{border-color:var(--blue);color:var(--blue);background:rgba(37,99,235,.06);}
+.nav-cta{background:var(--blue);color:#fff!important;padding:10px 22px;border-radius:100px;font-weight:700;font-size:0.88rem;text-decoration:none;transition:background .2s;}
+.nav-cta:hover{background:var(--blue-dark);}
+.nav-toggle{display:none;flex-direction:column;justify-content:space-between;width:28px;height:20px;background:none;border:none;cursor:pointer;padding:0;}
+.nav-toggle span{display:block;height:2px;background:var(--dark);border-radius:2px;transition:all .3s;}
+.nav-toggle.open span:nth-child(1){transform:translateY(9px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-9px) rotate(-45deg);}
+@media(max-width:900px){
+  .nav-toggle{display:flex;}
+  .nav-menu{display:none;position:fixed;top:57px;left:0;right:0;background:rgba(255,255,255,.98);border-bottom:1px solid var(--border);flex-direction:column;align-items:flex-start;padding:20px 24px;gap:0;z-index:998;}
+  .nav-menu.open{display:flex;}
+  .nav-links{flex-direction:column!important;gap:4px!important;width:100%;}
+  .nav-divider-v{display:none!important;}
+  .nav-cta{display:block;text-align:center;width:100%;margin-top:12px;}
+}
+
+/* ── PAGE ── */
+.page-wrap{max-width:1100px;margin:0 auto;padding:40px 24px 80px;}
+
+/* ── HEADER BAR ── */
+.page-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;margin-bottom:32px;
+}
+.page-header-left .page-tag{font-size:0.72rem;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.page-header-left h1{font-size:2rem;font-weight:900;color:var(--dark);}
+.filter-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+.filter-select{
+  padding:9px 16px;border:2px solid var(--border);border-radius:100px;
+  font-size:0.88rem;font-weight:600;font-family:inherit;color:var(--text);
+  background:#fff;outline:none;cursor:pointer;transition:border-color .2s;
+}
+.filter-select:focus{border-color:var(--blue);}
+.btn-export{
+  padding:9px 20px;background:#fff;border:2px solid var(--border);border-radius:100px;
+  font-size:0.85rem;font-weight:700;cursor:pointer;transition:all .2s;color:var(--text);
+}
+.btn-export:hover{border-color:var(--blue);color:var(--blue);}
+
+/* ── STAT CARDS ── */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px;}
+.stat-card{
+  background:#fff;border-radius:var(--radius);padding:22px 20px;
+  box-shadow:var(--shadow);border:1.5px solid var(--border);
+}
+.stat-card.accent-blue{border-top:3px solid var(--blue);}
+.stat-card.accent-green{border-top:3px solid var(--green);}
+.stat-card.accent-orange{border-top:3px solid var(--orange);}
+.stat-card.accent-purple{border-top:3px solid var(--purple);}
+.sc-label{font-size:0.73rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:6px;}
+.sc-val{font-size:1.75rem;font-weight:900;color:var(--dark);margin-bottom:2px;}
+.sc-sub{font-size:0.77rem;color:var(--muted);}
+
+/* ── MAIN GRID ── */
+.main-grid{display:grid;grid-template-columns:1fr 340px;gap:22px;align-items:start;}
+
+/* ── ADD FORM ── */
+.form-card{
+  background:#fff;border-radius:var(--radius);padding:30px;
+  box-shadow:var(--shadow);border:1.5px solid var(--border);margin-bottom:22px;
+}
+.card-title{font-size:1rem;font-weight:900;margin-bottom:20px;color:var(--dark);display:flex;align-items:center;gap:8px;}
+.form-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.fg{display:flex;flex-direction:column;gap:6px;}
+.fg label{font-size:0.8rem;font-weight:700;color:var(--text);}
+.fg input,.fg select,.fg textarea{
+  padding:10px 14px;border:2px solid var(--border);border-radius:10px;
+  font-size:0.92rem;font-family:inherit;color:var(--text);background:var(--bg);
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.fg input:focus,.fg select:focus,.fg textarea:focus{
+  border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.08);background:#fff;
+}
+.fg textarea{min-height:72px;resize:vertical;}
+.total-preview{
+  background:rgba(37,99,235,.05);border:1.5px solid rgba(37,99,235,.15);
+  border-radius:10px;padding:12px 16px;
+  display:flex;justify-content:space-between;align-items:center;
+  margin:4px 0;
+}
+.tp-label{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.tp-val{font-size:1.3rem;font-weight:900;color:var(--blue);}
+.btn-add{
+  width:100%;padding:13px;background:var(--blue);color:#fff;border:none;
+  border-radius:100px;font-size:0.97rem;font-weight:700;cursor:pointer;
+  margin-top:8px;transition:all .2s;box-shadow:0 4px 14px rgba(37,99,235,.25);
+}
+.btn-add:hover{background:var(--blue-dark);transform:translateY(-1px);}
+
+/* ── CATEGORY CHART ── */
+.chart-card{
+  background:#fff;border-radius:var(--radius);padding:26px 24px;
+  box-shadow:var(--shadow);border:1.5px solid var(--border);
+}
+.cat-row{margin-bottom:14px;}
+.cat-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.cat-name{font-size:0.85rem;font-weight:700;display:flex;align-items:center;gap:6px;}
+.cat-amount{font-size:0.88rem;font-weight:800;color:var(--dark);}
+.cat-bar-bg{height:8px;background:var(--bg);border-radius:4px;overflow:hidden;}
+.cat-bar{height:8px;border-radius:4px;transition:width .6s ease;}
+.cat-pct{font-size:0.72rem;color:var(--muted);margin-top:3px;text-align:right;}
+
+/* ── MONTHLY CHART ── */
+.month-chart{
+  background:#fff;border-radius:var(--radius);padding:26px 24px;
+  box-shadow:var(--shadow);border:1.5px solid var(--border);margin-bottom:22px;
+}
+.bars-wrap{display:flex;align-items:flex-end;gap:8px;height:110px;margin-top:16px;}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;}
+.bar-fill{width:100%;border-radius:6px 6px 0 0;transition:height .5s ease;min-height:3px;cursor:pointer;position:relative;}
+.bar-fill:hover::after{
+  content:attr(data-tip);position:absolute;bottom:calc(100%+6px);left:50%;transform:translateX(-50%);
+  background:var(--dark);color:#fff;font-size:0.72rem;font-weight:700;padding:4px 10px;
+  border-radius:8px;white-space:nowrap;pointer-events:none;z-index:10;
+}
+.bar-lbl{font-size:0.68rem;color:var(--muted);font-weight:600;}
+
+/* ── EXPENSE TABLE ── */
+.table-card{
+  background:#fff;border-radius:var(--radius);padding:26px 24px;
+  box-shadow:var(--shadow);border:1.5px solid var(--border);
+}
+.table-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.exp-count{font-size:0.8rem;color:var(--muted);font-weight:600;}
+.search-input{
+  padding:8px 14px;border:1.5px solid var(--border);border-radius:100px;
+  font-size:0.85rem;font-family:inherit;outline:none;width:200px;
+  transition:border-color .2s;
+}
+.search-input:focus{border-color:var(--blue);}
+.exp-table{width:100%;border-collapse:collapse;}
+.exp-table th{
+  font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;
+  color:var(--muted);padding:0 12px 12px;text-align:left;border-bottom:2px solid var(--border);
+}
+.exp-table td{
+  padding:12px;font-size:0.88rem;border-bottom:1px solid var(--border);
+  vertical-align:middle;
+}
+.exp-table tr:last-child td{border-bottom:none;}
+.exp-table tr:hover td{background:rgba(37,99,235,.025);}
+.cat-chip{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 10px;
+  border-radius:100px;font-size:0.75rem;font-weight:700;
+}
+.chip-detailing{background:rgba(37,99,235,.1);color:var(--blue);}
+.chip-narzedzia{background:rgba(245,158,11,.1);color:var(--orange);}
+.chip-czesci{background:rgba(239,68,68,.1);color:var(--red);}
+.chip-materialy{background:rgba(16,185,129,.1);color:var(--green);}
+.chip-inne{background:rgba(139,92,246,.1);color:var(--purple);}
+.td-amount{font-weight:800;color:var(--dark);white-space:nowrap;}
+.btn-del{
+  background:none;border:none;color:var(--muted);cursor:pointer;
+  font-size:1rem;padding:4px 6px;border-radius:6px;transition:all .2s;
+}
+.btn-del:hover{background:rgba(239,68,68,.1);color:var(--red);}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);}
+.empty-icon{font-size:2.5rem;margin-bottom:10px;}
+.empty-text{font-size:0.95rem;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .main-grid{grid-template-columns:1fr;}
+  .form-grid-3{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:600px){
+  nav{padding:14px 16px;}
+  .page-wrap{padding:24px 14px 60px;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .form-grid-2,.form-grid-3{grid-template-columns:1fr;}
+  .sc-val{font-size:1.4rem;}
+  .exp-table th:nth-child(3),.exp-table td:nth-child(3){display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="main-nav">
+  <a href="detailing.html" class="logo">Parus<span>Detail</span></a>
+  <button class="nav-toggle" id="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-menu" id="nav-menu">
+    <ul class="nav-links">
+      <li><a href="detailing.html#services">Usługi</a></li>
+      <li><a href="detailing.html#pricing">Cennik</a></li>
+      <li><a href="detailing.html#contact">Rezerwacja</a></li>
+    </ul>
+    <div class="nav-divider-v"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      <a href="admin.html" class="nav-page-link">⚙️ Panel</a>
+      <a href="status.html" class="nav-page-link">📦 Status</a>
+      <a href="magazyn.html" class="nav-page-link active-page">🗄️ Koszty</a>
+    </div>
+    <a href="detailing.html#contact" class="nav-cta" style="margin-left:6px">Umów wizytę</a>
+  </div>
+</nav>
+
+<!-- ── PAGE ── -->
+<div class="page-wrap">
+
+  <!-- HEADER -->
+  <div class="page-header">
+    <div class="page-header-left">
+      <div class="page-tag">Panel właściciela</div>
+      <h1>🗄️ Koszty & Magazyn</h1>
+    </div>
+    <div class="filter-row">
+      <select class="filter-select" id="filter-month">
+        <option value="0">Styczeń</option><option value="1">Luty</option>
+        <option value="2">Marzec</option><option value="3">Kwiecień</option>
+        <option value="4">Maj</option><option value="5">Czerwiec</option>
+        <option value="6">Lipiec</option><option value="7">Sierpień</option>
+        <option value="8">Wrzesień</option><option value="9">Październik</option>
+        <option value="10">Listopad</option><option value="11">Grudzień</option>
+      </select>
+      <select class="filter-select" id="filter-year"></select>
+      <button class="btn-export" onclick="exportCSV()">⬇️ Eksport CSV</button>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stat-grid">
+    <div class="stat-card accent-blue">
+      <div class="sc-label">Wydano w miesiącu</div>
+      <div class="sc-val" id="stat-month">0 zł</div>
+      <div class="sc-sub" id="stat-month-sub">brak danych</div>
+    </div>
+    <div class="stat-card accent-green">
+      <div class="sc-label">Wydano w roku</div>
+      <div class="sc-val" id="stat-year">0 zł</div>
+      <div class="sc-sub" id="stat-year-sub">wszystkie kategorie</div>
+    </div>
+    <div class="stat-card accent-orange">
+      <div class="sc-label">Liczba pozycji (mies.)</div>
+      <div class="sc-val" id="stat-count">0</div>
+      <div class="sc-sub" id="stat-count-sub">zakupów</div>
+    </div>
+    <div class="stat-card accent-purple">
+      <div class="sc-label">Najdroższy zakup</div>
+      <div class="sc-val" id="stat-max">0 zł</div>
+      <div class="sc-sub" id="stat-max-name">—</div>
+    </div>
+  </div>
+
+  <!-- MONTHLY BARS -->
+  <div class="month-chart">
+    <div class="card-title">📈 Wydatki — ostatnie 6 miesięcy</div>
+    <div class="bars-wrap" id="monthly-bars"></div>
+  </div>
+
+  <!-- MAIN GRID: form + chart -->
+  <div class="main-grid">
+
+    <!-- LEFT: form + table -->
+    <div>
+      <!-- ADD FORM -->
+      <div class="form-card">
+        <div class="card-title">➕ Dodaj zakup / wydatek</div>
+        <div class="form-grid-2" style="margin-bottom:12px;">
+          <div class="fg">
+            <label>Data zakupu *</label>
+            <input type="date" id="f-date">
+          </div>
+          <div class="fg">
+            <label>Kategoria *</label>
+            <select id="f-cat">
+              <option value="detailing">🧴 Produkty do detailingu</option>
+              <option value="narzedzia">🔧 Narzędzia i sprzęt</option>
+              <option value="czesci">🚗 Części samochodowe</option>
+              <option value="materialy">📦 Materiały eksploatacyjne</option>
+              <option value="inne">💡 Inne</option>
+            </select>
+          </div>
+        </div>
+        <div class="fg" style="margin-bottom:12px;">
+          <label>Nazwa produktu / usługi *</label>
+          <input type="text" id="f-name" placeholder="np. Meguiar's Ultimate Polish 450ml">
+        </div>
+        <div class="form-grid-3" style="margin-bottom:12px;">
+          <div class="fg">
+            <label>Ilość</label>
+            <input type="number" id="f-qty" value="1" min="0.1" step="0.1" placeholder="1">
+          </div>
+          <div class="fg">
+            <label>Cena za szt. (zł)</label>
+            <input type="number" id="f-price" min="0" step="0.01" placeholder="0.00">
+          </div>
+          <div class="fg">
+            <label>Łącznie</label>
+            <div class="total-preview">
+              <span class="tp-label">Razem:</span>
+              <span class="tp-val" id="f-total">0 zł</span>
+            </div>
+          </div>
+        </div>
+        <div class="fg" style="margin-bottom:12px;">
+          <label>Notatki (opcjonalne)</label>
+          <textarea id="f-notes" placeholder="Sklep, dostawca, zastosowanie..."></textarea>
+        </div>
+        <button class="btn-add" onclick="addExpense()">➕ Dodaj do listy</button>
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-card">
+        <div class="table-header">
+          <div class="card-title" style="margin-bottom:0">📋 Lista wydatków</div>
+          <div style="display:flex;gap:10px;align-items:center;">
+            <span class="exp-count" id="exp-count">0 pozycji</span>
+            <input class="search-input" id="search-input" placeholder="🔍 Szukaj..." oninput="renderTable()">
+          </div>
+        </div>
+        <div id="table-wrap">
+          <div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">Brak wpisów. Dodaj pierwszy zakup powyżej.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT: category chart -->
+    <div>
+      <div class="chart-card">
+        <div class="card-title">📊 Wg kategorii (miesiąc)</div>
+        <div id="cat-chart"></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ── CONFIG ── */
+const CATS = {
+  detailing: { label:'Produkty do detailingu', icon:'🧴', color:'#2563eb', chip:'chip-detailing' },
+  narzedzia: { label:'Narzędzia i sprzęt',     icon:'🔧', color:'#f59e0b', chip:'chip-narzedzia' },
+  czesci:    { label:'Części samochodowe',      icon:'🚗', color:'#ef4444', chip:'chip-czesci'    },
+  materialy: { label:'Materiały eksploatacyjne',icon:'📦', color:'#10b981', chip:'chip-materialy' },
+  inne:      { label:'Inne',                    icon:'💡', color:'#8b5cf6', chip:'chip-inne'      }
+};
+const MONTHS_PL = ['Styczeń','Luty','Marzec','Kwiecień','Maj','Czerwiec','Lipiec','Sierpień','Wrzesień','Październik','Listopad','Grudzień'];
+const MONTHS_SHORT = ['Sty','Lut','Mar','Kwi','Maj','Cze','Lip','Sie','Wrz','Paź','Lis','Gru'];
+
+/* ── STATE ── */
+function loadExpenses() { return JSON.parse(localStorage.getItem('pd_expenses') || '[]'); }
+function saveExpenses(arr) { localStorage.setItem('pd_expenses', JSON.stringify(arr)); }
+
+/* ── INIT ── */
+(function init() {
+  const now = new Date();
+
+  // Populate month selector
+  document.getElementById('filter-month').value = now.getMonth();
+
+  // Populate year selector
+  const yr = document.getElementById('filter-year');
+  for (let y = now.getFullYear(); y >= now.getFullYear() - 4; y--) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    yr.appendChild(o);
+  }
+  yr.value = now.getFullYear();
+
+  // Set today as default date for form
+  document.getElementById('f-date').value = now.toISOString().split('T')[0];
+
+  // Listeners
+  document.getElementById('filter-month').addEventListener('change', refresh);
+  document.getElementById('filter-year').addEventListener('change', refresh);
+  document.getElementById('f-qty').addEventListener('input', recalcTotal);
+  document.getElementById('f-price').addEventListener('input', recalcTotal);
+
+  refresh();
+})();
+
+function getFilters() {
+  return {
+    month: parseInt(document.getElementById('filter-month').value),
+    year:  parseInt(document.getElementById('filter-year').value)
+  };
+}
+
+function refresh() {
+  renderStats();
+  renderCatChart();
+  renderMonthlyBars();
+  renderTable();
+}
+
+/* ── TOTAL CALC ── */
+function recalcTotal() {
+  const qty   = parseFloat(document.getElementById('f-qty').value)   || 0;
+  const price = parseFloat(document.getElementById('f-price').value) || 0;
+  document.getElementById('f-total').textContent = fmt(qty * price);
+}
+
+/* ── ADD ── */
+function addExpense() {
+  const date  = document.getElementById('f-date').value;
+  const cat   = document.getElementById('f-cat').value;
+  const name  = document.getElementById('f-name').value.trim();
+  const qty   = parseFloat(document.getElementById('f-qty').value)   || 1;
+  const price = parseFloat(document.getElementById('f-price').value) || 0;
+  const notes = document.getElementById('f-notes').value.trim();
+
+  if (!date)  { alert('Wybierz datę zakupu.'); return; }
+  if (!name)  { alert('Podaj nazwę produktu lub usługi.'); return; }
+  if (price <= 0) { alert('Podaj cenę (większą niż 0).'); return; }
+
+  const exp = {
+    id: 'E-' + Date.now(),
+    date, cat, name, qty, price,
+    total: Math.round(qty * price * 100) / 100,
+    notes,
+    createdAt: new Date().toISOString()
+  };
+
+  const all = loadExpenses();
+  all.unshift(exp);
+  saveExpenses(all);
+
+  // Reset form (keep date and category)
+  document.getElementById('f-name').value  = '';
+  document.getElementById('f-qty').value   = 1;
+  document.getElementById('f-price').value = '';
+  document.getElementById('f-notes').value = '';
+  document.getElementById('f-total').textContent = '0 zł';
+
+  // Sync filter to added item's month
+  const d = new Date(date + 'T12:00:00');
+  document.getElementById('filter-month').value = d.getMonth();
+  document.getElementById('filter-year').value  = d.getFullYear();
+
+  refresh();
+}
+
+/* ── DELETE ── */
+function deleteExpense(id) {
+  if (!confirm('Usunąć ten wpis?')) return;
+  saveExpenses(loadExpenses().filter(e => e.id !== id));
+  refresh();
+}
+
+/* ── STATS ── */
+function renderStats() {
+  const { month, year } = getFilters();
+  const all = loadExpenses();
+  const monthly = all.filter(e => {
+    const d = new Date(e.date + 'T12:00:00');
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+  const yearly = all.filter(e => new Date(e.date + 'T12:00:00').getFullYear() === year);
+
+  const mTotal = monthly.reduce((s, e) => s + e.total, 0);
+  const yTotal = yearly.reduce((s, e) => s + e.total, 0);
+  const maxExp = monthly.length ? monthly.reduce((a, b) => a.total > b.total ? a : b) : null;
+
+  document.getElementById('stat-month').textContent     = fmt(mTotal);
+  document.getElementById('stat-month-sub').textContent = MONTHS_PL[month] + ' ' + year;
+  document.getElementById('stat-year').textContent      = fmt(yTotal);
+  document.getElementById('stat-year-sub').textContent  = 'rok ' + year + ' (' + yearly.length + ' zakupów)';
+  document.getElementById('stat-count').textContent     = monthly.length;
+  document.getElementById('stat-count-sub').textContent = 'w ' + MONTHS_PL[month];
+  document.getElementById('stat-max').textContent       = maxExp ? fmt(maxExp.total) : '0 zł';
+  document.getElementById('stat-max-name').textContent  = maxExp ? maxExp.name.slice(0, 28) + (maxExp.name.length > 28 ? '…' : '') : '—';
+}
+
+/* ── CATEGORY CHART ── */
+function renderCatChart() {
+  const { month, year } = getFilters();
+  const monthly = loadExpenses().filter(e => {
+    const d = new Date(e.date + 'T12:00:00');
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+
+  const totals = {};
+  Object.keys(CATS).forEach(k => totals[k] = 0);
+  monthly.forEach(e => { if (totals[e.cat] !== undefined) totals[e.cat] += e.total; });
+
+  const max = Math.max(...Object.values(totals), 1);
+  const container = document.getElementById('cat-chart');
+
+  if (monthly.length === 0) {
+    container.innerHTML = '<p style="color:var(--muted);font-size:.88rem;text-align:center;padding:20px 0">Brak danych dla wybranego miesiąca</p>';
+    return;
+  }
+
+  container.innerHTML = Object.entries(CATS).map(([key, cat]) => {
+    const val = totals[key];
+    const pct = Math.round((val / max) * 100);
+    return `
+      <div class="cat-row">
+        <div class="cat-header">
+          <span class="cat-name">${cat.icon} ${cat.label}</span>
+          <span class="cat-amount">${fmt(val)}</span>
+        </div>
+        <div class="cat-bar-bg">
+          <div class="cat-bar" style="width:${pct}%;background:${cat.color}"></div>
+        </div>
+        <div class="cat-pct">${pct}% całości</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── MONTHLY BARS ── */
+function renderMonthlyBars() {
+  const now = new Date();
+  const all = loadExpenses();
+  const months = [];
+  for (let i = 5; i >= 0; i--) {
+    const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
+    months.push({ month: d.getMonth(), year: d.getFullYear(), label: MONTHS_SHORT[d.getMonth()] });
+  }
+
+  const vals = months.map(m => {
+    return all.filter(e => {
+      const d = new Date(e.date + 'T12:00:00');
+      return d.getFullYear() === m.year && d.getMonth() === m.month;
+    }).reduce((s, e) => s + e.total, 0);
+  });
+
+  const maxVal = Math.max(...vals, 1);
+  const wrap = document.getElementById('monthly-bars');
+  wrap.innerHTML = vals.map((v, i) => {
+    const h = Math.round((v / maxVal) * 90);
+    return `
+      <div class="bar-col">
+        <div class="bar-fill" style="height:${h}px;background:${h > 60 ? 'var(--blue)' : 'rgba(37,99,235,.35)'}"
+             data-tip="${months[i].label}: ${fmt(v)}"></div>
+        <div class="bar-lbl">${months[i].label}</div>
+      </div>`;
+  }).join('');
+}
+
+/* ── TABLE ── */
+function renderTable() {
+  const { month, year } = getFilters();
+  const search = (document.getElementById('search-input').value || '').toLowerCase();
+
+  let data = loadExpenses().filter(e => {
+    const d = new Date(e.date + 'T12:00:00');
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+
+  if (search) data = data.filter(e =>
+    e.name.toLowerCase().includes(search) ||
+    (CATS[e.cat]?.label || '').toLowerCase().includes(search) ||
+    (e.notes || '').toLowerCase().includes(search)
+  );
+
+  document.getElementById('exp-count').textContent = data.length + ' pozycji';
+
+  const wrap = document.getElementById('table-wrap');
+  if (data.length === 0) {
+    wrap.innerHTML = '<div class="empty-state"><div class="empty-icon">📭</div><div class="empty-text">Brak wpisów w wybranym miesiącu' + (search ? ' dla "' + escHtml(search) + '"' : '') + '.</div></div>';
+    return;
+  }
+
+  const rows = data.map(e => {
+    const cat = CATS[e.cat] || CATS.inne;
+    const d = new Date(e.date + 'T12:00:00').toLocaleDateString('pl-PL', { day:'2-digit', month:'2-digit', year:'numeric' });
+    return `<tr>
+      <td>${d}</td>
+      <td><span class="cat-chip ${cat.chip}">${cat.icon} ${cat.label}</span></td>
+      <td style="font-weight:600">${escHtml(e.name)}${e.notes ? '<br><span style="color:var(--muted);font-size:.77rem">'+escHtml(e.notes)+'</span>' : ''}</td>
+      <td style="text-align:center">${e.qty}</td>
+      <td class="td-amount">${fmt(e.price)}</td>
+      <td class="td-amount" style="color:var(--blue)">${fmt(e.total)}</td>
+      <td><button class="btn-del" onclick="deleteExpense('${e.id}')" title="Usuń">🗑️</button></td>
+    </tr>`;
+  }).join('');
+
+  const total = data.reduce((s, e) => s + e.total, 0);
+  wrap.innerHTML = `
+    <table class="exp-table">
+      <thead><tr>
+        <th>Data</th><th>Kategoria</th><th>Produkt / usługa</th>
+        <th style="text-align:center">Ile</th><th>Cena szt.</th><th>Łącznie</th><th></th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+      <tfoot><tr style="background:rgba(37,99,235,.04)">
+        <td colspan="5" style="padding:12px;font-weight:800;font-size:.88rem;color:var(--muted)">SUMA MIESIĄCA</td>
+        <td class="td-amount" style="color:var(--blue);font-size:1.05rem">${fmt(total)}</td>
+        <td></td>
+      </tr></tfoot>
+    </table>`;
+}
+
+/* ── EXPORT CSV ── */
+function exportCSV() {
+  const { month, year } = getFilters();
+  const data = loadExpenses().filter(e => {
+    const d = new Date(e.date + 'T12:00:00');
+    return d.getFullYear() === year && d.getMonth() === month;
+  });
+
+  if (data.length === 0) { alert('Brak danych do eksportu dla wybranego miesiąca.'); return; }
+
+  const header = 'Data;Kategoria;Produkt;Ilość;Cena szt. (zł);Łącznie (zł);Notatki';
+  const rows = data.map(e => [
+    e.date,
+    CATS[e.cat]?.label || e.cat,
+    '"' + e.name.replace(/"/g, '""') + '"',
+    e.qty,
+    e.price.toFixed(2).replace('.', ','),
+    e.total.toFixed(2).replace('.', ','),
+    '"' + (e.notes || '').replace(/"/g, '""') + '"'
+  ].join(';'));
+
+  const total = data.reduce((s, e) => s + e.total, 0);
+  rows.push(';;SUMA;;;' + total.toFixed(2).replace('.', ',') + ';');
+
+  const csv = '﻿' + header + '\n' + rows.join('\n');
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'ParusDetail-koszty-' + MONTHS_PL[month] + '-' + year + '.csv';
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/* ── HELPERS ── */
+function fmt(n) { return (Math.round(n * 100) / 100).toLocaleString('pl-PL', { minimumFractionDigits:2, maximumFractionDigits:2 }) + ' zł'; }
+function escHtml(s) { const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+
+/* ── MOBILE NAV ── */
+(function(){
+  const t = document.getElementById('nav-toggle'), m = document.getElementById('nav-menu');
+  if (!t || !m) return;
+  t.addEventListener('click', () => { t.classList.toggle('open'); m.classList.toggle('open'); });
+  m.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { t.classList.remove('open'); m.classList.remove('open'); }));
+})();
+</script>
+</body>
+</html>
