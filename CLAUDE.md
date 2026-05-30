@@ -63,7 +63,7 @@ Pełna strategia: `instagram-strategy.html`
 - Tekst wtórny: `#A0AEC0`
 - Czcionka pogrubiona (bold/black) na duże tytuły, regularna na treść
 - Minimalistycznie — jeden główny przekaz na slajd
-- Nazwa konta: `@motoryzacyjneinfo`
+- Nazwa konta: `@motoedukacja`
 - **Rozmiar czcionki**: nagłówki/tytuły — domyślny z szablonu; tekst treści (body) — minimum **36px**, żeby był czytelny na telefonie
 
 ---
@@ -73,6 +73,23 @@ Pełna strategia: `instagram-strategy.html`
 - **Środa 18:00** — Karuzela Edukacyjna
 - **Piątek 08:00** — Mit vs Prawda lub Ranking
 - **Sobota 12:00** — Quiz tygodnia
+
+---
+
+## Szablon Cover Slajdu (Slajd 1 — zawsze identyczny)
+Każdy post zaczyna się od **tego samego szablonu wizualnego**, tylko tekst się zmienia.
+
+**Wzór:** Canva design ID `DAHLJBwk0is` (canva.com/d/AlWHI1bsTz3thCf)
+
+**Układ:**
+- Tło: `#0A0A0A` pełna czerń
+- Lewa połowa: zdjęcie auta/silnika (zmieniane pod temat posta)
+- Prawa połowa: teksty
+  - `◆ FAKT` / `◆ NEWS` / `◆ MIT` — niebieski `#00AAFF`, bold, góra
+  - Główny tytuł hooka — bardzo duży, `#00AAFF`, bold, 5–8 słów
+  - `@motoedukacja` — szary `#A0AEC0`, małe, dół
+
+**Zasada:** Przy każdym nowym poście kopiuj ten szablon → zmień tylko: tag (FAKT/NEWS/MIT), tytuł hooka, zdjęcie.
 
 ---
 
