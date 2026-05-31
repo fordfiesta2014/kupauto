@@ -25,7 +25,7 @@ Cel: stop-scroll, udostępnienia, viralowość
 - [ ] Najdroższy numer rejestracyjny — 9 milionów dolarów (Dubaj)
 - [ ] Najdłuższy korek — Chiny 2010, 100 km, 12 dni
 - [ ] Pierwsza kamera cofania była w Buicku z 1956 roku
-- [ ] Auto elektryczne ma ~20 ruchomych części, benzynowe ~2000
+- [x] Auto elektryczne ma ~20 ruchomych części, benzynowe ~2000
 - [ ] Michelin — producent opon i przewodnika restauracyjnego Michelin
 - [ ] Nürburgring rekord — Porsche 911 GT2 RS MR w 5:19
 - [ ] Rolls-Royce Silver Ghost — 24 000 km bez przerwy (1907)
@@ -43,7 +43,7 @@ Cel: stop-scroll, udostępnienia, viralowość
 ## EDUKACJA TECHNICZNA (25% contentu)
 Cel: zapisywalność, fundament e-booków
 
-- [ ] Jak działa turbosprężarka i czym różni się od kompressora
+- [x] Jak działa turbosprężarka i czym różni się od kompressora
 - [ ] Moment obrotowy vs moc (KM) — co naprawdę jeździ autem
 - [ ] Jak działa skrzynia DSG/DCT — zalety i wady
 - [ ] Jak działają hamulce ABS i dlaczego nie blokują kół
@@ -77,7 +77,7 @@ Cel: komentarze, debata, zaangażowanie
 - [ ] MIT: Premium benzyna daje więcej mocy w zwykłym silniku
 - [ ] MIT: Diesel jest zawsze droższy w utrzymaniu niż benzyna
 - [ ] MIT: Elektryki nie nadają się na mróz
-- [ ] MIT: Trzeba ocieplać silnik zimą przed ruszeniem
+- [x] MIT: Trzeba ocieplać silnik zimą przed ruszeniem
 - [ ] MIT: Manualna skrzynia jest zawsze lepsza dla sportowca
 - [ ] MIT: Turbo skraca żywotność silnika
 - [ ] MIT: Jazda na rezerwie niszczy pompę paliwa
@@ -100,7 +100,7 @@ Cel: komentarze, debata, zaangażowanie
 ## HISTORIA & LEGENDY (15% contentu)
 Cel: emocje, nostalgia, nowi obserwatorzy przez udostępnienia
 
-- [ ] Lamborghini — jak kłótnia z Ferrari zrodziła legendę (1963)
+- [x] Lamborghini — jak kłótnia z Ferrari zrodziła legendę (1963)
 - [ ] Ford vs Ferrari w Le Mans 1966 — jak Ameryka pokonała Włochy
 - [ ] Jak powstał VW Garbus — auto zaprojektowane przez Hitlera
 - [ ] Porsche — zaczął od aut elektrycznych, skończył na spalinowych
@@ -135,7 +135,7 @@ Tematy do regularnego wyszukiwania — ZAWSZE użyj WebSearch przed tworzeniem p
 
 **Aktualne tematy (maj 2026):**
 - [x] Nowe przepisy drogowe 2026/2027 — post już stworzony
-- [ ] Normy Euro 7 — od listopada 2026 dla nowych homologacji
+- [x] Normy Euro 7 — od listopada 2026 dla nowych homologacji
 - [ ] Autonomiczne auta na polskich drogach — przepisy od 24.06.2026
 - [ ] 7 na 10 aut musi być elektrycznych — nowe limity UE dla Polski
 - [ ] Nowe normy emisji uderzają też w elektryki (kurz z opon i hamulców)
