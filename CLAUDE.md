@@ -64,7 +64,8 @@ Pełna strategia: `instagram-strategy.html`
 - Czcionka pogrubiona (bold/black) na duże tytuły, regularna na treść
 - Minimalistycznie — jeden główny przekaz na slajd
 - Nazwa konta: `@motoedukacja`
-- **Rozmiar czcionki**: nagłówki/tytuły — domyślny z szablonu; tekst treści (body) — minimum **36px**, żeby był czytelny na telefonie
+- **Rozmiar czcionki na slajdach treści**: minimum **48px** — tekst ma być wyraźny i przyjemny do czytania na telefonie. Mniej tekstu per slajd = więcej slajdów. Jeden punkt na slajd, krótko i konkretnie.
+- **Zasada mniej = więcej**: zamiast 4 punktów na jednym slajdzie → 4 osobne slajdy z jednym punktem każdy. Tekst nigdy nie może być ściśnięty.
 
 ---
 
@@ -79,17 +80,16 @@ Pełna strategia: `instagram-strategy.html`
 ## Szablon Cover Slajdu (Slajd 1 — zawsze identyczny)
 Każdy post zaczyna się od **tego samego szablonu wizualnego**, tylko tekst się zmienia.
 
-**Wzór:** Canva design ID `DAHLJBwk0is` (canva.com/d/AlWHI1bsTz3thCf)
+**Wzór:** Canva design ID `DAHLPg874ao` (canva.com/d/iRZkcODgtb1kqmT)
 
-**Układ:**
-- Tło: `#0A0A0A` pełna czerń
-- Lewa połowa: zdjęcie auta/silnika (zmieniane pod temat posta)
-- Prawa połowa: teksty
-  - `◆ FAKT` / `◆ NEWS` / `◆ MIT` — niebieski `#00AAFF`, bold, góra
-  - Główny tytuł hooka — bardzo duży, `#00AAFF`, bold, 5–8 słów
-  - `@motoedukacja` — szary `#A0AEC0`, małe, dół
+**Styl: full-bleed (pełnoekranowe zdjęcie)**
+- Zdjęcie auta/silnika pokrywa **cały slajd 1080×1080** — bez ramek, bez czarnych pasów
+- Tekst nałożony bezpośrednio NA zdjęciu, przy dolnej krawędzi (lewy margines ~50px)
+- `◆ FAKT` / `◆ NEWS` / `◆ MIT` / `◆ EDUKACJA` — niebieski `#00AAFF`, bold, 26px, nad tytułem
+- Główny tytuł hooka — biały `#FFFFFF`, bold, 88px, 4–7 słów MAX
+- `@motoedukacja` — szary `#A0AEC0`, 22px, dół
 
-**Zasada:** Przy każdym nowym poście kopiuj ten szablon → zmień tylko: tag (FAKT/NEWS/MIT), tytuł hooka, zdjęcie.
+**Zasada:** Przy każdym nowym poście kopiuj ten szablon (design ID `DAHLPg874ao`) → zmień: tag, tytuł hooka, zdjęcie tła.
 
 ---
 
