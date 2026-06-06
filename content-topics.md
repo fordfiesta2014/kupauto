@@ -8,14 +8,14 @@
 Cel: stop-scroll, udostępnienia, viralowość
 
 - [ ] Bugatti Chiron osiąga 100 km/h w 2.4 sekundy
-- [ ] Silnik F1 kręci 18 000 obrotów na minutę
+- [x] Silnik F1 kręci 18 000 obrotów na minutę
 - [ ] Lamborghini zaczęło od produkcji ciągników rolniczych
 - [ ] Rolls-Royce oferuje 44 000 odcieni farby do wyboru
 - [ ] Koenigsegg Jesko Absolut — teoretyczne 531 km/h
 - [ ] Pierwszy samochód (1885) jechał maksymalnie 16 km/h
 - [ ] Tesla Model S Plaid — 0-100 km/h w 2.1 sekundy
-- [ ] Auto F1 spala 75 litrów paliwa na 100 km
-- [ ] Opony F1 nagrzewają się do 120°C podczas jazdy
+- [x] Auto F1 spala 75 litrów paliwa na 100 km
+- [x] Opony F1 nagrzewają się do 120°C podczas jazdy
 - [ ] Autobahn — tylko 30% odcinków bez ograniczeń prędkości
 - [ ] Polska ma ponad 30 milionów zarejestrowanych aut
 - [ ] Co roku na świecie produkuje się ok. 80 milionów aut
