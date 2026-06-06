@@ -35,6 +35,25 @@
 - **Status:** ✅ Gotowy, 3-zone layout zastosowany
 - **Slajdy content:** DAHLPw-bUa0, DAHLP_cXQlo, DAHLPxDJtgE, DAHLP_yvmXU
 
+### Post 7 — Fakt: Bugatti Chiron — Szokujące Liczby
+- **Temat:** Bugatti Chiron: 2,4 sek / 420 km/h / 1500 KM
+- **Typ:** Karuzela Faktów (5 slajdów)
+- **Status:** ✅ Gotowy, niebieski styl (#00AAFF zamiast #FFD700)
+- **Design ID:** `DAHL0LCfbf8`
+- **URL:** https://www.canva.com/d/6gqTl69XggQb4iY
+- **Pages:**
+  - Cover (Slajd 1): split layout, supercar zdjęcie top 60%, czarny panel
+  - Slajd 2 (2,4 SEK — 0-100 km/h)
+  - Slajd 3 (420 KM/H — prędkość max)
+  - Slajd 4 (1 500 KM — moc silnika)
+  - Slajd 5 (CTA)
+- **Zdjęcie cover:** `MAHL0Frac5A` (ciemny supercar z czerwonymi felgami)
+- **Kolor liczb:** `#00AAFF` (niebieski — nowy standard)
+- **Treść (przyjazna laikowi):**
+  - Slajd 2: "TO CZAS 0-100 KM/H. / TWOJE AUTO: 8 SEKUND. / BUGATTI: 3× SZYBCIEJ."
+  - Slajd 3: "PRĘDKOŚĆ MAKSYMALNA. / AUTOSTRADA: 140 KM/H. / BUGATTI: 3× WIĘCEJ."
+  - Slajd 4: "KM = KONIE MECHANICZNE. / TWOJE AUTO: ~100 KM. / BUGATTI: 15× WIĘCEJ."
+
 ### Post 6 — Fakt: Silnik F1 — Szokujące Liczby
 - **Temat:** Silnik F1 kręci 18 000 RPM / spala 75L/100km / opony 120°C
 - **Typ:** Karuzela Faktów (5 slajdów)

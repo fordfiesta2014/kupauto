@@ -7,7 +7,7 @@
 ## FAKTY SZOKUJĄCE (30% contentu)
 Cel: stop-scroll, udostępnienia, viralowość
 
-- [ ] Bugatti Chiron osiąga 100 km/h w 2.4 sekundy
+- [x] Bugatti Chiron osiąga 100 km/h w 2.4 sekundy
 - [x] Silnik F1 kręci 18 000 obrotów na minutę
 - [ ] Lamborghini zaczęło od produkcji ciągników rolniczych
 - [ ] Rolls-Royce oferuje 44 000 odcieni farby do wyboru
