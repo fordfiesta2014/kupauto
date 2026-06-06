@@ -38,9 +38,9 @@
 ### Post 7 — Fakt: Bugatti Chiron — Szokujące Liczby
 - **Temat:** Bugatti Chiron: 2,4 sek / 420 km/h / 1500 KM
 - **Typ:** Karuzela Faktów (5 slajdów)
-- **Status:** ✅ Gotowy, niebieski styl (#00AAFF zamiast #FFD700)
+- **Status:** ✅ Gotowy, niebieski styl (#00AAFF), cover z kontekstem 0-100 KM/H
 - **Design ID:** `DAHL0LCfbf8`
-- **URL:** https://www.canva.com/d/6gqTl69XggQb4iY
+- **URL:** https://www.canva.com/d/u2sht6o1AI8znuJ
 - **Pages:**
   - Cover (Slajd 1): split layout, supercar zdjęcie top 60%, czarny panel
   - Slajd 2 (2,4 SEK — 0-100 km/h)
@@ -49,9 +49,13 @@
   - Slajd 5 (CTA)
 - **Zdjęcie cover:** `MAHL0Frac5A` (ciemny supercar z czerwonymi felgami)
 - **Kolor liczb:** `#00AAFF` (niebieski — nowy standard)
-- **Treść (przyjazna laikowi):**
+- **Cover TAG (2-liniowy — WZÓR dla porównań):**
+  - TAG: "CZAS DO 100 KM/H:\nTWOJE AUTO: ~8 SEK" — biały #FFFFFF, font_size:78, bold, center, top:720
+  - TITLE: "BUGATTI: 2,4 SEK" — niebieski #00AAFF, font_size:100, bold, center, top:844
+  - @moto: top:1048 (naprawione po 2-liniowym TAG)
+- **Treść (przyjazna laikowi, pełne zdania):**
   - Slajd 2: "TO CZAS 0-100 KM/H. / TWOJE AUTO: 8 SEKUND. / BUGATTI: 3× SZYBCIEJ."
-  - Slajd 3: "PRĘDKOŚĆ MAKSYMALNA. / AUTOSTRADA: 140 KM/H. / BUGATTI: 3× WIĘCEJ."
+  - Slajd 3: "TO PRĘDKOŚĆ MAKSYMALNA. / AUTOSTRADA: 140 KM/H. / BUGATTI: 3× SZYBSZE."
   - Slajd 4: "KM = KONIE MECHANICZNE. / TWOJE AUTO: ~100 KM. / BUGATTI: 15× WIĘCEJ."
 
 ### Post 6 — Fakt: Silnik F1 — Szokujące Liczby
