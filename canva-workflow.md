@@ -38,19 +38,20 @@
 ### Post 6 — Fakt: Silnik F1 — Szokujące Liczby
 - **Temat:** Silnik F1 kręci 18 000 RPM / spala 75L/100km / opony 120°C
 - **Typ:** Karuzela Faktów (5 slajdów)
-- **Status:** ✅ Gotowy, styl viral (żółte liczby + białe ALL CAPS)
+- **Status:** ✅ Gotowy, styl viral (żółte liczby + białe ALL CAPS) + cover @autoswir1 split layout
 - **Design ID:** `DAHLyvb-d6I`
 - **URL:** https://www.canva.com/d/bUlg7CYQ4mVRfI8
 - **Pages:**
-  - Cover (Slajd 1): `PBQq6QRhypv3NmDk`
+  - Cover (Slajd 1): `PBQq6QRhypv3NmDk` — **@autoswir1 split layout** (zdjęcie top 60%, czarny panel bottom 40%)
   - Slajd 2 (18 000 RPM): `PBbHZp6PVcsRYxmV`
-  - Slajd 3 (2,4 SEK): `PBW7sFKp0JV2M9lR`
+  - Slajd 3 (120°C opony): `PBW7sFKp0JV2M9lR`
   - Slajd 4 (75L/100KM): `PBmD5DgT6cDJg4vY`
   - Slajd 5 (CTA): `PBbssXKWKX5TbGHp`
 - **Zmiany stylistyczne vs poprzednie posty:**
   - TITLE: kolor `#FFD700` (żółty/złoty), font_size:260, bold — główna liczba zajmuje cały góry slajd
   - BODY: kolor `#FFFFFF` (biały), font_size:80, bold, ALL CAPS
   - @motoedukacja watermark: top:1010 (naprawione — było poza ekranem na top:1159)
+  - **Cover: @autoswir1 split layout** — zdjęcie F1 top 620px (57%), czarny canvas bottom, tekst centered
 
 ---
 
@@ -67,6 +68,68 @@ Użyj `mcp__28b4b0bd__copy-design` lub ręcznie w Canva.
 - TAG nad tytułem: `◆ FAKT` / `◆ MIT` / `◆ NEWS` / `◆ EDUKACJA` — kolor `#00AAFF`, bold, 26px
 - Tytuł hooka: biały `#FFFFFF`, bold, 88px, 4–7 słów MAX
 - `@motoedukacja` na dole, szary `#A0AEC0`, 22px
+
+---
+
+## Cover — Styl @autoswir1 (SPLIT LAYOUT — obowiązujący od POST 6)
+
+Zamiast full-bleed, cover ma dwa wyraźne obszary:
+
+```
+[0–620px]    ZDJĘCIE AUTA (full width, przycinane do 620px wysokości)
+             → resize_element(img_element, width:1080, height:620)
+             
+[620–1080px] CZARNY PANEL (canvas background = #0A0A0A)
+             → TAG: "SILNIK F1" / "MARKA MODEL" — biały, centered, font_size:90
+             → TITLE: "18 000 RPM" / "SZOKUJĄCA LICZBA" — żółty #FFD700, centered, font_size:160
+             → @motoedukacja — szary #A0AEC0, centered, font_size:38, top:1037
+```
+
+**Pozycje elementów w czarnym panelu:**
+| Element | top | left | width | font_size | kolor | align |
+|---------|-----|------|-------|-----------|-------|-------|
+| TAG (label) | 720 | 0 | 1080 | 90 | #FFFFFF | center |
+| TITLE (liczba/fakt) | 800 | 0 | 1080 | 160 | #FFD700 | center |
+| @motoedukacja | 1037 | 0 | 1080 | 38 | #A0AEC0 | center |
+
+**Procedura (3 kroki):**
+
+**Krok 1:** update_fill + resize_element + replace/format/resize tekstu + position @moto
+```python
+update_fill(img_id, new_asset_id, "image")
+resize_element(img_id, width=1080, height=620)        # kluczowe: przytnij do 57%
+replace_text(TAG, "ETYKIETA")
+format_text(TAG, color="#FFFFFF", font_size=90, bold, center)
+resize_element(TAG, width=1080)
+replace_text(TITLE, "LICZBA/FAKT")
+format_text(TITLE, color="#FFD700", font_size=160, bold, center)
+resize_element(TITLE, width=1080)
+format_text(@moto, color="#A0AEC0", font_size=38, center)
+resize_element(@moto, width=1080)
+position_element(@moto, top=1037, left=0)
+```
+
+**Krok 2:** Napraw auto-pozycje TAG i TITLE (Canva przesuwa po font_size change)
+```python
+position_element(TAG, top=720, left=0)
+position_element(TITLE, top=800, left=0)
+```
+
+**Krok 3:** Commit
+
+**IDs elementów cover (page 1 szablonu):**
+```
+TAG   = PBQq6QRhypv3NmDk-LBzZ1zssl73QJXfF-LBXCQWWKSqslS01y
+TITLE = PBQq6QRhypv3NmDk-LBzZ1zssl73QJXfF-LBkp3wC1Sj4GtV1x
+@moto = PBQq6QRhypv3NmDk-LBzZ1zssl73QJXfF-LBGyx4b4TXDYWbd9
+img   = PBQq6QRhypv3NmDk-LB11DsMLbKwwRtqx
+```
+
+**Uwagi:**
+- Zdjęcie z jasnym tłem (studio) wygląda OK ale mniej dramatycznie niż ciemne
+- Dla lepszego efektu użyj zdjęć F1 z ciemnym tłem (noc, tor, dramatyczne oświetlenie)
+- Pexels URL: `https://images.pexels.com/photos/{ID}/pexels-photo-{ID}.jpeg?auto=compress&cs=tinysrgb&w=1920`
+- Użyj `upload-asset-from-url` żeby załadować zdjęcie do Canva przed `update_fill`
 
 ---
 
@@ -270,3 +333,5 @@ BODY:  Takie fakty znajdziesz co tydzień.
 | Transaction wygasła | Przerwa w sesji | Zacznij nową przez start-editing-transaction |
 | @motoedukacja poza slajdem | Split TITLE na 2 linie przesuwa watermark | position_element @moto top:1010 left:50 |
 | Liczba za mała wizualnie | 1 linia przy font_size:260 = ~16% slajdu | Split na 2 linie (\n) = ~35% slajdu |
+| Tekst "centered" ale wcięty | left:50 zamiast left:0 przy width:1080 | Zawsze left:0 gdy text_align:center i width:1080 |
+| Foto zajmuje cały slajd, brak czarnego panelu | height:1080 | resize_element(img, width:1080, height:620) → panel pojawia się poniżej |
