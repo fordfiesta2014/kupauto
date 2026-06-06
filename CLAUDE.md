@@ -93,6 +93,19 @@ Każdy post zaczyna się od **tego samego szablonu wizualnego**, tylko tekst si�
 
 ---
 
+## Canva MCP — tworzenie slajdów
+
+Szczegółowa dokumentacja techniczna: **`canva-workflow.md`** — czytaj przed każdą sesją Canva.
+
+**Kluczowe zasady (skrót):**
+- Cover (Slajd 1): kopiuj szablon `DAHLPg874ao`, zmieniaj TAG + tytuł + zdjęcie
+- Slajdy treści: 3-zone layout — TAG (top:80), TITLE (top:160, font_size:150), BODY (top:480, font_size:80)
+- **ZAWSZE 2 kroki przy edycji:** (1) ustaw treść+fonts+body position, (2) napraw pozycje TAG i TITLE osobnym `perform-editing-operations`
+- Element IDs wszystkich content slajdów: TAG=`...LBXCQWWKSqslS01y`, TITLE=`...LBkp3wC1Sj4GtV1x`, BODY=`...LBGyx4b4TXDYWbd9`
+- Pełne IDs i historia postów: `canva-workflow.md`
+
+---
+
 ## Instrukcja dla Claude
 Kiedy tworzę post lub Reels — **zawsze**:
 1. Podaj gotowy tekst każdego slajdu z osobna (Slajd 1, Slajd 2…)
