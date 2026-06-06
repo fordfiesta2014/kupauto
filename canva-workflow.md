@@ -35,6 +35,23 @@
 - **Status:** ✅ Gotowy, 3-zone layout zastosowany
 - **Slajdy content:** DAHLPw-bUa0, DAHLP_cXQlo, DAHLPxDJtgE, DAHLP_yvmXU
 
+### Post 6 — Fakt: Silnik F1 — Szokujące Liczby
+- **Temat:** Silnik F1 kręci 18 000 RPM / spala 75L/100km / opony 120°C
+- **Typ:** Karuzela Faktów (5 slajdów)
+- **Status:** ✅ Gotowy, styl viral (żółte liczby + białe ALL CAPS)
+- **Design ID:** `DAHLyvb-d6I`
+- **URL:** https://www.canva.com/d/bUlg7CYQ4mVRfI8
+- **Pages:**
+  - Cover (Slajd 1): `PBQq6QRhypv3NmDk`
+  - Slajd 2 (18 000 RPM): `PBbHZp6PVcsRYxmV`
+  - Slajd 3 (2,4 SEK): `PBW7sFKp0JV2M9lR`
+  - Slajd 4 (75L/100KM): `PBmD5DgT6cDJg4vY`
+  - Slajd 5 (CTA): `PBbssXKWKX5TbGHp`
+- **Zmiany stylistyczne vs poprzednie posty:**
+  - TITLE: kolor `#FFD700` (żółty/złoty), font_size:260, bold — główna liczba zajmuje cały góry slajd
+  - BODY: kolor `#FFFFFF` (biały), font_size:80, bold, ALL CAPS
+  - @motoedukacja watermark: top:1010 (naprawione — było poza ekranem na top:1159)
+
 ---
 
 ## Szablon Cover Slajdu (Slajd 1)
@@ -53,29 +70,37 @@ Użyj `mcp__28b4b0bd__copy-design` lub ręcznie w Canva.
 
 ---
 
-## Layout slajdów treści (3-zone) — OBOWIĄZUJĄCY STANDARD
+## Layout slajdów treści — VIRAL STYLE (obowiązujący od POST 6)
 
-Każdy slajd treści (nie-cover) musi mieć ten układ:
+Każdy slajd treści musi mieć układ dominującej liczby + kontekst:
 
 ```
-[80px]  ◆  KATEGORIA           ← TAG: niebieski #00AAFF, bold, font_size: 30
-[160px] DUŻY TYTUŁ             ← TITLE: biały #FFFFFF, bold, font_size: 150
-        DWUWIERSZOWY           ← szerokość 920px
-        
-        
-[480px] Pierwsza linia treści.  ← BODY: szary #A0AEC0, normal, font_size: 80
-        Druga linia treści.     ← line_height: 1.5, szerokość 920px
-        Trzecia linia treści.
+[top:88]  DUŻA LICZBA           ← TITLE: żółty #FFD700, bold, font_size:260
+          NA 2 LINIE            ← split newline \n dla liczb > 6 znaków
+                                ← szerokość: 920px
+
+[top:480] KRÓTKIE ZDANIA.       ← BODY: biały #FFFFFF, bold, font_size:90
+          MAKS. 22 ZNAKI/LINIĘ. ← line_height:1.25, szerokość:920px
+          3 LINIE MAX.
+          
+[top:1010] @motoedukacja        ← watermark: szary, mały, bottom
 ```
 
-**Pozycje elementów (px od góry):**
+**Pozycje elementów (px od góry) — viral style:**
 | Element | top | left | font_size | kolor |
 |---------|-----|------|-----------|-------|
-| TAG | 80 | 80 | 30 | #00AAFF |
-| TITLE | 160 | 80 | 150 | #FFFFFF |
-| BODY | 480 | 80 | 80 | #A0AEC0 |
+| TITLE (liczba) | 88 | 80 | 260 | #FFD700 |
+| BODY | 480 (po 1-linii) / 480+ (po 2-linii) | 80 | 90 | #FFFFFF |
+| @motoedukacja | 1010 | 50 | auto | #A0AEC0 |
 
-**Reguła body:** maksymalnie 3 krótkie linie, każda ~1 zdanie. Nigdy więcej.
+**KLUCZOWE ZASADY VIRAL STYLE:**
+- Liczba ZAWSZE żółta (#FFD700), bold, font_size:260 — dominuje slajd
+- Liczby > 6 znaków → split na 2 linie (`\n`) → zajmuje ~35% slajdu
+- Body text: biały, bold, ALL CAPS, krótkie linie (max 22 znaki at font_size:90)
+- Nigdy szary tekst (#A0AEC0) na content slajdach — TYLKO biały!
+- Po split tytułu na 2 linie → BODY przesuwa się do top:480+
+
+**Reguła body:** maksymalnie 3 krótkie linie, max 22 znaki/linię przy font_size:90. Nigdy więcej.
 
 ---
 
@@ -240,6 +265,8 @@ BODY:  Takie fakty znajdziesz co tydzień.
 |---------|-----------|-------------|
 | TAG poza ekranem (top: -100) | font_size 150 przesuwa elementy | Zawsze Krok 2: position_element TAG top:80 |
 | TITLE nakrywa TAG | Auto-pozycjonowanie Canva | Krok 2: position_element TITLE top:160 |
-| BODY nakrywa tytuł | font_size za mały, height za mały | Użyj font_size:80 i top:480 |
-| Tekst ściśnięty | Za długie linie | Skróć tekst lub podziel na więcej slajdów |
+| BODY nakrywa tytuł | font_size za mały, height za mały | Użyj font_size:90 i top:480 |
+| Tekst ściśnięty | Za długie linie | Max 22 znaki/linię przy font_size:90 |
 | Transaction wygasła | Przerwa w sesji | Zacznij nową przez start-editing-transaction |
+| @motoedukacja poza slajdem | Split TITLE na 2 linie przesuwa watermark | position_element @moto top:1010 left:50 |
+| Liczba za mała wizualnie | 1 linia przy font_size:260 = ~16% slajdu | Split na 2 linie (\n) = ~35% slajdu |
