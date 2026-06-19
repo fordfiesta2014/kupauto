@@ -4,6 +4,137 @@
 
 ---
 
+## PRIORYTETOWA LISTA 100 TEMATÓW
+> Ułożone według potencjału zasięgowego (badania Instagram/TikTok 2024-2026).
+> Legende: 🔥 Viral/zasięg | 💾 Zapisywalność | 💬 Komentarze/debata | 📰 Wymaga WebSearch
+
+### BLOK 1 — SZOKUJĄCE LICZBY I FAKTY (najwyższy potencjał viralowy)
+- [ ] 1. 🔥 Ile naprawdę pali Twoje auto? Deklaracja vs rzeczywistość — 7 popularnych modeli
+- [ ] 2. 🔥 Auto F1 zatrzymuje się z 300 km/h w 65 m. Twoje potrzebuje 190 m.
+- [ ] 3. 🔥 Kosztuje Cię samochód ROCZNIE — pełny rachunek (kupno + paliwo + serwis + OC)
+- [ ] 4. 🔥 Bugatti Chiron — koszt jednej opony to 42 000 zł. Wymiana co 3 000 km.
+- [ ] 5. 🔥 Polska: 33 miliony aut na 38 milionów ludzi — każdy niemal ma auto
+- [ ] 6. 🔥 Elektryczny silnik Tesla ma 1 ruchomą część. Benzynowy ma ich 2 000.
+- [ ] 7. 🔥 Co roku 1,35 miliona ludzi ginie na drogach — więcej niż w wojnach
+- [ ] 8. 🔥 Lamborghini Urus spala tyle samo co ciągnik rolniczy (15 l/100 km w mieście)
+- [ ] 9. 🔥 Toyota Hilux: wrzucona do oceanu, zakopana, spalona — i dalej jechała
+- [ ] 10. 🔥 Najdroższy numer rejestracyjny na świecie — 9 mln dolarów (Dubaj, 1 cyfra)
+
+### BLOK 2 — KUPNO UŻYWANEGO AUTA (najwyższa zapisywalność w niszy)
+- [ ] 11. 💾 7 rzeczy które musisz sprawdzić ZANIM podpiszesz umowę kupna auta
+- [ ] 12. 💾 Dlaczego NIGDY nie jedź oglądać auto kiedy silnik jest już ciepły
+- [ ] 13. 💾 Jak sprawdzić czy auto było zalewane — 8 pewnych oznak
+- [ ] 14. 💾 5 pytań do sprzedającego — i jak interpretować odpowiedzi
+- [ ] 15. 💾 Historia serwisowa auta: jak czytać i co powinno być w środku
+- [ ] 16. 💾 Jak sprawdzić historię wypadkową auta za darmo (krok po kroku)
+- [ ] 17. 💾 Negocjacja ceny auta — ile możesz zbić i jak to robić
+- [ ] 18. 💾 Auto z Niemiec vs polskie — co naprawdę się opłaca w 2026
+- [ ] 19. 💾 Salon nowe vs używane z gwarancją — twarde liczby
+- [ ] 20. 💾🔥 Największe błędy kupujących używane auto — TOP 7
+
+### BLOK 3 — EDUKACJA TECHNICZNA (fundamenty e-booków)
+- [ ] 21. 💾 Olej silnikowy: jak wybrać właściwy (5W-40, 0W-30 — co to znaczy)
+- [ ] 22. 💾 Turbo vs wolnossący — które jest trwalsze w codziennej jeździe?
+- [ ] 23. 💾 DSG/DCT vs klasyczny automat — co częściej się psuje?
+- [ ] 24. 💾 DPF/FAP — co to, jak dbać i jak uniknąć wymiany za 8 000 zł
+- [ ] 25. 💾 Rozrząd: łańcuch vs pasek — kiedy wymieniać i co grozi gdy nie
+- [ ] 26. 💾 ABS, ESP, EDS, ASR — co każdy skrót znaczy i kiedy ratuje życie
+- [ ] 27. 💾 Hamulce — kiedy NAPRAWDĘ trzeba je wymieniać (nie tylko co 30 000 km)
+- [ ] 28. 💾 Diagnoza OBD2 — co możesz zrobić za 50 zł, a co wymaga mechanika
+- [ ] 29. 💾 Chip tuning Stage 1 — co realnie dostaniesz i czy gwarancja przepada
+- [ ] 30. 💾 8 nawyków jazdy które dają -15% spalania (bez żadnych kosztów)
+- [ ] 31. 💾 LPG — ile oszczędzasz REALNIE po 3 latach? Prawdziwe liczby
+- [ ] 32. 💾 Jak oszczędzać na OC — 6 legalnych sposobów na niższą składkę
+- [ ] 33. 💾 Skrzynia manualna vs automat — co jest trwalsze? (dane serwisowe)
+- [ ] 34. 💾 Opony zimowe vs całoroczne — test w liczbach, co wybrać w Polsce
+- [ ] 35. 💾 Jak przygotować auto na zimę — 10-punktowa lista (zapisz!)
+
+### BLOK 4 — MITY VS PRAWDA (generuje debatę i komentarze)
+- [ ] 36. 💬 MIT: Diesel jest zawsze droższy w utrzymaniu niż benzyna — PRAWDA?
+- [ ] 37. 💬 MIT: Elektryki w zimie tracą 50% zasięgu — ile naprawdę tracą?
+- [ ] 38. 💬 MIT: Turbo niszczy silnik przy codziennej jeździe
+- [ ] 39. 💬 MIT: Jazda na rezerwie niszczy pompę paliwa
+- [ ] 40. 💬 MIT: Droższe paliwo = lepsza jakość. Kto naprawdę kontroluje jakość?
+- [ ] 41. 💬 MIT: Olej syntetyczny niszczy stare uszczelki
+- [ ] 42. 💬 MIT: SUV jest bezpieczniejszy od sedana w wypadku
+- [ ] 43. 💬 MIT: Chip OBD2 za 50 zł z Aliexpress naprawdę dodaje 20 KM?
+- [ ] 44. 💬 MIT: Klimatyzacja zużywa litr na 100 km — ile naprawdę?
+- [ ] 45. 💬 MIT: Elektryki są nieekologiczne przez produkcję baterii
+- [ ] 46. 💬 MIT: LPG niszczy silnik i zawory
+- [ ] 47. 💬 MIT: Premium benzyna daje więcej mocy w zwykłym silniku
+- [ ] 48. 💬 MIT: Automat jest mniej trwały od manualnej skrzyni
+- [ ] 49. 💬 MIT: Woda w baku natychmiast niszczy silnik
+- [ ] 50. 💬 MIT: Im więcej KM, tym auto szybsze. Moment obrotowy vs moc.
+
+### BLOK 5 — RANKINGI I TOP X (wysoka zapisywalność + udostępnienia)
+- [ ] 51. 🔥💾 TOP 5 najniezawodniejszych silników wszech czasów
+- [ ] 52. 🔥💾 TOP 5 aut używanych za 30 000 zł które warto kupić w 2026
+- [ ] 53. 🔥💾 TOP 5 aut z najwyższymi ukrytymi kosztami — nie kupuj!
+- [ ] 54. 🔥💾 TOP 5 marek z najlepszą niezawodnością długodystansową
+- [ ] 55. 🔥💾 TOP 5 aut elektrycznych z najdłuższym REALNYM zasięgiem
+- [ ] 56. 🔥💾 TOP 10 aut, które po 10 latach są warte więcej niż nowe
+- [ ] 57. 🔥💾 Najlepsze auta rodzinne 2026 — ranking bezpieczeństwa NCAP
+- [ ] 58. 🔥💾 TOP 7 aut używanych z Niemiec — które mają ukryte problemy?
+- [ ] 59. 🔥💾 TOP 5 najgorszych aut w historii motoryzacji — ranking wstydu
+- [ ] 60. 🔥💾 TOP 5 aut spalinowych skazanych na zniknięcie przez Euro 7
+
+### BLOK 6 — HISTORIA I LEGENDY (zasięg przez emocje i nostalgia)
+- [ ] 61. 🔥 Ford vs Ferrari w Le Mans 1966 — jak Ameryka upokorzyła Włochy
+- [ ] 62. 🔥 VW Garbus — historia auta które miał zaprojektować Hitler
+- [ ] 63. 🔥 Ayrton Senna — geniusz, który zmienił F1 na zawsze (i jego śmierć)
+- [ ] 64. 🔥 Porsche — zanim zrobiło sportowe auta, budowało elektryki (rok 1900)
+- [ ] 65. 🔥 Toyota — od tkalni przez komunizm do nr 1 na świecie
+- [ ] 66. 🔥 Jak Japonia zdominowała motoryzację świata w zaledwie 10 lat
+- [ ] 67. 🔥 Nürburgring — historia najniebezpieczniejszego toru (73 ofiary, 1 mit)
+- [ ] 68. 🔥 Historia pasa bezpieczeństwa — ile milionów istnień uratował od 1959?
+- [ ] 69. 🔥 BMW M — 3 inżynierów, garaż i plan by pokonać Ferrari
+- [ ] 70. 🔥 Najdroższe auto sprzedane na aukcji — Mercedes 300 SLR za 135 mln €
+
+### BLOK 7 — ELEKTRYKI I PRZYSZŁOŚĆ (wysoki ruch od osób decyzyjnych)
+- [ ] 71. 💾🔥 Elektryki vs spalinowe — pełny koszt przez 5 lat. Kto wygrywa?
+- [ ] 72. 💾 Jak naprawdę wytrzymuje bateria elektryka po 8 latach?
+- [ ] 73. 💾 Hybryda plug-in vs mild hybrid vs elektryczny — co wybrać w Polsce
+- [ ] 74. 💾 Ładowanie elektryka w Polsce — stan sieci w 2026 (bez lukrowania)
+- [ ] 75. 📰 Euro 7 od listopada 2026 — co to oznacza dla Twoich planów zakupu
+
+### BLOK 8 — PORÓWNANIA A vs B (decyzyjność + komentarze)
+- [ ] 76. 💬💾 Toyota Yaris Hybrid vs Dacia Sandero — co naprawdę się opłaca?
+- [ ] 77. 💬💾 BMW 320d vs Mercedes C220d — które jest tańsze przez 5 lat?
+- [ ] 78. 💬💾 Leasing vs kredyt vs gotówka — twarde liczby, zero ściemy
+- [ ] 79. 💬💾 Mechanik prywatny vs ASO — kiedy co wybrać (i ile tracisz)
+- [ ] 80. 💬💾 Elektryczne używane z Niemiec vs nowe tanie spalinowe — co wybrać?
+
+### BLOK 9 — QUIZY I INTERAKCJA (podbija komentarze)
+- [ ] 81. 💬 Quiz: Znasz te znaki drogowe? Te które 90% kierowców myli
+- [ ] 82. 💬 Zagadka: Które auto jest szybsze 0-100? (odpowiedź zaskoczy)
+- [ ] 83. 💬 Sondaż: Benzyna, diesel, hybryda czy elektryk — co masz?
+- [ ] 84. 💬 Quiz: Co to znaczy ta lampka na desce rozdzielczej? (10 symboli)
+- [ ] 85. 💬 Debata: Manual czy automat — 3 argumenty za każdym, Ty decydujesz
+
+### BLOK 10 — OSZCZĘDZANIE I FINANSE (wysoka zapisywalność)
+- [ ] 86. 💾 Jak obniżyć OC o 30% legalnie — sprawdzone sposoby
+- [ ] 87. 💾 Co możesz naprawić sam, a co oddaj mechanikowi (i dlaczego)
+- [ ] 88. 💾 Jak kupić auto za granicą — procedura krok po kroku
+- [ ] 89. 💾 Serwis auta — co możesz pominąć, a co MUSISZ robić regularnie
+- [ ] 90. 💾 Jak zminimalizować utratę wartości auta — 7 konkretnych działań
+
+### BLOK 11 — EMOCJE I LIFESTYLE (zasięg przez udostępnienia)
+- [ ] 91. 🔥 Twoje pierwsze auto — te 5 błędów które prawie wszyscy popełniali
+- [ ] 92. 🔥 Marzenie vs rzeczywistość — ile naprawdę kosztuje Porsche 911 miesięcznie
+- [ ] 93. 🔥 Auta które stały się ikonami mimo że były klęskami rynkowymi
+- [ ] 94. 🔥 Słynne auta z filmów — co się z nimi stało naprawdę?
+- [ ] 95. 🔥 Najpiękniejsze auta ostatnich 50 lat — ranking który wywoła kłótnię
+
+### BLOK 12 — NEWSY BIEŻĄCE (autorytet + nowi obserwatorzy)
+- [ ] 96. 📰 Autonomiczne auta na polskich drogach — co jest legalne od 24.06.2026
+- [ ] 97. 📰 Recall miesiąca — które auta są wycofywane w Polsce (zawsze aktualne)
+- [ ] 98. 📰 Nowy model który wszyscy czekają — premiera + cena w Polsce
+- [ ] 99. 📰 Ceny paliw — dlaczego drożeją i kiedy to się zmieni
+- [ ] 100. 📰 Elektryki 2026 — przegląd nowości które wchodzą na polski rynek
+
+---
+
+
 ## FAKTY SZOKUJĄCE (30% contentu)
 Cel: stop-scroll, udostępnienia, viralowość
 
