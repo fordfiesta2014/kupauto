@@ -58,6 +58,22 @@
   - Slajd 3: "TO PRĘDKOŚĆ MAKSYMALNA. / AUTOSTRADA: 140 KM/H. / BUGATTI: 3× SZYBSZE."
   - Slajd 4: "KM = KONIE MECHANICZNE. / TWOJE AUTO: ~100 KM. / BUGATTI: 15× WIĘCEJ."
 
+### Post 8 — Ranking: Najoszczędniejsze auta 2026 (realne spalanie)
+- **Temat:** TOP 3 auta z najniższym spalaniem — realne wyniki testów
+- **Typ:** Ranking / Karuzela (5 slajdów)
+- **Źródło:** auto-swiat.pl/testy/ktore-auta-pala-najmniej-ranking
+- **Status:** ✅ Gotowy, niebieski styl, format 2 zdań na slajd
+- **Design ID:** `DAHNA2yyljA`
+- **URL:** https://www.canva.com/d/wVxiGdUYw54LNgL
+- **Slajdy:**
+  - Cover: "TE AUTA PALĄ NAJMNIEJ: RANKING REALNEGO SPALANIA" + "OD 4,2 L/100KM"
+  - Slajd 2 (#3): Hyundai Ioniq Hybrid — 4,8 L/100KM
+  - Slajd 3 (#2): Mazda 2 Hybrid — 4,4 L/100KM
+  - Slajd 4 (#1): Toyota Yaris Hybrid — 4,2 L/100KM
+  - Slajd 5: CTA — ZAPISZ POST
+
+---
+
 ### Post 6 — Fakt: Silnik F1 — Szokujące Liczby
 - **Temat:** Silnik F1 kręci 18 000 RPM / spala 75L/100km / opony 120°C
 - **Typ:** Karuzela Faktów (5 slajdów)
