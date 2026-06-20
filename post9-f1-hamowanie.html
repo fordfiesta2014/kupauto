@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="hz:slide-selector" content=".slide">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; }
+
+.slide {
+  width: 1080px;
+  height: 1080px;
+  background: #0A0A0A;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 80px 100px 80px 130px;
+  font-family: 'Inter', sans-serif;
+}
+
+.accent-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 10px;
+  height: 100%;
+  background: #00AAFF;
+}
+
+.badge {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 26px;
+  color: #00AAFF;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 44px;
+}
+
+.hero-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 290px;
+  color: #00AAFF;
+  line-height: 0.82;
+  letter-spacing: -3px;
+}
+
+.hero-unit {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 90px;
+  color: #00AAFF;
+  line-height: 1;
+  margin-bottom: 28px;
+  letter-spacing: 1px;
+}
+
+.divider {
+  width: 64px;
+  height: 4px;
+  background: #00AAFF;
+  margin-bottom: 36px;
+  border-radius: 2px;
+}
+
+.title {
+  font-family: 'Inter', sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  max-width: 820px;
+}
+
+.body {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 34px;
+  color: #A0AEC0;
+  line-height: 1.6;
+  max-width: 820px;
+}
+
+.handle {
+  position: absolute;
+  bottom: 52px;
+  right: 80px;
+  font-family: 'Inter', sans-serif;
+  font-size: 22px;
+  color: #444;
+  letter-spacing: 1px;
+}
+
+.blue { color: #00AAFF; font-weight: 700; }
+.white { color: #FFFFFF; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="badge">◆ FAKT DNIA</div>
+  <div class="hero-number">65</div>
+  <div class="hero-unit">METRÓW</div>
+  <div class="divider"></div>
+  <div class="title">Droga hamowania bolidu F1<br>z 300 km/h</div>
+  <div class="body">Twoje auto potrzebuje prawie <span class="white">3× więcej</span> miejsca.</div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="badge">◆ FIZYKA F1</div>
+  <div class="hero-number">5</div>
+  <div class="hero-unit">G — SIŁA HAMOWANIA</div>
+  <div class="divider"></div>
+  <div class="title">Tyle przeciążenia czuje pilot<br>w momencie hamowania</div>
+  <div class="body">Jakbyś nagle ważył <span class="white">ponad 400 kg</span>.<br>Decyzja o hamowaniu — w ułamku sekundy.</div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="badge">◆ TECHNIKA</div>
+  <div class="hero-number" style="font-size: 210px;">1000</div>
+  <div class="hero-unit">°C — TARCZE HAMULCOWE F1</div>
+  <div class="divider"></div>
+  <div class="title">Do takiej temperatury nagrzewają się<br>ceramiczne tarcze F1</div>
+  <div class="body">Świecą na <span class="white">czerwono jak żelazo w piecu</span>.<br>Wytrzymują jeden weekend wyścigowy.</div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 4 -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="badge">◆ TWOJE AUTO</div>
+  <div class="hero-number">190</div>
+  <div class="hero-unit">METRÓW</div>
+  <div class="divider"></div>
+  <div class="title">Tyle potrzebuje zwykłe auto<br>hamując z 300 km/h</div>
+  <div class="body"><span class="white">3× więcej niż F1.</span> Dlatego na autostradzie<br>bezpieczna odległość to minimum 100 m.</div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 5: CTA -->
+<div class="slide">
+  <div class="accent-bar"></div>
+  <div class="badge">◆ @MOTOEDUKACJA</div>
+  <div class="hero-number" style="font-size: 230px; color: #FFFFFF; line-height: 0.88;">ZAPISZ<br>POST</div>
+  <div class="divider" style="margin-top: 44px; width: 100px;"></div>
+  <div class="body" style="font-size: 36px; line-height: 1.7; margin-top: 4px;">
+    Co tydzień fakty o motoryzacji<br>
+    których nie znajdziesz w szkole.<br><br>
+    Obserwuj → <span class="blue">@motoedukacja</span>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+</body>
+</html>
