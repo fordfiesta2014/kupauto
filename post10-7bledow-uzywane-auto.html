@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="hz:slide-selector" content=".slide">
+<meta name="hz:canvas-width" content="1080">
+<meta name="hz:canvas-height" content="1080">
+<link rel="stylesheet" href="https://use.typekit.net/vqc8ptk.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; }
+
+.slide {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+  font-family: 'lato', sans-serif;
+}
+
+.slide img.bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.overlay-cover {
+  height: 62%;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.65) 28%,
+    rgba(0,0,0,0.92) 58%,
+    rgba(0,0,0,0.97) 100%);
+}
+
+.overlay-content {
+  height: 56%;
+  background: linear-gradient(to bottom,
+    transparent 0%,
+    rgba(0,0,0,0.60) 22%,
+    rgba(0,0,0,0.88) 52%,
+    rgba(0,0,0,0.96) 100%);
+}
+
+.accent-bar {
+  position: absolute;
+  left: 0; top: 0;
+  width: 8px; height: 100%;
+  background: #00AAFF;
+  z-index: 3;
+}
+
+/* CONTENT SLIDES layout */
+.content {
+  position: absolute;
+  bottom: 108px;
+  left: 0; right: 0;
+  z-index: 2;
+  text-align: center;
+  padding: 0 72px;
+}
+
+.tag {
+  font-family: 'lato', sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  color: #00AAFF;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 22px;
+}
+
+.title {
+  font-family: 'lato', sans-serif;
+  font-weight: 900;
+  font-size: 82px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  line-height: 1.08;
+  letter-spacing: -1px;
+}
+
+.title-sm {
+  font-size: 68px;
+  line-height: 1.1;
+}
+
+.body {
+  font-family: 'lato', sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #C8D4E0;
+  line-height: 1.58;
+  margin-top: 24px;
+}
+
+/* COVER layout */
+.cover-content {
+  position: absolute;
+  bottom: 96px;
+  left: 0; right: 0;
+  z-index: 2;
+  text-align: center;
+  padding: 0 64px;
+}
+
+.cover-tag {
+  font-family: 'lato', sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  color: #00AAFF;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.cover-title {
+  font-family: 'lato', sans-serif;
+  font-weight: 900;
+  font-size: 94px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  line-height: 1.06;
+  letter-spacing: -2px;
+}
+
+/* CTA */
+.cta-title {
+  font-family: 'bebas-neue-by-fontfabric', sans-serif;
+  font-size: 210px;
+  color: #FFFFFF;
+  line-height: 0.88;
+  letter-spacing: -2px;
+  margin-bottom: 32px;
+}
+
+.handle {
+  position: absolute;
+  bottom: 44px;
+  right: 54px;
+  font-family: 'lato', sans-serif;
+  font-weight: 400;
+  font-size: 22px;
+  color: rgba(255,255,255,0.36);
+  z-index: 2;
+  letter-spacing: 1px;
+}
+
+.blue { color: #00AAFF; font-weight: 700; }
+.white { color: #FFFFFF; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/3806249/pexels-photo-3806249.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-cover"></div>
+  <div class="accent-bar"></div>
+  <div class="cover-content">
+    <div class="cover-tag">◆ KUPNO UŻYWANEGO AUTA</div>
+    <div class="cover-title">7 BŁĘDÓW<br>KTÓRYCH NIE<br>MOŻESZ POPEŁNIĆ</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 2: BŁĄD #1 — Brak historii serwisowej -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/8986070/pexels-photo-8986070.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #1</div>
+    <div class="title">KUPUJESZ BEZ<br>HISTORII SERWISOWEJ</div>
+    <div class="body">Brak przeglądów = ukryte problemy.<br>Zawsze żądaj książki serwisowej.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 3: BŁĄD #2 — Nie sprawdzasz VIN -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/12499799/pexels-photo-12499799.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #2</div>
+    <div class="title">NIE SPRAWDZASZ<br>NUMERU VIN</div>
+    <div class="body">VIN ujawnia historię wypadków<br>i liczbę poprzednich właścicieli.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 4: BŁĄD #3 — Jazda próbna tylko po mieście -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/3674373/pexels-photo-3674373.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #3</div>
+    <div class="title title-sm">JAZDA PRÓBNA<br>TYLKO PO MIEŚCIE</div>
+    <div class="body">Jedź autostradą. Dopiero powyżej<br>120 km/h wychodzą ukryte usterki.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 5: BŁĄD #4 — Ignorujesz grubość lakieru -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/3855478/pexels-photo-3855478.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #4</div>
+    <div class="title">IGNORUJESZ<br>GRUBOŚĆ LAKIERU</div>
+    <div class="body">Grubościomierz kosztuje ~50 zł.<br>Ujawnia powypadkowe naprawy.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 6: BŁĄD #5 — Nie negocjujesz ceny -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/7144172/pexels-photo-7144172.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #5</div>
+    <div class="title title-sm">NIE PRÓBUJESZ<br>NEGOCJOWAĆ CENY</div>
+    <div class="body">Każde auto ma margines 5–15%.<br>Jedno pytanie = kilkaset zł taniej.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 7: BŁĄD #6 — Kupujesz bez mechanika -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/32152037/pexels-photo-32152037.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #6</div>
+    <div class="title">KUPUJESZ BEZ<br>OCENY MECHANIKA</div>
+    <div class="body">Godzina diagnostyki: 150–200 zł.<br>Może oszczędzić ci 10 000 zł.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 8: BŁĄD #7 — Ignorujesz opony i hamulce -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/29149444/pexels-photo-29149444.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-content"></div>
+  <div class="accent-bar"></div>
+  <div class="content">
+    <div class="tag">◆ BŁĄD #7</div>
+    <div class="title title-sm">IGNORUJESZ STAN<br>OPON I HAMULCÓW</div>
+    <div class="body">Nowy komplet opon: 1 500–3 000 zł.<br>Hamulce: dodatkowe 600–1 200 zł.</div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+<!-- SLIDE 9: CTA -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <img class="bg" src="https://images.pexels.com/photos/4527219/pexels-photo-4527219.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="">
+  <div class="overlay overlay-cover"></div>
+  <div class="accent-bar"></div>
+  <div class="cover-content">
+    <div class="cta-title">ZAPISZ<br>POST</div>
+    <div class="body" style="font-size: 36px; line-height: 1.7;">
+      Co tydzień błędy które kosztują<br>
+      kupujących tysiące złotych.<br>
+      Obserwuj → <span class="blue">@motoedukacja</span>
+    </div>
+  </div>
+  <div class="handle">@motoedukacja</div>
+</div>
+
+</body>
+</html>
