@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="hz:slide-selector" content=".avatar">
+<meta name="hz:canvas-width" content="1080">
+<meta name="hz:canvas-height" content="1080">
+<link rel="stylesheet" href="https://use.typekit.net/vqc8ptk.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; }
+.avatar {
+  width: 1080px;
+  height: 1080px;
+  background: #0A0A0A;
+  position: relative;
+  overflow: hidden;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.logo-text {
+  font-family: 'lato', sans-serif;
+  font-weight: 900;
+  font-size: 168px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  line-height: 1;
+  letter-spacing: -4px;
+}
+.logo-bar {
+  width: 220px;
+  height: 5px;
+  background: #00AAFF;
+  border-radius: 3px;
+}
+.logo-sub {
+  font-family: 'lato', sans-serif;
+  font-weight: 700;
+  font-size: 52px;
+  color: #00AAFF;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+}
+</style>
+</head>
+<body>
+<div class="avatar" data-canvas-width="1080" data-canvas-height="1080">
+  <!-- Blue ring — centered on canvas -->
+  <svg style="position:absolute;top:0;left:0;width:100%;height:100%;" viewBox="0 0 1080 1080" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="540" cy="540" r="370" fill="none" stroke="#00AAFF" stroke-width="6"/>
+  </svg>
+  <!-- Logo content -->
+  <div class="center">
+    <div class="logo-text">MOTO</div>
+    <div class="logo-bar"></div>
+    <div class="logo-sub">EDUKACJA</div>
+  </div>
+</div>
+</body>
+</html>
