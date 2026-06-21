@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="hz:slide-selector" content=".slide">
+<meta name="hz:canvas-width" content="1080">
+<meta name="hz:canvas-height" content="1080">
+<link rel="stylesheet" href="https://use.typekit.net/vqc8ptk.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #000; }
+
+/* ============================
+   SPLIT LAYOUT: photo top + dark panel bottom
+   Exactly like Motorsport & Beyond style
+   ============================ */
+.slide {
+  width: 1080px;
+  height: 1080px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Photo zone — top 60% */
+.photo {
+  width: 1080px;
+  height: 632px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+/* Dark panel — bottom 40% */
+.panel {
+  flex: 1;
+  background: #0D0D0D;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 18px 56px 14px;
+  gap: 14px;
+}
+
+/* Main headline — huge, white, all-caps */
+.headline {
+  font-family: 'lato', sans-serif;
+  font-weight: 900;
+  font-size: 92px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  line-height: 1.09;
+  letter-spacing: -1px;
+}
+.headline.lg {
+  font-size: 116px;
+  line-height: 1.06;
+}
+.headline.md {
+  font-size: 78px;
+  line-height: 1.1;
+}
+
+/* Attribution line: ——— @konto ——— */
+.attribution {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.attr-bar {
+  width: 72px;
+  height: 3px;
+  background: #00AAFF;
+  border-radius: 2px;
+}
+.attr-text {
+  font-family: 'lato', sans-serif;
+  font-weight: 700;
+  font-size: 27px;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.blue  { color: #00AAFF; }
+.white { color: #FFFFFF; }
+</style>
+</head>
+<body>
+
+<!-- SLIDE 1: COVER -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/a7feeabc40d6e84d9f1d8f8cddf2c281bc57c6488458c3a2d6ab826e290763c8.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_457490204.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100926Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=39a4466541e1b2d7047ad9e92e2a002ff2b3ce88e08745ce603035f66fdac7f1" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline">7 BŁĘDÓW<br>PRZY KUPNIE<br>UŻYWANEGO AUTA</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 2: BŁĄD #1 — Brak historii serwisowej -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/05426adc9fa43ca9cefd711429c51bfae5c2f72802f405b76007a9ef0c05c1b9.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_274883852.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100929Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=50f4dfc13b1a5a55a74c721e03b5bdec6c905b4a0dfc3e12178dff9fd95379c3" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline lg">BEZ HISTORII<br>SERWISOWEJ</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 3: BŁĄD #2 — Nie sprawdzasz VIN -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/f10f37f82cefd219072ffd72be4560fc05989c63bae22bc2b497ce041bcce23e.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_525600760.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100931Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=c43b65767d27584fe21f1dfc0b5cd34c4cc057faac0541ef060ccbf3a9735d99" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline lg">NIE SPRAWDZASZ<br>NUMERU VIN</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 4: BŁĄD #3 — Jazda próbna tylko po mieście -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/2e601a8f8ca483fafa1cda5565e7e67389056181a057afacbbb5d7eb79ddfefd.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_487637922.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100937Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=d5d2f5de5f90d5a7eb7c22c97d11c929097cfebf7d3f6e5b3c50caed6ce70812" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline md">JAZDA PRÓBNA<br>TYLKO PO MIEŚCIE<br>TO ZA MAŁO</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 5: BŁĄD #4 — Grubość lakieru -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/aa408badd7fd1e691194b8ef46bc89e62d380cbdc4844e2bc80944c1ab8decf8.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_554954024.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100946Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=4a44c48928089aba64e7ee9c055644514bea417e55fc07077fe616a871900d1f" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline lg">IGNORUJESZ<br>GRUBOŚĆ LAKIERU</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 6: BŁĄD #5 — Nie negocjujesz -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/a443d108cbf92e081bf56c01d4945f79aece0f19c8f8c08eefe6429f63b89a58.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_290867958.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100948Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b351c876e048dcc25e03243d10e90d0bdfeabc23510321262ee73c7c41e0399e" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline lg">NIE NEGOCJUJESZ<br>CENY AUTA</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 7: BŁĄD #6 — Kupujesz bez mechanika -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/051d2ea5e466af3f7bd4a5fba5cb658866e0c2038229a06fb4157c61a7f662d0.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_325126492.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100849Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=b82b6fa55431f95a29299b7fbc6e9a013d2952e8b2e6fd22ffec4ec6eff143fe" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline lg">KUPUJESZ<br>BEZ MECHANIKA</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 8: BŁĄD #7 — Ignorujesz opony i hamulce -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/c33ec352ff94b288e87353f3b811db709ce654e3c51f408f2ffc9475a5b9479d.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_227295117.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100950Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=cf864f0ce1a82250e660a939fce9a19ff238112aac9a2bc0955ec4056bb8ae79" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline lg">IGNORUJESZ<br>OPONY I HAMULCE</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+<!-- SLIDE 9: CTA -->
+<div class="slide" data-canvas-width="1080" data-canvas-height="1080">
+  <div class="photo">
+    <img width="1080" height="632" src="https://stock-apex-images-prod-ew1.s3.eu-west-1.amazonaws.com/cd07093dd08a5613623cd4e6669f7345501763ea053a095f3f6fe1c7aa853279.jpg?response-content-disposition=attachment%3B%20filename%3D%22AdobeStock_396180356.jpeg%22&response-content-type=image%2Fjpeg&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAUMGGMQGERDWXM64M%2F20260620%2Feu-west-1%2Fs3%2Faws4_request&X-Amz-Date=20260620T100953Z&X-Amz-SignedHeaders=host&X-Amz-Expires=3600&X-Amz-Signature=eea733dfd8bee77085d99dcef54a4eb2a0671ba38a9a426495b404873e5a3764" alt="">
+  </div>
+  <div class="panel">
+    <div class="headline" style="font-size:128px; line-height:1.0;">ZAPISZ<br>TEN POST</div>
+    <div class="attribution">
+      <div class="attr-bar"></div>
+      <div class="attr-text">@motoedukacja</div>
+      <div class="attr-bar"></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
